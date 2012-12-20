@@ -178,39 +178,76 @@ function initializeAPI()
 		return;
 	}
 	initialized = true;
-
-	var style = "\
-		.emoteTabButton {\
-			width: 32px;\
-			height: 23px;\
-			background-image: url(\"//dl.dropbox.com/u/31471793/FiMFiction/script/buttonBG.png\");\
-			float: left;\
-			text-align: center;\
-			padding-top: 5px;\
-			cursor: pointer;\
-			font: 13px normal \"Segoe UI\" !important;\
-			-webkit-touch-callout: none;\
-			-webkit-user-select: none;\
-			-khtml-user-select: none;\
-			-moz-user-select: none;\
-			-ms-user-select: none;\
-			user-select: none;\
-			opacity: 1;\
-			transition: opacity .2s ease-in;\
-			-moz-transition: opacity .2s ease-in;\
-			-webkit-transition: opacity .2s ease-in;\
-			-o-transition: opacity .2s ease-in;\
-			color: #ffffff;\
-		}\
-		\
-		.emoteTabButton:hover {\
-			cursor: pointer;\
-			opacity: 0.8;\
-			transition: opacity .2s ease-out;\
-			-moz-transition: opacity .2s ease-out;\
-			-webkit-transition: opacity .2s ease-out;\
-			-o-transition: opacity .2s ease-out;\
-		}";
+			
+	var style = "";
+	
+	style += ".emoticons_panel {";
+	style += "	height: auto !important;";
+	style += "	min-height: 300px !important;";
+	style += "	display: block !important;";
+	style += "}";
+	
+	style += "#comment_comment {";
+	style += "	min-height: 297px !important;";
+	style += "}";
+	
+	style += ".customEmote {";
+	style += "	opacity: 0.7;";
+	style += "	transition: opacity .2s ease-out;";
+	style += "	-moz-transition: opacity .2s ease-out;";
+	style += "	-webkit-transition: opacity .2s ease-out;";
+	style += "	-o-transition: opacity .2s ease-out;";
+	style += "	-webkit-touch-callout: none;";
+	style += "	-webkit-user-select: none;";
+	style += "	-khtml-user-select: none;";
+	style += "	-moz-user-select: none;";
+	style += "	-ms-user-select: none;";
+	style += "	user-select: none;";
+	style += "}";
+	
+	style += ".customEmote:hover {";
+	style += "	opacity: 1;";
+	style += "	transition: opacity .2s ease-in;";
+	style += "	-moz-transition: opacity .2s ease-in;";
+	style += "	-webkit-transition: opacity .2s ease-in;";
+	style += "	-o-transition: opacity .2s ease-in;";
+	style += "	cursor: pointer;";
+	style += "}";
+	
+	style += ".emoteTabButton {";
+	style += "	width: 32px;";
+	style += "	height: 23px;";
+	style += "	background-image: url(\"http://i.imgur.com/p8O1R.png\");";
+	style += "	float: left;";
+	style += "	text-align: center;";
+	style += "	padding-top: 5px;";
+	style += "	font: 13px normal \"Segoe UI\" !important;";
+	style += "	-webkit-touch-callout: none;";
+	style += "	-webkit-user-select: none;";
+	style += "	-khtml-user-select: none;";
+	style += "	-moz-user-select: none;";
+	style += "	-ms-user-select: none;";
+	style += "	user-select: none;";
+	style += "	opacity: 1;";
+	style += "	transition: opacity .2s ease-in;";
+	style += "	-moz-transition: opacity .2s ease-in;";
+	style += "	-webkit-transition: opacity .2s ease-in;";
+	style += "	-o-transition: opacity .2s ease-in;";
+	style += "	color: #ffffff";
+	style += "}";
+	
+	style += ".emoteTabButton:hover {";
+	style += "	cursor: pointer;";
+	style += "	opacity: 0.8;";
+	style += "	transition: opacity .2s ease-out;";
+	style += "	-moz-transition: opacity .2s ease-out;";
+	style += "	-webkit-transition: opacity .2s ease-out;";
+	style += "	-o-transition: opacity .2s ease-out;";
+	style += "}";
+	
+	style += ".inner_padding {";
+	style += "	margin-top: 0px !important;";
+	style += "}";
 
 	GM_addStyle(style);
 
@@ -223,7 +260,6 @@ function initializeAPI()
 	}
 	//Store the default emote table and give it an id
 	var defaultEmoteTable = emotePanel.firstChild;
-	defaultEmoteTable.style.display = "none";
 	emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
 	emotePanel.style.paddingTop = "15px";
 
@@ -310,7 +346,7 @@ function createNewEmoteTable(tableName)
 	emoteTables[tablePrefix + tableName] = emoteTable;
 	emotePanel.appendChild(emoteTable);
 
-	createTableLink(tableName);
+	tabContainer.appendChild(createTableLink(tableName));
 }
 
 function createNewEmote(url, tableName)
@@ -345,8 +381,8 @@ function createTableLink(tableName)
 
 function showTable(tableID)
 {
-	alert("Showing table: " + tableID);
 	emoteTables[tableID].style.display = 'block';
+	commentBox.style.height = emoteTables[tableID].offsetHeight + 85;
 
 	for (var table in emoteTables) {
 		if (!emoteTables.hasOwnProperty(table)) {
