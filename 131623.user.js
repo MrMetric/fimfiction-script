@@ -6,42 +6,13 @@
 // @version			12
 // @icon			https://dl.dropbox.com/u/31471793/FiMFiction/Luna_lolface.png
 // @grant			none
+// @require			https://github.com/iloveportalz0r/fimfiction-script/raw/master/emoteHandler.js
 // ==/UserScript==
 
 /*jshint newcap:false, globalstrict:true, scripturl:false */
 /*global Components:true, self:true, alert:true, prompt:true, unsafeWindow:true, escape:true */
 
 "use strict";
-
-function logg(msg){console.log(msg);}
-
-// from http://stackoverflow.com/questions/1622145/how-can-i-mimic-greasemonkey-firefoxs-unsafewindow-functionality-in-chrome
-var bGreasemonkeyServiceDefined = false;
-try
-{
-	if(typeof Components.interfaces.gmIGreasemonkeyService === "object")
-	{
-		bGreasemonkeyServiceDefined = true;
-	}
-}
-catch(err){}
-if(typeof unsafeWindow === "undefined" || !bGreasemonkeyServiceDefined)
-{
-	unsafeWindow = (function()
-	{
-		var dummyElem = document.createElement("p");
-		dummyElem.setAttribute("onclick", "return window;");
-		return dummyElem.onclick();
-	})();
-	logg("Created unsafeWindow");
-}
-
-logg("typeof $ = " + typeof $);
-if(typeof $ === "undefined")
-{
-	logg("Copying jQuery from unsafeWindow");
-	var $ = unsafeWindow.jQuery;
-}
 
 // INFOCARD REPLACEMENT
 
@@ -99,73 +70,6 @@ $(document).on("mouseleave", "div.content a", infocard_hover_off);
 
 // END
 
-function stringToBool(s)
-{
-	if(typeof s === "boolean")
-	{
-		return s;
-	}
-	switch(s)
-	{
-		case "true": return true;
-		case "false": return false;
-		default: return null;
-	}
-}
-
-// GM function replacements are from https://raw.github.com/gist/3123124
-
-function GM_addStyle(aCss)
-{
-	var head = document.getElementsByTagName("head")[0];
-	if(head)
-	{
-		var stylenode = document.createElement("style");
-		stylenode.type = "text/css";
-		stylenode.textContent = aCss;
-		head.appendChild(stylenode);
-		return stylenode;
-	}
-	return null;
-}
-
-//var GM_STORAGE_PREFIX = ["", GM_info.script.namespace, GM_info.script.name, ""].join("***");
-var GM_STORAGE_PREFIX = "FFE_";
-
-// All of the GM_*Value methods rely on DOM Storage's localStorage facility.
-// They work like always, but the values are scoped to a domain, unlike the
-// original functions. The content page's scripts can access, set, and
-// delete these values.
-//function GM_deleteValue(aKey){localStorage.removeItem(GM_STORAGE_PREFIX + aKey);}
-
-function GM_getValue_(aKey, aDefault)
-{
-	var val = localStorage.getItem(GM_STORAGE_PREFIX + aKey);
-	if(val == null && typeof aDefault !== "undefined")
-	{
-		return aDefault;
-	}
-	return val;
-}
-
-function GM_getValue(aKey, aDefault)
-{
-	var value = GM_getValue_(aKey, aDefault);
-	var boolValue = stringToBool(value);
-	if(boolValue != null)
-	{
-		value = boolValue;
-	}
-	logg("getValue returned " + value + " for " + aKey);
-	return value;
-}
-
-function GM_setValue(aKey, aVal)
-{
-	localStorage.setItem(GM_STORAGE_PREFIX + aKey, aVal);
-	logg("Set " + aKey + " to " + aVal);
-}
-
 /*
 .reu_basket
 {
@@ -177,22 +81,6 @@ function GM_setValue(aKey, aVal)
 	display:none;
 }
 */
-
-function setTitle(title)
-{
-	unsafeWindow.title_cache = title + " - FIMFiction.net";
-	document.title = unsafeWindow.title_cache;
-	logg("Set page title: "+title);
-}
-
-// from general_scripts.js
-function setCookie(c_name, value, exdays)
-{
-	var exdate = new Date();
-	exdate.setDate(exdate.getDate() + exdays);
-	var c_value = escape(value)+(exdays==null?"":"; expires="+exdate.toUTCString());
-	document.cookie = c_name + "=" + c_value + ";path=/";
-}
 
 var i = 0;
 var addEmoticons = GM_getValue("addEmoticons", true);
@@ -446,7 +334,7 @@ if(settingsPage)
 	}
 	else
 	{
-		setTitle("Script Settings");
+		Site.setTitle("Script Settings");
 		var innerContent = document.getElementsByClassName("content_background")[0].getElementsByClassName("inner")[0].getElementsByClassName("content_box user_cp_content_box ")[0];
 		if(innerContent != null)
 		{
@@ -521,7 +409,7 @@ else if(error502)
 else if(notificationsPage)
 {
 	logg("Detected page: Notifications");
-	setTitle("Notifications");
+	Site.setTitle("Notifications");
 	var notifications = document.getElementsByClassName("notification");
 	for(i = 0; i < notifications.length; i++)
 	{
@@ -534,25 +422,25 @@ else if(notificationsPage)
 else if(/page=banner_credits/.test(self.location.href))
 {
 	logg("Detected page: Banner Credits");
-	setTitle("Banner Credits");
+	Site.setTitle("Banner Credits");
 }
 else if(/view=category/.test(self.location.href))
 {
 	if(/&read_it_later/.test(self.location.href))
 	{
 		logg("Detected page: Read Later");
-		setTitle("Read Later");
+		Site.setTitle("Read Later");
 	}
 	else if(/&tracking=1&order=updated&unread=1/.test(self.location.href))
 	{
 		logg("Detected page: Favorites");
-		setTitle("Favorites");
+		Site.setTitle("Favorites");
 	}
 }
 else if(/manage_user\/blog/.test(self.location.href))
 {
 	logg("Detected page: Manage Blog");
-	setTitle("Manage Blog");
+	Site.setTitle("Manage Blog");
 }
 else if(storyPage)
 {
