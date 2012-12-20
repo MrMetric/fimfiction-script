@@ -7,6 +7,9 @@
  *	Usage:	@require this script in your Greasemonkey scripts
  *			Use addEmote("image url", "table name"); to add an emote
  */
+
+"use strict";
+
 var initialized = false;
 var emoteTables = [];
 var commentBox;
