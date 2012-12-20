@@ -182,6 +182,15 @@ function initializeAPI()
 			-webkit-transition: opacity .2s ease-in;\
 			-o-transition: opacity .2s ease-in;\
 			color: #ffffff;\
+		}\
+		\
+		.emoteTabButton:hover {\
+			cursor: pointer;\
+			opacity: 0.8;\
+			transition: opacity .2s ease-out;\
+			-moz-transition: opacity .2s ease-out;\
+			-webkit-transition: opacity .2s ease-out;\
+			-o-transition: opacity .2s ease-out;\
 		}";
 		
 	GM_addStyle(style);
