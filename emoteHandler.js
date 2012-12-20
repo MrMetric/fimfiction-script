@@ -264,6 +264,8 @@ function initializeAPI(m)
 	{
 		style += ".customEmote {";
 		style += "	opacity: 0.7;";
+		style += "	width: 54;";
+		style += "	height: 54;";
 		style += "	transition: opacity .2s ease-out;";
 		style += "	-moz-transition: opacity .2s ease-out;";
 		style += "	-webkit-transition: opacity .2s ease-out;";
@@ -384,11 +386,13 @@ function createNewEmote(url, emoteName, tableName)
 	logg("Adding emoticon: " + url + " (" + emoteName + ") to " + tableName);
 	var image = document.createElement("img");
 	image.src = url;
-	image.id = emoteName.toLowerCase.replace(" ", "_");
+	if (Site.mode == 0) {
+		image.id = url;
+	} else {
+		image.id = emoteName.toLowerCase.replace(" ", "_");
+	}
 	image.title = emoteName;
 	image.className = "customEmote";
-	//image.width = "54";
-	//image.height = "54";
 	image.style.margin = "5px";
 	image.addEventListener("click", function() { addEmoteToCommentBox(this.id); }, false);
 	emoteTables[tablePrefix + tableName].appendChild(image);
