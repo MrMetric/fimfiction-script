@@ -19,40 +19,6 @@ function logg(msg)
 	console.log(msg);
 }
 
-// from http://stackoverflow.com/questions/1622145/how-can-i-mimic-greasemonkey-firefoxs-unsafewindow-functionality-in-chrome
-var bGreasemonkeyServiceDefined = false;
-try
-{
-	if(typeof Components.interfaces.gmIGreasemonkeyService === "object")
-	{
-		bGreasemonkeyServiceDefined = true;
-	}
-}
-catch(err){}
-if(typeof unsafeWindow === "undefined" || !bGreasemonkeyServiceDefined)
-{
-	unsafeWindow = (function()
-	{
-		var dummyElem = document.createElement("p");
-		dummyElem.setAttribute("onclick", "return window;");
-		return dummyElem.onclick();
-	})();
-}
-
-// Add jQuery
-if(typeof $ === "undefined")
-{
-	if(typeof unsafeWindow.jQuery !== "undefined")
-	{
-		var $ = unsafeWindow.jQuery;
-	}
-	else
-	{
-		// TODO: Error handling
-		logg("jQuery not found");
-	}
-}
-
 function stringToBool(s)
 {
 	if(typeof s === "boolean")
@@ -178,111 +144,41 @@ function initializeAPI()
 		return;
 	}
 	initialized = true;
-			
-	var style = "";
-	
-	style += ".emoticons_panel {";
-	style += "	height: auto !important;";
-	style += "	min-height: 300px !important;";
-	style += "	display: block !important;";
-	style += "}";
-	
-	style += ".customEmote {";
-	style += "	opacity: 0.7;";
-	style += "	transition: opacity .2s ease-out;";
-	style += "	-moz-transition: opacity .2s ease-out;";
-	style += "	-webkit-transition: opacity .2s ease-out;";
-	style += "	-o-transition: opacity .2s ease-out;";
-	style += "	-webkit-touch-callout: none;";
-	style += "	-webkit-user-select: none;";
-	style += "	-khtml-user-select: none;";
-	style += "	-moz-user-select: none;";
-	style += "	-ms-user-select: none;";
-	style += "	user-select: none;";
-	style += "}";
-	
-	style += ".customEmote:hover {";
-	style += "	opacity: 1;";
-	style += "	transition: opacity .2s ease-in;";
-	style += "	-moz-transition: opacity .2s ease-in;";
-	style += "	-webkit-transition: opacity .2s ease-in;";
-	style += "	-o-transition: opacity .2s ease-in;";
-	style += "	cursor: pointer;";
-	style += "}";
-	
-	style += ".emoteTabButton {";
-	style += "	width: 32px;";
-	style += "	height: 23px;";
-	style += "	background-image: url(\"http://i.imgur.com/p8O1R.png\");";
-	style += "	float: left;";
-	style += "	text-align: center;";
-	style += "	padding-top: 5px;";
-	style += "	font: 13px normal \"Segoe UI\" !important;";
-	style += "	-webkit-touch-callout: none;";
-	style += "	-webkit-user-select: none;";
-	style += "	-khtml-user-select: none;";
-	style += "	-moz-user-select: none;";
-	style += "	-ms-user-select: none;";
-	style += "	user-select: none;";
-	style += "	opacity: 1;";
-	style += "	transition: opacity .2s ease-in;";
-	style += "	-moz-transition: opacity .2s ease-in;";
-	style += "	-webkit-transition: opacity .2s ease-in;";
-	style += "	-o-transition: opacity .2s ease-in;";
-	style += "	color: #ffffff";
-	style += "}";
-	
-	style += ".emoteTabButton:hover {";
-	style += "	cursor: pointer;";
-	style += "	opacity: 0.8;";
-	style += "	transition: opacity .2s ease-out;";
-	style += "	-moz-transition: opacity .2s ease-out;";
-	style += "	-webkit-transition: opacity .2s ease-out;";
-	style += "	-o-transition: opacity .2s ease-out;";
-	style += "}";
-	
-	style += ".inner_padding {";
-	style += "	margin-top: 0px !important;";
-	style += "}";
 
-	GM_addStyle(style);
-
-	commentBox = document.getElementById("comment_comment");
-	//Grab FiMFiction's emote panel div and store it
-	var emoticonsPanel = document.getElementsByClassName("emoticons_panel");
-	for(var i = 0; i < emoticonsPanel.length; i++)
+	// from http://stackoverflow.com/questions/1622145/how-can-i-mimic-greasemonkey-firefoxs-unsafewindow-functionality-in-chrome
+	var bGreasemonkeyServiceDefined = false;
+	try
 	{
-		emotePanel = emoticonsPanel[i];
+		if(typeof Components.interfaces.gmIGreasemonkeyService === "object")
+		{
+			bGreasemonkeyServiceDefined = true;
+		}
 	}
-	var tableOffset = 0;
-	if (window.location.pathname.indexOf("story") == -1 && window.location.pathname.indexOf("blog") == -1) {
-		tableOffset = 2;
-	} else {
-		tableOffset = 1;
+	catch(err){}
+	if(typeof unsafeWindow === "undefined" || !bGreasemonkeyServiceDefined)
+	{
+		unsafeWindow = (function()
+		{
+			var dummyElem = document.createElement("p");
+			dummyElem.setAttribute("onclick", "return window;");
+			return dummyElem.onclick();
+		})();
 	}
-	//Store the default emote table and give it an id
-	var defaultEmoteTable = emotePanel.childNodes[emotePanel.childNodes.length - tableOffset];
-	emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
-	emotePanel.style.paddingTop = "15px";
 
-	tabContainer = document.createElement("div");
-	tabContainer.style.marginLeft = "12px";
-	tabContainer.style.marginTop = "0px";
-	tabContainer.style.float = "left";
-	tabContainer.style.clear = "both";
-	tabContainer.style.width = "279px";
-	emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
-	
-	defaultEmoteTable.style.float = "left";
-	defaultEmoteTable.style.clear = "both";
-	defaultEmoteTable.style.paddingTop = "20px";
-	
-	tabContainer.appendChild(createTableLink("FF"));
-	
-	setTimeout(function() {
-			commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
-		}, 1);
-		
+	// Add jQuery
+	if(typeof $ === "undefined")
+	{
+		if(typeof unsafeWindow.jQuery !== "undefined")
+		{
+			var $ = unsafeWindow.jQuery;
+		}
+		else
+		{
+			// TODO: Error handling
+			logg("jQuery not found");
+		}
+	}
+
 	Site.username = "";
 	Site.userid = -1;
 
@@ -290,8 +186,7 @@ function initializeAPI()
 	{
 		Site.page = PAGE.MAIN;
 	}
-	else*/
-	if(/manage_user\/scriptsettings/.test(self.location.href))
+	else*/ if(/manage_user\/scriptsettings/.test(self.location.href))
 	{
 		Site.page = PAGE.SCRIPTSETTINGS;
 	}
@@ -335,11 +230,118 @@ function initializeAPI()
 	{
 		Site.page = PAGE.OTHER;
 	}
+
+	var style = "";
+
+	style += ".emoticons_panel {";
+	style += "	height: auto !important;";
+	style += "	min-height: 300px !important;";
+	style += "	display: block !important;";
+	style += "}";
+
+	style += ".customEmote {";
+	style += "	opacity: 0.7;";
+	style += "	transition: opacity .2s ease-out;";
+	style += "	-moz-transition: opacity .2s ease-out;";
+	style += "	-webkit-transition: opacity .2s ease-out;";
+	style += "	-o-transition: opacity .2s ease-out;";
+	style += "	-webkit-touch-callout: none;";
+	style += "	-webkit-user-select: none;";
+	style += "	-khtml-user-select: none;";
+	style += "	-moz-user-select: none;";
+	style += "	-ms-user-select: none;";
+	style += "	user-select: none;";
+	style += "}";
+
+	style += ".customEmote:hover {";
+	style += "	opacity: 1;";
+	style += "	transition: opacity .2s ease-in;";
+	style += "	-moz-transition: opacity .2s ease-in;";
+	style += "	-webkit-transition: opacity .2s ease-in;";
+	style += "	-o-transition: opacity .2s ease-in;";
+	style += "	cursor: pointer;";
+	style += "}";
+
+	style += ".emoteTabButton {";
+	style += "	width: 32px;";
+	style += "	height: 23px;";
+	style += "	background-image: url(\"http://i.imgur.com/p8O1R.png\");";
+	style += "	float: left;";
+	style += "	text-align: center;";
+	style += "	padding-top: 5px;";
+	style += "	font: 13px normal \"Segoe UI\" !important;";
+	style += "	-webkit-touch-callout: none;";
+	style += "	-webkit-user-select: none;";
+	style += "	-khtml-user-select: none;";
+	style += "	-moz-user-select: none;";
+	style += "	-ms-user-select: none;";
+	style += "	user-select: none;";
+	style += "	opacity: 1;";
+	style += "	transition: opacity .2s ease-in;";
+	style += "	-moz-transition: opacity .2s ease-in;";
+	style += "	-webkit-transition: opacity .2s ease-in;";
+	style += "	-o-transition: opacity .2s ease-in;";
+	style += "	color: #ffffff";
+	style += "}";
+
+	style += ".emoteTabButton:hover {";
+	style += "	cursor: pointer;";
+	style += "	opacity: 0.8;";
+	style += "	transition: opacity .2s ease-out;";
+	style += "	-moz-transition: opacity .2s ease-out;";
+	style += "	-webkit-transition: opacity .2s ease-out;";
+	style += "	-o-transition: opacity .2s ease-out;";
+	style += "}";
+
+	style += ".inner_padding {";
+	style += "	margin-top: 0px !important;";
+	style += "}";
+
+	GM_addStyle(style);
+
+	commentBox = document.getElementById("comment_comment");
+	//Grab FiMFiction's emote panel div and store it
+	var emoticonsPanel = document.getElementsByClassName("emoticons_panel");
+	for(var i = 0; i < emoticonsPanel.length; i++)
+	{
+		emotePanel = emoticonsPanel[i];
+	}
+	var tableOffset = 0;
+	if(Site.page != PAGE.STORY && Site.page != PAGE.BLOG)
+	{
+		tableOffset = 2;
+	}
+	else
+	{
+		tableOffset = 1;
+	}
+	//Store the default emote table and give it an id
+	var defaultEmoteTable = emotePanel.childNodes[emotePanel.childNodes.length - tableOffset];
+	emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
+	emotePanel.style.paddingTop = "15px";
+
+	tabContainer = document.createElement("div");
+	tabContainer.style.marginLeft = "12px";
+	tabContainer.style.marginTop = "0px";
+	tabContainer.style.float = "left";
+	tabContainer.style.clear = "both";
+	tabContainer.style.width = "279px";
+	emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
+
+	defaultEmoteTable.style.float = "left";
+	defaultEmoteTable.style.clear = "both";
+	defaultEmoteTable.style.paddingTop = "20px";
+
+	tabContainer.appendChild(createTableLink("FF"));
+
+	setTimeout(function()
+	{
+		commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
+	}, 1);
 }
 
 function createNewEmoteTable(tableName)
 {
-	
 	var emoteTable = document.createElement("div");
 	emoteTable.style.display = "none";
 	emoteTable.style.margin = "10px";
@@ -350,7 +352,6 @@ function createNewEmoteTable(tableName)
 	emotePanel.appendChild(emoteTable);
 
 	tabContainer.appendChild(createTableLink(tableName));
-	
 }
 
 function createNewEmote(url, tableName)
@@ -368,7 +369,6 @@ function createNewEmote(url, tableName)
 
 function createTableLink(tableName)
 {
-
 	var tableLink = document.createElement("span");
 	tableLink.className = "emoteTabButton";
 	tableLink.id = tablePrefix + tableName;
@@ -385,18 +385,21 @@ function createTableLink(tableName)
 
 function showTable(tableID)
 {
-	emoteTables[tableID].style.display = 'block';
-	
-	setTimeout(function() {
-			commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
-		}, 1);
+	emoteTables[tableID].style.display = "block";
 
-	for (var table in emoteTables) {
-		if (!emoteTables.hasOwnProperty(table)) {
-			continue;
-		}
-		if (emoteTables[table] != emoteTables[tableID]) {
-			emoteTables[table].style.display = 'none';
+	setTimeout(function()
+	{
+		commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
+	}, 1);
+
+	for(var table in emoteTables)
+	{
+		if(emoteTables.hasOwnProperty(table))
+		{
+			if(emoteTables[table] != emoteTables[tableID])
+			{
+				emoteTables[table].style.display = "none";
+			}
 		}
 	}
 }
@@ -406,57 +409,74 @@ function addEmoteToCommentBox(url)
 	replaceSelectedText(commentBox, "[img]" + url + "[/img]");
 }
 
-function getInputSelection(el) {
-    var start = 0, end = 0, normalizedValue, range,
-        textInputRange, len, endRange;
+function getInputSelection(el)
+{
+	var _start = 0, _end = 0, normalizedValue, range,
+		textInputRange, len, endRange;
 
-    if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
-        start = el.selectionStart;
-        end = el.selectionEnd;
-    } else {
-        range = document.selection.createRange();
+	if(typeof el.selectionStart === "number" && typeof el.selectionEnd === "number")
+	{
+		_start = el.selectionStart;
+		_end = el.selectionEnd;
+	}
+	else
+	{
+		range = document.selection.createRange();
 
-        if (range && range.parentElement() == el) {
-            len = el.value.length;
-            normalizedValue = el.value.replace(/\r\n/g, "\n");
-			
-            textInputRange = el.createTextRange();
-            textInputRange.moveToBookmark(range.getBookmark());
-			
-            endRange = el.createTextRange();
-            endRange.collapse(false);
+		if(range && range.parentElement() == el)
+		{
+			len = el.value.length;
+			normalizedValue = el.value.replace(/\r\n/g, "\n");
 
-            if (textInputRange.compareEndPoints("StartToEnd", endRange) > -1) {
-                start = end = len;
-            } else {
-                start = -textInputRange.moveStart("character", -len);
-                start += normalizedValue.slice(0, start).split("\n").length - 1;
+			textInputRange = el.createTextRange();
+			textInputRange.moveToBookmark(range.getBookmark());
 
-                if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
-                    end = len;
-                } else {
-                    end = -textInputRange.moveEnd("character", -len);
-                    end += normalizedValue.slice(0, end).split("\n").length - 1;
-                }
-            }
-        }
-    }
+			endRange = el.createTextRange();
+			endRange.collapse(false);
 
-    return {
-        start: start,
-        end: end
-    };
+			if(textInputRange.compareEndPoints("StartToEnd", endRange) > -1)
+			{
+				_start = _end = len;
+			}
+			else
+			{
+				_start = -textInputRange.moveStart("character", -len);
+				_start += normalizedValue.slice(0, _start).split("\n").length - 1;
+
+				if(textInputRange.compareEndPoints("EndToEnd", endRange) > -1)
+				{
+					_end = len;
+				}
+				else
+				{
+					_end = -textInputRange.moveEnd("character", -len);
+					_end += normalizedValue.slice(0, _end).split("\n").length - 1;
+				}
+			}
+		}
+	}
+
+	return {
+		start: _start,
+		end: _end
+	};
 }
 
-function replaceSelectedText(el, text) {
-    var sel = getInputSelection(el), val = el.value;
-    el.value = val.slice(0, sel.start) + text + val.slice(sel.end);
+function replaceSelectedText(el, text)
+{
+	var sel = getInputSelection(el), val = el.value;
+	el.value = val.slice(0, sel.start) + text + val.slice(sel.end);
 }
 
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
+Object.size = function(obj)
+{
+	var size = 0, key;
+	for(key in obj)
+	{
+		if(obj.hasOwnProperty(key))
+		{
+			size++;
+		}
+	}
+	return size;
 };
