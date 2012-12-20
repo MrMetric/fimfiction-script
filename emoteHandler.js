@@ -114,6 +114,19 @@ function GM_setValue(aKey, aVal)
 	logg("Set " + aKey + " to " + aVal);
 }
 
+var PAGE = {
+	OTHER:			{value: -1, name: "Other"},
+	MAIN:			{value: 0, name: "Main"},
+	SCRIPTSETTINGS:	{value: 1, name: "Script Settings"},
+	BLOG:			{value: 2, name: "Blog"},
+	BLOGEDIT:		{value: 3, name: "Blog Editor"},
+	GROUP:			{value: 4, name: "Group"},
+	GROUPTHREAD:	{value: 5, name: "Group Thread"},
+	NOTIFICATIONS:	{value: 6, name: "Notifications"},
+	USER:			{value: 7, name: "User"},
+	STORY:			{value: 8, name: "Story"}
+};
+
 var Site = {
 	setTitle: function(title)
 	{
@@ -130,6 +143,51 @@ var Site = {
 		document.cookie = c_name + "=" + c_value + ";path=/";
 	}
 };
+
+Site.username = "";
+Site.userid = -1;
+
+/*if()
+{
+	Site.page = PAGE.MAIN;
+}
+else*/
+if(/manage_user\/scriptsettings/.test(self.location.href))
+{
+	Site.page = PAGE.SCRIPTSETTINGS;
+}
+else if(/blog\//.test(self.location.href))
+{
+	Site.page = PAGE.BLOG;
+}
+else if(/manage_user\/edit_blog_post/.test(self.location.href))
+{
+	Site.page = PAGE.BLOGEDIT;
+}
+/*else if()
+{
+	Site.page = PAGE.GROUP;
+}*/
+else if(/view=group/.test(self.location.href) && /thread=/.test(self.location.href))
+{
+	Site.page = PAGE.GROUPTHREAD;
+}
+else if(/manage_user\/notifications/.test(self.location.href))
+{
+	Site.page = PAGE.NOTIFICATIONS;
+}
+else if(/\/user\//.test(self.location.href))
+{
+	Site.page = PAGE.USER;
+}
+else if(/story\//.test(self.location.href) || /chapter\//.test(self.location.href))
+{
+	Site.page = PAGE.STORY;
+}
+else
+{
+	Site.page = PAGE.OTHER;
+}
 
 // End utility stuff
 
