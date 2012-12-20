@@ -92,15 +92,6 @@ var userBanners = GM_getValue("userBanners", "");
 //var characters = GM_getValue("characters", "7,11,9,10,8,12,45");
 var eha = GM_getValue("eha", "1:0:0:0:0:0").split(":");
 var error502 = (document.body.innerHTML.indexOf("<center><h1>502 Bad Gateway</h1></center>") !== -1);
-var settingsPage = (/manage_user\/scriptsettings/.test(self.location.href));
-var blogEdit = (/manage_user\/edit_blog_post/.test(self.location.href));
-var blogPage = (/blog\//.test(self.location.href));
-var groupThread = (/view=group/.test(self.location.href) && /thread=/.test(self.location.href));
-var notificationsPage = (/manage_user\/notifications/.test(self.location.href));
-var userPage = (/\/user\//.test(self.location.href)); // /images/emoticons/fluttershysad.png
-var storyPage = (/story\//.test(self.location.href) || /chapter\//.test(self.location.href));
-var userName = "";
-var userid = "none";
 
 // Fix void links
 var anchors = document.getElementsByTagName("a");
@@ -136,17 +127,17 @@ if(user_toolbar != null)
 					{
 						vmt.checked = confirm("Please confirm that you are of legal age to read sexual or other adult content in your country by clicking OK. Click Cancel if this is not true.");
 					}
-					setCookie("view_mature", vmt.checked, 10000);
+					Site.setCookie("view_mature", vmt.checked, 10000);
 				}, false);
 			}
-			if(userName === "")
+			if(Site.username === "")
 			{
 				var expression = /\/user\/([^\/]*)$/; // from general_scripts.js
 				var matches = expression.exec(user_toolbar.getElementsByClassName("user_drop_down_menu")[0].getElementsByClassName("button")[0].href);
 				if(matches != null && typeof matches[1] !== "undefined")
 				{
-					userName = matches[1];
-					logg("Found username: " + userName);
+					Site.username = matches[1];
+					logg("Found username: " + Site.username);
 				}
 			}
 		}
@@ -162,7 +153,7 @@ if(sideMenu != null)
 	{
 		logg("Modifying side tabs");
 		sideTabs.getElementsByClassName("tab")[0].getElementsByTagName("img")[0].src = "//www.fimfiction-static.net/images/icons/settings.png";
-		sideTabs.innerHTML += '<a href="/manage_user/scriptsettings" class="tab'+(settingsPage?" tab_selected":"")+'"><img src="//www.fimfiction-static.net/images/icons/dashboard.png"> Script Settings</a>';
+		sideTabs.innerHTML += '<a href="/manage_user/scriptsettings" class="tab'+((Site.page == PAGE.SCRIPTSETTINGS)?" tab_selected":"")+'"><img src="//www.fimfiction-static.net/images/icons/dashboard.png"> Script Settings</a>';
 		logg("Done: side tabs");
 	}
 }
@@ -173,10 +164,10 @@ if(sideMenu != null)
 	var e_username = document.getElementById("comment_username");
 	if(e_username != null && e_username.value != null && e_username.value !== "")
 	{
-		if(userName == null || userName === "")
+		if(Site.username == null || Site.username === "")
 		{
-			userName = e_username.value;
-			logg("Found username: " + userName);
+			Site.username = e_username.value;
+			logg("Found username: " + Site.username);
 		}
 		e_username.style.display = "none";
 		e_username.parentNode.getElementsByClassName("label")[0].style.display = "none";
@@ -246,8 +237,7 @@ function loadAllPages(pages)
 	}
 }*/
 
-// TODO: Make this work
-/*if(blogPage || storyPage || groupThread)
+if(Site.page == PAGE.BLOG || Site.page == PAGE.STORY || Site.page == PAGE.GROUPTHREAD)
 {
 	var e_authors = document.getElementsByClassName("author");
 	for(i = 0; i < e_authors.length; i++)
@@ -256,27 +246,28 @@ function loadAllPages(pages)
 		if(e_avatar != null && e_avatar.length > 0)
 		{
 			var auname = e_avatar[0].parentNode.getElementsByClassName("name")[0].getElementsByTagName("a")[0].innerHTML;
-			if(auname === userName)
+			if(auname === Site.username)
 			{
-				userid = e_avatar[0].src;
-				userid = userid.substring(userid.indexOf("tars/")+5, userid.indexOf("_64"));
-				logg("Found userid (1): " + userid);
+				Site.userid = e_avatar[0].src;
+				Site.userid = Site.userid.substring(Site.userid.indexOf("tars/")+5, Site.userid.indexOf("_64"));
+				logg("Found userid (1): " + Site.userid);
 				break;
 			}
 		}
 	}
-}*/
-if((userid == null || userid === "" || userid === "none") && !(/\/manage_user\//.test(self.location.href)))
+}
+
+if((Site.userid == null || Site.userid === "" || Site.userid === -1) && !(/\/manage_user\//.test(self.location.href)))
 {
 	var avatar = document.getElementsByClassName("user_info")[0];
 	if(avatar != null)
 	{
 		avatar = avatar.getElementsByClassName("name")[0].getElementsByClassName("avatar")[0];
-		if(avatar.href.substring(avatar.href.indexOf("user/")+5) === userName)
+		if(avatar.href.substring(avatar.href.indexOf("user/")+5) === Site.username)
 		{
-			userid = avatar.getElementsByTagName("img")[0].src;
-			userid = userid.substring(userid.indexOf("tars/")+5, userid.indexOf("_64"));
-			logg("Found userid (2): " + userid);
+			Site.userid = avatar.getElementsByTagName("img")[0].src;
+			Site.userid = Site.userid.substring(Site.userid.indexOf("tars/")+5, Site.userid.indexOf("_64"));
+			logg("Found userid (2): " + Site.userid);
 		}
 	}
 }
@@ -322,10 +313,8 @@ if(searchform != null)
 	searchform.innerHTML = '<div class="textbox"><input type="hidden" value="category" name="view"><input type="text" placeholder="Search" style="width:160px; padding-left:8px;" value="" name="search" class="search"></div><input type="submit" value="" class="search_submit">';
 }*/
 
-if(settingsPage)
+if(Site.page == PAGE.SCRIPTSETTINGS)
 {
-	logg("Detected page: Script Settings");
-
 	var tableHTML = '<table class="properties"><tr><td class="label" style="line-height:1em;text-align:center;" colspan="2"><h2>General</h2></td></tr><tr><td class="label" style="line-height:1em;">More Emoticons</td><td><div><input id="ss_emoticons" type="checkbox" '+(addEmoticons?' checked="true"':' ')+'></div></td></tr><tr><td class="label" style="line-height:1em;">Full-width chapters</td><td><div><input id="ss_fullwidth" type="checkbox" '+(fullwidth?' checked="true"':' ')+'></div></td></tr><tr><td class="label">Banner (leave blank for default)</td><td><div><input id="ss_banner" type="text" style="width:80%" value="'+banner+'"><input type="button" style="width:5%;margin-left:1%;" value="Add" id="ss_banner_add"><input type="button" style="width:7%;margin-left:1%;" value="Delete" id="ss_banner_del"><br><select id="ss_banner_dd" style="width:100%;"><option value="">Default</option><option value="" disabled="true">Official</option><option value="//www.fimfiction-static.net/images/custom_banners/zecora.jpg">"Hanging by the Edge" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/aeron_fluttershy.jpg">"Nature" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/aeron_philomena.jpg">"Philomena - Equestria\'s Finest Phoenix" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/aeron_celestia.jpg">"Path to Canterlot" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/derpy_dash.jpg">"Full Armour D vs D" by ponyKillerX</option><option value="//www.fimfiction-static.net/images/custom_banners/ponykiller_trixie.jpg">"No Title" by ponyKillerX</option><option value="//www.fimfiction-static.net/images/custom_banners/maplesunrise_pinkiedash.jpg">"A Warm Evening" by MapleSunrise</option><option value="//www.fimfiction-static.net/images/custom_banners/yamio_fluttershy.jpg">"Fluttershy" by Yamio</option><option value="//www.fimfiction-static.net/images/custom_banners/smitty_derpy.jpg">"Derpy for Kiyoshi" by Smitty G</option><option value="//www.fimfiction-static.net/images/custom_banners/ratofdrawn_1.jpg">"Wet Fun" by RatofDrawn</option><option value="//www.fimfiction-static.net/images/custom_banners/ratofdrawn_rarijack.jpg">"Differences" by RatofDrawn</option><option value="//www.fimfiction-static.net/images/custom_banners/jinzhan_applejack.jpg">"Applejack" by JinZhan</option><option value="//www.fimfiction-static.net/images/custom_banners/jinzhan_group.jpg">"There are alligators in the lake" by JinZhan</option><option value="//www.fimfiction-static.net/images/custom_banners/solar_luna.jpg">"Chibi Luna - Star Fishing" by Soapie-Solar</option><option value="//www.fimfiction-static.net/images/custom_banners/solar_group.jpg">"Forest Foundation" by Soapie-Solar</option><option value="//www.fimfiction-static.net/images/custom_banners/uc77_1.jpg">"Ponies Dig Giant Robots" by UC77</option><option value="//www.fimfiction-static.net/images/custom_banners/cmaggot_fluttershy.jpg">"Dangerous Mission" by cmaggot</option><option value="//www.fimfiction-static.net/images/custom_banners/rainbow_ss.jpg">Silver Spoon by Rainbow</option><option value="//www.fimfiction-static.net/images/custom_banners/rainbow_markerpone.jpg">Untitled by Rainbow</option><option value="//www.fimfiction-static.net/images/custom_banners/rainbow_roseluck.jpg">Roseluck by Rainbow</option><option value="//www.fimfiction-static.net/images/custom_banners/jj_trixie.jpg">"Trixie\'s Life is so Hard" by John Joseco</option><option value="//www.fimfiction-static.net/images/custom_banners/anima_1.jpg">"C\'mon, lift your Spirit" by Anima-dos</option><option value="//www.fimfiction-static.net/images/custom_banners/mew_pinkie.jpg">"Reflect" by Mewball</option><option value="//www.fimfiction-static.net/images/custom_banners/tsitra_dash.jpg">"Morning Flight" by Tsitra360</option><option value="//www.fimfiction-static.net/images/custom_banners/knifeh_scoots.jpg">"Scootaloo" by KnifeH</option></select></div></td></tr></table>';
 	if(error502)
 	{
@@ -406,9 +395,8 @@ else if(error502)
 	//document.body.innerHTML = document.body.innerHTML.replace("502 Bad Gateway", errmsg502);
 	addEmoticons = false;
 }
-else if(notificationsPage)
+else if(Site.page == PAGE.NOTIFICATIONS)
 {
-	logg("Detected page: Notifications");
 	Site.setTitle("Notifications");
 	var notifications = document.getElementsByClassName("notification");
 	for(i = 0; i < notifications.length; i++)
@@ -419,9 +407,8 @@ else if(notificationsPage)
 		}
 	}
 }
-else if(/page=banner_credits/.test(self.location.href))
+else if(Site.page == PAGE.BANNERCREDITS)
 {
-	logg("Detected page: Banner Credits");
 	Site.setTitle("Banner Credits");
 }
 else if(/view=category/.test(self.location.href))
@@ -442,7 +429,7 @@ else if(/manage_user\/blog/.test(self.location.href))
 	logg("Detected page: Manage Blog");
 	Site.setTitle("Manage Blog");
 }
-else if(storyPage)
+else if(Site.page == PAGE.STORY)
 {
 	logg("Detected page: Story");
 	if(fullwidth)
@@ -460,7 +447,7 @@ else if(storyPage)
 		}
 	}
 }
-else if(blogEdit)
+else if(Site.page == PAGE.BLOGEDIT)
 {
 	logg("Detected page: Blog Editor");
 	var e_blog_title = document.getElementById("blog_title");
@@ -469,19 +456,7 @@ else if(blogEdit)
 		e_blog_title.setAttribute("value", "Untitled");
 	}
 }
-else if(blogPage)
-{
-	logg("Detected page: Blog");
-}
-else if(groupThread)
-{
-	logg("Detected page: Group Thread");
-}
-else if(userPage)
-{
-	logg("Detected page: User");
-}
-else
+else if(Site.page == PAGE.OTHER)
 {
 	logg("Detected page: ???");
 	addEmoticons = false;
@@ -785,7 +760,7 @@ if(browsething != null)
 var commentForm = document.getElementById("comment_form");
 if(commentForm != null)
 {
-	/*if(userName != null && userName !== "") // Better safe than sorry!
+	/*if(Site.username != null && Site.username !== "") // Better safe than sorry!
 	{
 		var commentType = -1;
 		var commentItem = -1;
@@ -826,7 +801,7 @@ if(commentForm != null)
 					document.getElementById("comment_processing").style.display = "";
 					$.post("/ajax_add_comment.php",
 					{
-						username: userName,
+						username: Site.username,
 						comment: _comment,
 						type: commentType,
 						item: commentItem,
@@ -903,7 +878,7 @@ function addTBB(toolbar, id) // TBB = Toolbar Buttons
 
 function AddYT()
 {
-	var txtfield = document.getElementById((blogEdit?"blog_post_content":"comment_comment"));
+	var txtfield = document.getElementById((Site.page == PAGE.BLOGEDIT?"blog_post_content":"comment_comment"));
 	if(txtfield != null)
 	{
 		var url = prompt("Enter a YouTube video URL","");
@@ -940,7 +915,7 @@ function InsertTextAt(field, text)
 	}
 }
 
-if(addEmoticons && blogEdit)
+if(addEmoticons && Site.page == PAGE.BLOGEDIT)
 {
 	var form = document.getElementById("edit_story_form");
 	if(form != null)
