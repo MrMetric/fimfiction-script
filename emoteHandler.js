@@ -228,12 +228,12 @@ function initializeAPI()
 		return;
 	}
 	initialized = true;
-	
+
 	var style = "\
 		.emoteTabButton {\
 			width: 32px;\
 			height: 23px;\
-			background-image: url(\"http://i.imgur.com/p8O1R.png\");\
+			background-image: url(\"//dl.dropbox.com/u/31471793/FiMFiction/script/buttonBG.png\");\
 			float: left;\
 			text-align: center;\
 			padding-top: 5px;\
@@ -265,7 +265,7 @@ function initializeAPI()
 	GM_addStyle(style);
 
 	commentBox = document.getElementById("comment_comment");
-	//Grab fimfiction's emote panel div and store it
+	//Grab FiMFiction's emote panel div and store it
 	var emoticonsPanel = document.getElementsByClassName("emoticons_panel");
 	for(var i = 0; i < emoticonsPanel.length; i++)
 	{
@@ -279,7 +279,7 @@ function initializeAPI()
 
 	var br = document.createElement('br');
 	emotePanel.insertBefore(br, emotePanel.firstChild);
-	
+
 	br = document.createElement('br');
 	emotePanel.insertBefore(br, emotePanel.firstChild);
 
@@ -287,15 +287,14 @@ function initializeAPI()
 		br = document.createElement('br');
 		emotePanel.insertBefore(br, emotePanel.firstChild);
 	}
-	
+
 	tabContainer = document.createElement("div");
 	tabContainer.style.marginLeft = "12px";
 	tabContainer.style.marginTop = "0px";
 	tabContainer.style.width = "279px";
 	emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
-	
+
 	tabContainer.appendChild(createTableLink("FF"));
-	
 }
 
 function createNewEmoteTable(tableName)
@@ -306,7 +305,7 @@ function createNewEmoteTable(tableName)
 	emoteTable.style.marginTop = "0px";
 	emoteTables[tablePrefix + tableName] = emoteTable;
 	emotePanel.appendChild(emoteTable);
-	
+
 	createTableLink(tableName);
 }
 
@@ -325,7 +324,7 @@ function createNewEmote(url, tableName)
 
 function createTableLink(tableName)
 {
-	
+
 	var tableLink = document.createElement("span");
 	tableLink.className = "emoteTabButton";
 	tableLink.id = tablePrefix + tableName;
@@ -336,16 +335,15 @@ function createTableLink(tableName)
 	{
 		showTable(this.id);
 	}, false);
-	
+
 	return tableLink;
-	
 }
 
 function showTable(tableID)
 {
 	alert("Showing table: " + tableID);
 	emoteTables[tableID].style.display = 'block';
-	
+
 	for (var table in emoteTables) {
 		if (!emoteTables.hasOwnProperty(table)) {
 			continue;
@@ -354,5 +352,4 @@ function showTable(tableID)
 			emoteTables[table].style.display = 'none';
 		}
 	}
-	
 }
