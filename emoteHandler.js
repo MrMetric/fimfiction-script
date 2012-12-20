@@ -199,10 +199,6 @@ var emotePanel;
 
 function addEmote(url, tableName)
 {
-	if(!initialized)
-	{
-		initialize();
-	}
 	if(emoteTables[tableName] != undefined)
 	{
 		createNewEmote(url, tableName);
@@ -214,9 +210,49 @@ function addEmote(url, tableName)
 	}
 }
 
-function initialize()
+function initializeAPI()
 {
+	if(initialized)
+	{
+		return;
+	}
 	initialized = true;
+	
+	var style = "\
+		.emoteTabButton {\
+			width: 32px;\
+			height: 23px;\
+			background-image: url(\"http://i.imgur.com/p8O1R.png\");\
+			float: left;\
+			text-align: center;\
+			padding-top: 5px;\
+			cursor: pointer;\
+			font: 13px normal \"Segoe UI\" !important;\
+			-webkit-touch-callout: none;\
+			-webkit-user-select: none;\
+			-khtml-user-select: none;\
+			-moz-user-select: none;\
+			-ms-user-select: none;\
+			user-select: none;\
+			opacity: 1;\
+			transition: opacity .2s ease-in;\
+			-moz-transition: opacity .2s ease-in;\
+			-webkit-transition: opacity .2s ease-in;\
+			-o-transition: opacity .2s ease-in;\
+			color: #ffffff;\
+		}\
+		\
+		.emoteTabButton:hover {\
+			cursor: pointer;\
+			opacity: 0.8;\
+			transition: opacity .2s ease-out;\
+			-moz-transition: opacity .2s ease-out;\
+			-webkit-transition: opacity .2s ease-out;\
+			-o-transition: opacity .2s ease-out;\
+		}";
+		
+	GM_addStyle(style);
+	
 	commentBox = document.getElementById("comment_comment");
 	//Grab fimfiction's emote panel div and store it
 	var emoticonsPanel = document.getElementsByClassName("emoticons_panel");
@@ -226,25 +262,28 @@ function initialize()
 	}
 	//Store the default emote table and give it an id
 	var defaultEmoteTable = emotePanel.firstChild;
-	defaultEmoteTable.id = "defaultemotetable";
-	emoteTables["defaultEmoteTable"] = defaultEmoteTable;
+	emoteTables["FF"] = defaultEmoteTable;
 	emotePanel.style.paddingTop = "15px";
+	
+	var br = document.createElement('br');
+	emotePanel.insertBefore(br, emotePanel.firstChild);
+	
+	br = document.createElement('br');
+	emotePanel.insertBefore(br, emotePanel.firstChild);
+	
+	for (var i = 0; i < emoteTables.length / 7 - 1; i++) {
+		br = document.createElement('br');
+		emotePanel.insertBefore(br, emotePanel.firstChild);
+	}
+	
 	tabContainer = document.createElement("div");
 	tabContainer.style.marginLeft = "12px";
 	tabContainer.style.marginTop = "0px";
 	tabContainer.style.width = "279px";
 	emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
-	var defaultTableLink = document.createElement("span");
-	defaultTableLink.className = "emoteTabButton";
-	defaultTableLink.id = "defaultEmoteTable";
-	defaultTableLink.style.marginLeft = "5px";
-	defaultTableLink.style.marginTop = "5px";
-	defaultTableLink.innerHTML = "defaultEmoteTable";
-	defaultTableLink.addEventListener("click", function ()
-	{
-		showTable(this.id);
-	}, false);
-	tabContainer.appendChild(defaultTableLink);
+	
+	tabContainer.appendChild(createTableLink("FF"));
+	
 }
 
 function createNewEmoteTable(tableName)
@@ -269,6 +308,24 @@ function createNewEmote(url, tableName)
 	image.style.margin = "5px";
 	//image.addEventListener("click", function() { addAnEmote(this.id); }, false);
 	emoteTables[tableName].appendChild(image);
+}
+
+function createTableLink(tableName)
+{
+	
+	var tableLink = document.createElement("span");
+	tableLink.className = "emoteTabButton";
+	tableLink.id = tableName;
+	tableLink.style.marginLeft = "5px";
+	tableLink.style.marginTop = "5px";
+	tableLink.innerHTML = tableName;
+	tableLink.addEventListener("click", function ()
+	{
+		showTable(this.id);
+	}, false);
+	
+	return tableLink;
+	
 }
 
 function showTable(tableName)
