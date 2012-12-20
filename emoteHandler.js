@@ -10,6 +10,112 @@
 
 "use strict";
 
+// Utility stuff
+
+function logg(msg)
+{
+	console.log(msg);
+}
+
+// from http://stackoverflow.com/questions/1622145/how-can-i-mimic-greasemonkey-firefoxs-unsafewindow-functionality-in-chrome
+var bGreasemonkeyServiceDefined = false;
+try
+{
+	if(typeof Components.interfaces.gmIGreasemonkeyService === "object")
+	{
+		bGreasemonkeyServiceDefined = true;
+	}
+}
+catch(err){}
+if(typeof unsafeWindow === "undefined" || !bGreasemonkeyServiceDefined)
+{
+	unsafeWindow = (function()
+	{
+		var dummyElem = document.createElement("p");
+		dummyElem.setAttribute("onclick", "return window;");
+		return dummyElem.onclick();
+	})();
+}
+
+// Add jQuery
+if(typeof $ === "undefined")
+{
+	if(typeof unsafeWindow.jQuery !== "undefined")
+	{
+		var $ = unsafeWindow.jQuery;
+	}
+	else
+	{
+		// TODO: Error handling
+	}
+}
+
+function stringToBool(s)
+{
+	if(typeof s === "boolean")
+	{
+		return s;
+	}
+	switch(s)
+	{
+		case "true": return true;
+		case "false": return false;
+		default: return null;
+	}
+}
+
+// GM function replacements are from https://raw.github.com/gist/3123124
+
+function GM_addStyle(aCss)
+{
+	var head = document.getElementsByTagName("head")[0];
+	if(head)
+	{
+		var stylenode = document.createElement("style");
+		stylenode.type = "text/css";
+		stylenode.textContent = aCss;
+		head.appendChild(stylenode);
+		return stylenode;
+	}
+	return null;
+}
+
+var GM_STORAGE_PREFIX = "FFE_";
+
+// All of the GM_*Value methods rely on DOM Storage's localStorage facility.
+// They work like always, but the values are scoped to a domain, unlike the
+// original functions. The content page's scripts can access, set, and
+// delete these values.
+
+function GM_deleteValue(aKey)
+{
+	localStorage.removeItem(GM_STORAGE_PREFIX + aKey);
+}
+
+function GM_getValue(aKey, aDefault)
+{
+	var value = localStorage.getItem(GM_STORAGE_PREFIX + aKey);
+	if(value == null && typeof aDefault !== "undefined")
+	{
+		value = aDefault;
+	}
+	var boolValue = stringToBool(value);
+	if(boolValue != null)
+	{
+		value = boolValue;
+	}
+	logg("getValue returned " + value + " for " + aKey);
+	return value;
+}
+
+function GM_setValue(aKey, aVal)
+{
+	localStorage.setItem(GM_STORAGE_PREFIX + aKey, aVal);
+	logg("Set " + aKey + " to " + aVal);
+}
+
+// End utility stuff
+
 var initialized = false;
 var emoteTables = [];
 var commentBox;
@@ -93,12 +199,4 @@ function createNewEmote(url, tableName)
 function showTable(tableName)
 {
 	alert("Showing table: " + tableName);
-}
-
-function addStyle(style)
-{
-	var head = document.getElementsByTagName("head")[0];
-	var ele = head.appendChild(document.createElement("style"));
-	ele.innerHTML = style;
-	return ele;
 }
