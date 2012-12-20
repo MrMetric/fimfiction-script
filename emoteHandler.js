@@ -206,10 +206,11 @@ var emoteTables = [];
 var commentBox;
 var tabContainer;
 var emotePanel;
+var tablePrefix = "emoteAPI_Table:";
 
 function addEmote(url, tableName)
 {
-	if(emoteTables[tableName] != undefined)
+	if(emoteTables[tablePrefix + tableName] != undefined)
 	{
 		createNewEmote(url, tableName);
 	}
@@ -272,7 +273,8 @@ function initializeAPI()
 	}
 	//Store the default emote table and give it an id
 	var defaultEmoteTable = emotePanel.firstChild;
-	emoteTables["FF"] = defaultEmoteTable;
+	defaultEmoteTable.style.display = 'none';
+	emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
 	emotePanel.style.paddingTop = "15px";
 
 	var br = document.createElement('br');
@@ -302,9 +304,10 @@ function createNewEmoteTable(tableName)
 	emoteTable.style.display = "none";
 	emoteTable.style.margin = "10px";
 	emoteTable.style.marginTop = "0px";
-	emoteTable.id = tableName;
-	emoteTables[tableName] = emoteTable;
+	emoteTables[tablePrefix + tableName] = emoteTable;
 	emotePanel.appendChild(emoteTable);
+	
+	createTableLink(tableName);
 }
 
 function createNewEmote(url, tableName)
@@ -317,7 +320,7 @@ function createNewEmote(url, tableName)
 	image.height = "54";
 	image.style.margin = "5px";
 	//image.addEventListener("click", function() { addAnEmote(this.id); }, false);
-	emoteTables[tableName].appendChild(image);
+	emoteTables[tablePrefix + tableName].appendChild(image);
 }
 
 function createTableLink(tableName)
@@ -325,7 +328,7 @@ function createTableLink(tableName)
 	
 	var tableLink = document.createElement("span");
 	tableLink.className = "emoteTabButton";
-	tableLink.id = tableName;
+	tableLink.id = tablePrefix + tableName;
 	tableLink.style.marginLeft = "5px";
 	tableLink.style.marginTop = "5px";
 	tableLink.innerHTML = tableName;
@@ -338,7 +341,18 @@ function createTableLink(tableName)
 	
 }
 
-function showTable(tableName)
+function showTable(tableID)
 {
-	alert("Showing table: " + tableName);
+	alert("Showing table: " + tableID);
+	emoteTables[tableID].style.display = 'block';
+	
+	for (var table in emoteTables) {
+		if (!emoteTables.hasOwnProperty(table)) {
+			continue;
+		}
+		if (emoteTables[table] != emoteTables[tableID]) {
+			emoteTables[table].style.display = 'none';
+		}
+	}
+	
 }
