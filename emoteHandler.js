@@ -264,8 +264,6 @@ function initializeAPI(m)
 	{
 		style += ".customEmote {";
 		style += "	opacity: 0.7;";
-		style += "	width: 54;";
-		style += "	height: 54;";
 		style += "	transition: opacity .2s ease-out;";
 		style += "	-moz-transition: opacity .2s ease-out;";
 		style += "	-webkit-transition: opacity .2s ease-out;";
@@ -375,6 +373,7 @@ function createNewEmoteTable(tableName, shortTableName)
 	emoteTable.style.paddingTop = "20px";
 	emoteTable.style.float = "left";
 	emoteTable.style.clear = "both";
+	emoteTable.style.textAlign = "center";
 	emoteTables[tablePrefix + shortTableName] = emoteTable;
 	emotePanel.appendChild(emoteTable);
 
@@ -387,6 +386,8 @@ function createNewEmote(url, emoteName, tableName)
 	var image = document.createElement("img");
 	image.src = url;
 	if (Site.mode == 0) {
+		image.width = '58';
+		image.height = '58';
 		image.id = url;
 	} else {
 		image.id = emoteName.toLowerCase.replace(" ", "_");
