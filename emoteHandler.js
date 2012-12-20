@@ -151,7 +151,7 @@ function initialize()
 	}
 	//Store the default emote table and give it an id
 	var defaultEmoteTable = emotePanel.firstChild;
-	defaultEmoteTable.setAttribute("id", "defaultemotetable");
+	defaultEmoteTable.id = "defaultemotetable";
 	emoteTables["defaultEmoteTable"] = defaultEmoteTable;
 	emotePanel.style.paddingTop = "15px";
 	tabContainer = document.createElement("div");
@@ -160,8 +160,8 @@ function initialize()
 	tabContainer.style.width = "279px";
 	emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
 	var defaultTableLink = document.createElement("span");
-	defaultTableLink.setAttribute("class", "emoteTabButton");
-	defaultTableLink.setAttribute("id", "defaultEmoteTable");
+	defaultTableLink.className = "emoteTabButton";
+	defaultTableLink.id = "defaultEmoteTable";
 	defaultTableLink.style.marginLeft = "5px";
 	defaultTableLink.style.marginTop = "5px";
 	defaultTableLink.innerHTML = "defaultEmoteTable";
@@ -178,7 +178,7 @@ function createNewEmoteTable(tableName)
 	emoteTable.style.display = "none";
 	emoteTable.style.margin = "10px";
 	emoteTable.style.marginTop = "0px";
-	emoteTable.setAttribute("id", tableName);
+	emoteTable.id = tableName;
 	emoteTables[tableName] = emoteTable;
 	emotePanel.appendChild(emoteTable);
 }
@@ -186,11 +186,11 @@ function createNewEmoteTable(tableName)
 function createNewEmote(url, tableName)
 {
 	var image = document.createElement("img");
-	image.setAttribute("src", url);
-	image.setAttribute("id", url);
-	image.setAttribute("class", "customEmote");
-	image.setAttribute("width", "54");
-	image.setAttribute("height", "54");
+	image.src = url;
+	image.id = url;
+	image.className = "customEmote";
+	image.width = "54";
+	image.height = "54";
 	image.style.margin = "5px";
 	//image.addEventListener("click", function() { addAnEmote(this.id); }, false);
 	emoteTables[tableName].appendChild(image);
