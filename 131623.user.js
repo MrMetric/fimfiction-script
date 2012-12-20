@@ -1009,8 +1009,9 @@ function addEmoticonsF(emoticons_panel, num)
 		addEmoticon1("facehoof", "Facehoof");
 		addEmoticon1("eeyup", "Eeyup");
 		addEmoticon1("duck", "Duck");
+		endSection();
 
-		endStartSection("Awesome Faces", 1, num);
+		/*endStartSection("Awesome Faces", 1, num);
 		addEmoticon2("Luna_lolface", "Luna Lolface");
 		addEmoticon3("lolface_Celestia", "Celestia Lolface");
 		addEmoticon2("Sweetie_Belle_lolface", "Sweetie Belle Lolface");
@@ -1143,11 +1144,11 @@ function addEmoticonsF(emoticons_panel, num)
 		addEmoticon("//e.deviantart.com/emoticons/moods/sadness.gif", "Sadness");
 		addEmoticon("//e.deviantart.com/emoticons/moods/fear.gif", "Fear");
 		addEmoticon("//e.deviantart.com/emoticons/moods/neutral.gif", "Neutral");
-		endSection();
+		endSection();*/
 
 		innerdiv.innerHTML = txtToAdd;
 
-		var aoeu = document.getElementById("ehl_0_" + num);
+		/*var aoeu = document.getElementById("ehl_0_" + num);
 		aoeu.addEventListener("click", function(){eh(0, num);}, false);
 		aoeu = document.getElementById("ehl_1_" + num);
 		aoeu.addEventListener("click", function(){eh(1, num);}, false);
@@ -1160,7 +1161,26 @@ function addEmoticonsF(emoticons_panel, num)
 		aoeu = document.getElementById("ehl_5_" + num);
 		aoeu.addEventListener("click", function(){eh(5, num);}, false);
 		aoeu = document.getElementById("ehl_6_" + num);
-		aoeu.addEventListener("click", function(){eh(6, num);}, false);
+		aoeu.addEventListener("click", function(){eh(6, num);}, false);*/
+
+		createNewEmoteTable("Awesome Faces", "AF");
+		createNewEmote(getURL2("Luna_lolface"), "Luna Lolface", "AF")
+		/*addEmoticon3("lolface_Celestia", "Celestia Lolface");
+		addEmoticon2("Sweetie_Belle_lolface", "Sweetie Belle Lolface");
+		addEmoticon2("Twilight_Sparkle_lolface", "Twilight Sparkle Lolface");
+		addEmoticon2("Spike_lolface", "Spike Lolface");
+		addEmoticon2("Pinkie_Pie_lolface", "Pinkie Pie Lolface");
+		addEmoticon2("Rarity_lolface", "Rarity Lolface");
+		addEmoticon2("Rainbow_Dash_lolface", "Rainbow Dash Lolface");
+		addEmoticon2("Applejack_lolface", "Applejack Lolface");
+		addEmoticon2("Vinyl_Scratch_lolface", "Vinyl Scratch Lolface");
+		addEmoticon2("Fluttershy_lolface", "Fluttershy Lolface");
+		addEmoticon2("Scootaloo_lolface", "Scootaloo Lolface");
+		addEmoticon2("Applebloom_lolface", "Applebloom Lolface");
+		addEmoticon2("Derpy_Hooves_lolface", "Derpy Hooves Lolface");
+		addEmoticon2("Trixie_lolface_1", "Trixie Lolface 1");
+		addEmoticon2("Trixie_lolface_2", "Trixie Lolface 2");
+		addEmoticon3("lolface_Queen_Chrysalis", "Queen Chrysalis Lolface");*/
 	}
 }
 
@@ -1195,6 +1215,11 @@ function addEmoticon1(name, title) // default
 function addEmoticon2(url, title) // old format
 {
 	addEmoticon("//dl.dropbox.com/u/31471793/FiMFiction/" + url + ".png", title);
+}
+
+function getURL2(url)
+{
+	return("//dl.dropbox.com/u/31471793/FiMFiction/" + url + ".png");
 }
 
 function addEmoticon3(url, title) // new format

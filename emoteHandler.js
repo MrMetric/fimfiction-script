@@ -137,13 +137,19 @@ function addEmote(url, tableName)
 	}
 }
 
-function initializeAPI()
+function initializeAPI(m)
 {
 	if(initialized)
 	{
 		return;
 	}
 	initialized = true;
+
+	if(typeof m === "undefined" || m == null || m < 0 || m > 1)
+	{
+		m = 0;
+	}
+	Site.mode = m; // emoticon mode
 
 	// from http://stackoverflow.com/questions/1622145/how-can-i-mimic-greasemonkey-firefoxs-unsafewindow-functionality-in-chrome
 	var bGreasemonkeyServiceDefined = false;
@@ -242,64 +248,74 @@ function initializeAPI()
 	var style = "";
 
 	style += ".emoticons_panel {";
-	style += "	height: auto !important;";
-	style += "	min-height: 300px !important;";
-	style += "	display: block !important;";
+	if(mode == 0)
+	{
+		style += "	height: auto !important;";
+		style += "	min-height: 300px !important;";
+		style += "	display: block !important;";
+	}
+	else if(mode == 1)
+	{
+		style += "	overflow: auto;";
+	}
 	style += "}";
 
-	style += ".customEmote {";
-	style += "	opacity: 0.7;";
-	style += "	transition: opacity .2s ease-out;";
-	style += "	-moz-transition: opacity .2s ease-out;";
-	style += "	-webkit-transition: opacity .2s ease-out;";
-	style += "	-o-transition: opacity .2s ease-out;";
-	style += "	-webkit-touch-callout: none;";
-	style += "	-webkit-user-select: none;";
-	style += "	-khtml-user-select: none;";
-	style += "	-moz-user-select: none;";
-	style += "	-ms-user-select: none;";
-	style += "	user-select: none;";
-	style += "}";
+	if(mode == 0)
+	{
+		style += ".customEmote {";
+		style += "	opacity: 0.7;";
+		style += "	transition: opacity .2s ease-out;";
+		style += "	-moz-transition: opacity .2s ease-out;";
+		style += "	-webkit-transition: opacity .2s ease-out;";
+		style += "	-o-transition: opacity .2s ease-out;";
+		style += "	-webkit-touch-callout: none;";
+		style += "	-webkit-user-select: none;";
+		style += "	-khtml-user-select: none;";
+		style += "	-moz-user-select: none;";
+		style += "	-ms-user-select: none;";
+		style += "	user-select: none;";
+		style += "}";
 
-	style += ".customEmote:hover {";
-	style += "	opacity: 1;";
-	style += "	transition: opacity .2s ease-in;";
-	style += "	-moz-transition: opacity .2s ease-in;";
-	style += "	-webkit-transition: opacity .2s ease-in;";
-	style += "	-o-transition: opacity .2s ease-in;";
-	style += "	cursor: pointer;";
-	style += "}";
+		style += ".customEmote:hover {";
+		style += "	opacity: 1;";
+		style += "	transition: opacity .2s ease-in;";
+		style += "	-moz-transition: opacity .2s ease-in;";
+		style += "	-webkit-transition: opacity .2s ease-in;";
+		style += "	-o-transition: opacity .2s ease-in;";
+		style += "	cursor: pointer;";
+		style += "}";
 
-	style += ".emoteTabButton {";
-	style += "	width: 32px;";
-	style += "	height: 23px;";
-	style += "	background-image: url(\"http://i.imgur.com/p8O1R.png\");";
-	style += "	float: left;";
-	style += "	text-align: center;";
-	style += "	padding-top: 5px;";
-	style += "	font: 13px normal \"Segoe UI\" !important;";
-	style += "	-webkit-touch-callout: none;";
-	style += "	-webkit-user-select: none;";
-	style += "	-khtml-user-select: none;";
-	style += "	-moz-user-select: none;";
-	style += "	-ms-user-select: none;";
-	style += "	user-select: none;";
-	style += "	opacity: 1;";
-	style += "	transition: opacity .2s ease-in;";
-	style += "	-moz-transition: opacity .2s ease-in;";
-	style += "	-webkit-transition: opacity .2s ease-in;";
-	style += "	-o-transition: opacity .2s ease-in;";
-	style += "	color: #ffffff";
-	style += "}";
+		style += ".emoteTabButton {";
+		style += "	width: 32px;";
+		style += "	height: 23px;";
+		style += "	background-image: url(\"http://i.imgur.com/p8O1R.png\");";
+		style += "	float: left;";
+		style += "	text-align: center;";
+		style += "	padding-top: 5px;";
+		style += "	font: 13px normal \"Segoe UI\" !important;";
+		style += "	-webkit-touch-callout: none;";
+		style += "	-webkit-user-select: none;";
+		style += "	-khtml-user-select: none;";
+		style += "	-moz-user-select: none;";
+		style += "	-ms-user-select: none;";
+		style += "	user-select: none;";
+		style += "	opacity: 1;";
+		style += "	transition: opacity .2s ease-in;";
+		style += "	-moz-transition: opacity .2s ease-in;";
+		style += "	-webkit-transition: opacity .2s ease-in;";
+		style += "	-o-transition: opacity .2s ease-in;";
+		style += "	color: #ffffff";
+		style += "}";
 
-	style += ".emoteTabButton:hover {";
-	style += "	cursor: pointer;";
-	style += "	opacity: 0.8;";
-	style += "	transition: opacity .2s ease-out;";
-	style += "	-moz-transition: opacity .2s ease-out;";
-	style += "	-webkit-transition: opacity .2s ease-out;";
-	style += "	-o-transition: opacity .2s ease-out;";
-	style += "}";
+		style += ".emoteTabButton:hover {";
+		style += "	cursor: pointer;";
+		style += "	opacity: 0.8;";
+		style += "	transition: opacity .2s ease-out;";
+		style += "	-moz-transition: opacity .2s ease-out;";
+		style += "	-webkit-transition: opacity .2s ease-out;";
+		style += "	-o-transition: opacity .2s ease-out;";
+		style += "}";
+	}
 
 	style += ".inner_padding {";
 	style += "	margin-top: 0px !important;";
@@ -348,28 +364,31 @@ function initializeAPI()
 	}, 1);
 }
 
-function createNewEmoteTable(tableName)
+function createNewEmoteTable(tableName, shortTableName)
 {
+	logg("Creating emoticon table: " + tableName + "(" + shortTableName + ")");
 	var emoteTable = document.createElement("div");
 	emoteTable.style.display = "none";
 	emoteTable.style.margin = "10px";
 	emoteTable.style.paddingTop = "20px";
 	emoteTable.style.float = "left";
 	emoteTable.style.clear = "both";
-	emoteTables[tablePrefix + tableName] = emoteTable;
+	emoteTables[tablePrefix + shortTableName] = emoteTable;
 	emotePanel.appendChild(emoteTable);
 
-	tabContainer.appendChild(createTableLink(tableName));
+	tabContainer.appendChild(createTableLink(shortTableName));
 }
 
-function createNewEmote(url, tableName)
+function createNewEmote(url, emoteName, tableName)
 {
+	logg("Adding emoticon: " + url + " (" + emoteName + ") to " + tableName);
 	var image = document.createElement("img");
 	image.src = url;
-	image.id = url;
+	image.id = emoteName.toLowerCase.replace(" ", "_");
+	image.title = emoteName;
 	image.className = "customEmote";
-	image.width = "54";
-	image.height = "54";
+	//image.width = "54";
+	//image.height = "54";
 	image.style.margin = "5px";
 	image.addEventListener("click", function() { addEmoteToCommentBox(this.id); }, false);
 	emoteTables[tablePrefix + tableName].appendChild(image);
