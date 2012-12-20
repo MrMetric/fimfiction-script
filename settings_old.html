@@ -1,0 +1,545 @@
+<table class="properties">
+	<tr>
+		<td class="label" style="line-height:1em;text-align:center;" colspan="2">
+			<h2>General</h2>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" style="line-height:1em;">More Emoticons</td>
+		<td>
+			<div>
+				<input id="ss_emoticons" type="checkbox" '+(addEmoticons?' checked="true"':' ')+'>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" style="line-height:1em;">Comment Preview</td>
+		<td>
+			<div>
+				<input id="ss_preview" type="checkbox" '+(commentPreview?' checked="true"':' ')+'>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" style="line-height:1em;">Automatically update preview</td>
+		<td>
+			<div>
+				<input id="ss_autoupdate" type="checkbox" '+(ap?' checked="true" ':'')+'>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" style="line-height:1em;">Full-width chapters</td>
+		<td>
+			<div>
+				<input id="ss_fullwidth" type="checkbox" '+(fullwidth?' checked="true"':' ')+'>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">Banner (leave blank for default)</td>
+		<td>
+			<div>
+				<input id="ss_banner" type="text" style="width:85%" value="'+banner+'">
+				<input type="button" style="width:5%;margin-left:1%;" value="Add" id="ss_banner_add">
+				<input type="button" style="width:7%;margin-left:1%;" value="Delete" id="ss_banner_del">
+				<br>
+				<select id="ss_banner_dd" onclick="setting_banner_dd();" style="width:100%;">
+					<option value="">Default</option>
+					<option value="" disabled="true">Official</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/502fiction.jpg">502fiction</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/header_title_appledash.jpg">Appledash</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/fields.jpg">Fields</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/header_title_flittercloudchaser.jpg">Flitter and Cloudchaser</option>
+					<option value="https://dl.dropbox.com/u/31471793/FiMFiction/banners/flutterdash.jpg">Flutterdash</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/header_title_flutterdash.jpg">Flutterdash 2</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/flutterdash.jpg">Flutterdash 3</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/header_title_fluttershy.jpg">Fluttershy</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/fluttershypinkie.jpg">Fluttershy and Pinkie</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/luna.jpg">Luna</option>
+					<option value="https://www.fimfiction-static.net/themes/poni2.0/images/header_title_mdw.png">Mare-Do-Well</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/twilestia.jpg">My Faithful Student</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/one_year_anniversary.jpg">One Year Anniversary</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/header_title_pinkiedash.jpg">Pinkiedash</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/pinkiedash.jpg">Pinkiedash 2</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/header_title_rainbowdash.jpg">Rainbow Dash</option>
+					<option value="https://www.fimfiction-static.net/themes/poni2.0/images/header_title_pet.png">Rainbow Dash and Tank</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/rarijack.jpg">Rarijack</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/header_title_reu.png">Reuniclus Edition</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/fwf.jpg">Running of the Leaves</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/scootaloo.jpg">Scootaloo</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/theshadytrough.jpg">The Shady Trough</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/stealth.jpg">Stealth</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/trees.jpg">Trees</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/twidash.jpg">Twidash</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/twilightlicious.jpg">Twilightlicious</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/twixie.jpg">Twixie</option>
+					<option value="" disabled="true">Official - Stories</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/the_63rd_rune.jpg">The 63rd Rune</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/the_ambassadors_son.jpg">The Ambassador\'s Son</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/images/header_title_antipodes.png">Antipodes</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/the_elements_of_discord.jpg">The Elements of Discord</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/equestrians_in_undergarments.jpg">Equestrians in Undergarments</option>
+					<option value="https://www.fimfiction-static.net/images/custom_banners/harmony.jpg">Harmony</option>
+					<option value="" disabled="true">User-created</option>
+					<option value="https://dl.dropbox.com/u/31471793/FiMFiction/banners/veggie55_v1.png">Veggie55 v1 (art by veggie55-Manfaceplz)</option>
+				</select>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">502 error message</td>
+		<td>
+			<div>
+				<input id="ss_errmsg502" type="text" style="width:100%" value="'+errmsg502+'">
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" style="line-height:1em;text-align:center;" colspan="2">'+ '
+			<h2>Colors</h2>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">Featured Title Background</td>
+		<td>
+			<div>
+				<input id="ss_fboxtitlecolor_bg" type="text" style="color:#000000;background-color:'+fboxtitlecolor_bg+';"
+				value="'+fboxtitlecolor_bg+'">
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">Featured Title Background (hover)</td>
+		<td>
+			<div>
+				<input id="ss_fboxtitlecolor_bgh" type="text" style="color:#000000;background-color:'+fboxtitlecolor_bgh+';"
+				value="'+fboxtitlecolor_bgh+'">
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">Featured Title Text</td>
+		<td>
+			<div>
+				<input id="ss_fboxtitlecolor_txt" type="text" style="color:#000000;background-color:'+fboxtitlecolor_txt+';"
+				value="'+fboxtitlecolor_txt+'">
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" style="line-height:1em;text-align:center;" colspan="2">
+			<h2>Characters in the Browse dropdown thing</h2>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<center>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">
+					<a class="select_character">
+						<input type="checkbox" class="included" style="display:none;" value="7">
+						<img title="Twilight Sparkle" class="archive_character" style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/twilight_sparkle.png\');opacity:0.5;"
+						id="7" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" class="included" style="display:none;" value="8">
+						<img title="Rainbow Dash" class="archive_character" style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/rainbow_dash.png\');opacity:0.5;"
+						id="8" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" class="included" style="display:none;" value="9">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/pinkie_pie.png\');opacity:0.5;"
+						id="9" title="Pinkie Pie" class="archive_character" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" class="included" style="display:none;" value="10">
+						<img id="10" title="Applejack" class="archive_character" style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/applejack.png\');opacity:0.5;"
+						src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" class="included" style="display:none;" value="11">
+						<img id="11" title="Rarity" class="archive_character" style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/rarity.png\');opacity:0.5;"
+						src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" class="included" style="display:none;" value="12">
+						<img id="12" title="Fluttershy" class="archive_character" style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/fluttershy.png\');opacity:0.5;"
+						src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="16" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/spike.png\');opacity:0.5;"
+						class="archive_character" title="Spike" id="16" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="74" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/main_6.png\');opacity:0.5;"
+						class="archive_character" title="Main 6" id="74" src="//www.fimfiction-static.net/images/selected/neutral.png"
+						width="64" height="32">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="13" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/apple_bloom.png\');opacity:0.5;"
+						class="archive_character" title="Apple Bloom" id="13" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="14" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/scootaloo.png\');opacity:0.5;"
+						class="archive_character" title="Scootaloo" id="14" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="15" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/sweetie_belle.png\');opacity:0.5;"
+						class="archive_character" title="Sweetie Belle" id="15" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="75" style="display:none;" class="included">'+ '
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/cmc.png\');opacity:0.5;"
+						class="archive_character" title="Cutie Mark Crusaders" id="75" src="//www.fimfiction-static.net/images/selected/neutral.png"
+						width="64" height="32">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="17" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/celestia.png\');opacity:0.5;"
+						class="archive_character" title="Princess Celestia" id="17" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="18" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/princess_luna.png\');opacity:0.5;"
+						class="archive_character" title="Princess Luna" id="18" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="54" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/nightmare_moon.png\');opacity:0.5;"
+						class="archive_character" title="Nightmare Moon" id="54" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="19" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/gilda.png\');opacity:0.5;"
+						class="archive_character" title="Gilda" id="19" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="20" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/zecora.png\');opacity:0.5;"
+						class="archive_character" title="Zecora" id="20" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="21" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/trixie.png\');opacity:0.5;"
+						class="archive_character" title="Trixie" id="21" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="30" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/cherilee.png\');opacity:0.5;"
+						class="archive_character" title="Cheerilee" id="30" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="31" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/the_mayor.png\');opacity:0.5;"
+						class="archive_character" title="The Mayor" id="31" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="32" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/hoity_toity.png\');opacity:0.5;"
+						class="archive_character" title="Hoity Toity" id="32" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="33" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/photo_finish.png\');opacity:0.5;"
+						class="archive_character" title="Photo Finish" id="33" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="34" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/sapphire_shores.png\');opacity:0.5;"
+						class="archive_character" title="Sapphire Shores" id="34" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="35" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/spitfire.png\');opacity:0.5;"
+						class="archive_character" title="Spitfire" id="35" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="36" style="display:none;" class="included">'+ '
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/soarin.png\');opacity:0.5;"
+						class="archive_character" title="Soarin" id="36" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="37" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/prince_blueblood.png\');opacity:0.5;"
+						class="archive_character" title="Prince Blueblood" id="37" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="38" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/little_strongheart.png\');opacity:0.5;"
+						class="archive_character" title="Little Strongheart" id="38" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="53" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/discord.png\');opacity:0.5;"
+						class="archive_character" title="Discord" id="53" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="58" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/mare_do_well.png\');opacity:0.5;"
+						class="archive_character" title="Mare Do Well" id="58" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="60" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/fancypants.png\');opacity:0.5;"
+						class="archive_character" title="Fancypants" id="60" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="63" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/daring_do.png\');opacity:0.5;"
+						class="archive_character" title="Daring Do" id="63" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="65" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/flimflamicon.png\');opacity:0.5;"
+						class="archive_character" title="Flim and Flam" id="65" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="66" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/cranky doodle icon.png\');opacity:0.5;"
+						class="archive_character" title="Cranky Doodle Donkey" id="66" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="67" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/matilda icon.png\');opacity:0.5;"
+						class="archive_character" title="Matilda" id="67" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="68" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/mr cake icon.png\');opacity:0.5;"
+						class="archive_character" title="Mr. Cake" id="68" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="69" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/mrs cake icon.png\');opacity:0.5;"
+						class="archive_character" title="Mrs. Cake" id="69" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="71" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/ironwillicon.png\');opacity:0.5;"
+						class="archive_character" title="Iron Will" id="71" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="72" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/Cadence.png\');opacity:0.5;"
+						class="archive_character" title="Princess Cadence" id="72" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>'+ '&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="73" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/shining-armor.png\');opacity:0.5;"
+						class="archive_character" title="Shining Armor" id="73" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="76" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/wonderbolts.png\');opacity:0.5;"
+						class="archive_character" title="Wonderbolts" id="76" src="//www.fimfiction-static.net/images/selected/neutral.png"
+						width="64" height="32">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="77" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/diamond_dogs.png\');opacity:0.5;"
+						class="archive_character" title="Diamond Dogs" id="77" src="//www.fimfiction-static.net/images/selected/neutral.png"
+						width="64" height="32">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="78" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/queen-chrysalis.png\');opacity:0.5;"
+						class="archive_character" title="Queen Chrysalis" id="78" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="22" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/big_mac.png\');opacity:0.5;"
+						class="archive_character" title="Big Macintosh" id="22" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="23" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/granny_smith.png\');opacity:0.5;"
+						class="archive_character" title="Granny Smith" id="23" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="24" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/braeburn.png\');opacity:0.5;"
+						class="archive_character" title="Braeburn" id="24" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="25" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/diamond_tiara.png\');opacity:0.5;"
+						class="archive_character" title="Diamond Tiara" id="25" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="26" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/silver_spoon.png\');opacity:0.5;"
+						class="archive_character" title="Silver Spoon" id="26" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="27" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/twist.png\');opacity:0.5;"
+						class="archive_character" title="Twist" id="27" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="28" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/snips.png\');opacity:0.5;"
+						class="archive_character" title="Snips" id="28" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="29" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/snails.png\');opacity:0.5;"
+						class="archive_character" title="Snails" id="29" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="55" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/pipsqueak.png\');opacity:0.5;"
+						class="archive_character" title="Pipsqueak" id="55" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>'+ '
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="39" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/angel.png\');opacity:0.5;"
+						class="archive_character" title="Angel" id="39" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="40" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/winona.png\');opacity:0.5;"
+						class="archive_character" title="Winona" id="40" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="41" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/opalescence.png\');opacity:0.5;"
+						class="archive_character" title="Opalescence" id="41" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="42" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/gummy.png\');opacity:0.5;"
+						class="archive_character" title="Gummy" id="42" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="43" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/owlowiscious.png\');opacity:0.5;"
+						class="archive_character" title="Owlowiscious" id="43" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="44" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/philomena.png\');opacity:0.5;"
+						class="archive_character" title="Philomena" id="44" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="59" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/tank.png\');opacity:0.5;"
+						class="archive_character" title="Tank" id="59" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="45" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/derpy_hooves.png\');opacity:0.5;"
+						class="archive_character" title="Derpy Hooves" id="45" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="46" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/lyra.png\');opacity:0.5;"
+						class="archive_character" title="Lyra" id="46" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="47" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/bon_bon.png\');opacity:0.5;"
+						class="archive_character" title="Bon-Bon" id="47" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="48" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/dj_pon3.png\');opacity:0.5;"
+						class="archive_character" title="DJ P0N-3" id="48" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="50" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/caramel.png\');opacity:0.5;"
+						class="archive_character" title="Caramel" id="50" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="51" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/doctor_whooves.png\');opacity:0.5;"
+						class="archive_character" title="Doctor Whooves" id="51" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="52" style="display:none;" class="included">'+ '
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/octavia.png\');opacity:0.5;"
+						class="archive_character" title="Octavia" id="52" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="56" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/berry_punch.png\');opacity:0.5;"
+						class="archive_character" title="Berry Punch" id="56" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="57" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/carrot_top.png\');opacity:0.5;"
+						class="archive_character" title="Carrot Top" id="57" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="82" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/roseluck.png\');opacity:0.5;"
+						class="archive_character" title="Roseluck" id="82" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="61" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/fleur_de_lis.png\');opacity:0.5;"
+						class="archive_character" title="Fleur de Lis" id="61" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="64" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/colgateicon.png\');opacity:0.5;"
+						class="archive_character" title="Colgate" id="64" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="70" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/dinkyicon.png\');opacity:0.5;"
+						class="archive_character" title="Dinky Hooves" id="70" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="79" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/thunderlane.png\');opacity:0.5;"
+						class="archive_character" title="Thunderlane" id="79" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="80" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/flitter_and_cloudchaser.png\');opacity:0.5;"
+						class="archive_character" title="Flitter and Cloudchaser" id="80" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="81" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/rumble.png\');opacity:0.5;"
+						class="archive_character" title="Rumble" id="81" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>
+				<div style="border:1px solid #ccc;padding:5px;display:inline-block;background-color:#FFF;margin:2px;height:32px;">&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="49" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/oc.png\');opacity:0.5;"
+						class="archive_character" title="Original Character" id="49" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>&nbsp;
+					<a class="select_character">
+						<input type="checkbox" value="62" style="display:none;" class="included">
+						<img style="background-repeat:no-repeat;background-position:center center;background-image:url(\'//www.fimfiction-static.net/images/characters/other.png\');opacity:0.5;"
+						class="archive_character" title="Other" id="62" src="//www.fimfiction-static.net/images/selected/neutral.png">
+					</a>
+				</div>
+			</center>
+		</td>
+	</tr>
+</table>
