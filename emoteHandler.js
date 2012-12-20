@@ -186,27 +186,34 @@ function initializeAPI()
 	{
 		Site.page = PAGE.MAIN;
 	}
-	else*/ if(/manage_user\/scriptsettings/.test(self.location.href))
+	else*/ if(/\/manage_user\/scriptsettings/.test(self.location.href))
 	{
 		Site.page = PAGE.SCRIPTSETTINGS;
 	}
-	else if(/blog\//.test(self.location.href))
+	else if(/\/blog\//.test(self.location.href))
 	{
 		Site.page = PAGE.BLOG;
 	}
-	else if(/manage_user\/edit_blog_post/.test(self.location.href))
+	else if(/\/manage_user\/edit_blog_post/.test(self.location.href))
 	{
 		Site.page = PAGE.BLOGEDIT;
 	}
-	/*else if()
+	else if(/\/group\//.test(self.location.href))
 	{
-		Site.page = PAGE.GROUP;
-	}*/
+		if(/\/thread\//.test(self.location.href))
+		{
+			Site.page = PAGE.GROUPTHREAD;
+		}
+		else
+		{
+			Site.page = PAGE.GROUP;
+		}
+	}
 	else if(/view=group/.test(self.location.href) && /thread=/.test(self.location.href))
 	{
 		Site.page = PAGE.GROUPTHREAD;
 	}
-	else if(/manage_user\/notifications/.test(self.location.href))
+	else if(/\/manage_user\/notifications/.test(self.location.href))
 	{
 		Site.page = PAGE.NOTIFICATIONS;
 	}
@@ -214,7 +221,7 @@ function initializeAPI()
 	{
 		Site.page = PAGE.USER;
 	}
-	else if(/story\//.test(self.location.href) || /chapter\//.test(self.location.href))
+	else if(/\/story\//.test(self.location.href) || /\/chapter\//.test(self.location.href))
 	{
 		Site.page = PAGE.STORY;
 	}
@@ -222,7 +229,7 @@ function initializeAPI()
 	{
 		Site.page = PAGE.BANNERCREDITS;
 	}
-	else if(/manage_user\/blog/.test(self.location.href))
+	else if(/\/manage_user\/blog/.test(self.location.href))
 	{
 		Site.page = PAGE.MANAGEBLOG;
 	}
@@ -230,6 +237,7 @@ function initializeAPI()
 	{
 		Site.page = PAGE.OTHER;
 	}
+	logg("Detected page: " + Site.page.name);
 
 	var style = "";
 
@@ -375,7 +383,7 @@ function createTableLink(tableName)
 	tableLink.style.marginLeft = "5px";
 	tableLink.style.marginTop = "5px";
 	tableLink.innerHTML = tableName;
-	tableLink.addEventListener("click", function ()
+	tableLink.addEventListener("click", function()
 	{
 		showTable(this.id);
 	}, false);

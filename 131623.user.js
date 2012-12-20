@@ -955,7 +955,7 @@ function addEmoticonsF(emoticons_panel, num)
 		logg("Adding panel #" + num);
 		var innerdiv = emoticons_panel.getElementsByClassName("inner_padding")[0];
 		emoticons_panel.style.overflow = "auto";
-		if(!blogEdit)
+		if(Site.page != PAGE.BLOGEDIT)
 		{
 			txtToAdd += "<b>Do not post more than 20 emoticons at once</b><br>";
 		}
