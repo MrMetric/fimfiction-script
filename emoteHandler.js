@@ -248,19 +248,19 @@ function initializeAPI(m)
 	var style = "";
 
 	style += ".emoticons_panel {";
-	if(mode == 0)
+	if(Site.mode == 0)
 	{
 		style += "	height: auto !important;";
 		style += "	min-height: 300px !important;";
 		style += "	display: block !important;";
 	}
-	else if(mode == 1)
+	else if(Site.mode == 1)
 	{
 		style += "	overflow: auto;";
 	}
 	style += "}";
 
-	if(mode == 0)
+	if(Site.mode == 0)
 	{
 		style += ".customEmote {";
 		style += "	opacity: 0.7;";
