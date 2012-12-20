@@ -114,6 +114,23 @@ function GM_setValue(aKey, aVal)
 	logg("Set " + aKey + " to " + aVal);
 }
 
+var Site = {
+	setTitle: function(title)
+	{
+		unsafeWindow.title_cache = title + " - FiMFiction.net";
+		document.title = unsafeWindow.title_cache;
+		logg("Set page title: "+title);
+	},
+	// from general_scripts.js
+	setCookie: function(c_name, value, exdays)
+	{
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + exdays);
+		var c_value = escape(value) + (exdays == null?"":"; expires=" + exdate.toUTCString());
+		document.cookie = c_name + "=" + c_value + ";path=/";
+	}
+};
+
 // End utility stuff
 
 var initialized = false;
