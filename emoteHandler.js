@@ -124,7 +124,9 @@ var PAGE = {
 	GROUPTHREAD:	{value: 5, name: "Group Thread"},
 	NOTIFICATIONS:	{value: 6, name: "Notifications"},
 	USER:			{value: 7, name: "User"},
-	STORY:			{value: 8, name: "Story"}
+	STORY:			{value: 8, name: "Story"},
+	BANNERCREDITS:	{value: 9, name: "Banner Credits"},
+	MANAGEBLOG:		{value:10, name: "Manage Blog"}
 };
 
 var Site = {
@@ -183,6 +185,14 @@ else if(/\/user\//.test(self.location.href))
 else if(/story\//.test(self.location.href) || /chapter\//.test(self.location.href))
 {
 	Site.page = PAGE.STORY;
+}
+else if(/page=banner_credits/.test(self.location.href))
+{
+	Site.page = PAGE.BANNERCREDITS;
+}
+else if(/manage_user\/blog/.test(self.location.href))
+{
+	Site.page = PAGE.MANAGEBLOG;
 }
 else
 {
@@ -250,9 +260,9 @@ function initializeAPI()
 			-webkit-transition: opacity .2s ease-out;\
 			-o-transition: opacity .2s ease-out;\
 		}";
-		
+
 	GM_addStyle(style);
-	
+
 	commentBox = document.getElementById("comment_comment");
 	//Grab fimfiction's emote panel div and store it
 	var emoticonsPanel = document.getElementsByClassName("emoticons_panel");
@@ -264,13 +274,13 @@ function initializeAPI()
 	var defaultEmoteTable = emotePanel.firstChild;
 	emoteTables["FF"] = defaultEmoteTable;
 	emotePanel.style.paddingTop = "15px";
-	
+
 	var br = document.createElement('br');
 	emotePanel.insertBefore(br, emotePanel.firstChild);
 	
 	br = document.createElement('br');
 	emotePanel.insertBefore(br, emotePanel.firstChild);
-	
+
 	for (var i = 0; i < emoteTables.length / 7 - 1; i++) {
 		br = document.createElement('br');
 		emotePanel.insertBefore(br, emotePanel.firstChild);
