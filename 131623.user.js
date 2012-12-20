@@ -159,7 +159,7 @@ if(sideMenu != null)
 }
 
 // TODO: Make this work
-/*if(blogPage || storyPage)
+/*if(Site.page == PAGE.BLOG || Site.page == PAGE.STORY)
 {
 	var e_username = document.getElementById("comment_username");
 	if(e_username != null && e_username.value != null && e_username.value !== "")
@@ -424,9 +424,8 @@ else if(/view=category/.test(self.location.href))
 		Site.setTitle("Favorites");
 	}
 }
-else if(/manage_user\/blog/.test(self.location.href))
+else if(Site.page == PAGE.MANAGEBLOG)
 {
-	logg("Detected page: Manage Blog");
 	Site.setTitle("Manage Blog");
 }
 else if(Site.page == PAGE.STORY)

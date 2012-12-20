@@ -8,6 +8,8 @@
  *			Use addEmote("image url", "table name"); to add an emote
  */
 
+/*jshint multistr: true*/
+
 "use strict";
 
 // Utility stuff
@@ -46,7 +48,7 @@ if(typeof $ === "undefined")
 	}
 	else
 	{
-		// TODO: Error handling
+		logg("jQuery not found");
 	}
 }
 
@@ -146,59 +148,6 @@ var Site = {
 	}
 };
 
-Site.username = "";
-Site.userid = -1;
-
-/*if()
-{
-	Site.page = PAGE.MAIN;
-}
-else*/
-if(/manage_user\/scriptsettings/.test(self.location.href))
-{
-	Site.page = PAGE.SCRIPTSETTINGS;
-}
-else if(/blog\//.test(self.location.href))
-{
-	Site.page = PAGE.BLOG;
-}
-else if(/manage_user\/edit_blog_post/.test(self.location.href))
-{
-	Site.page = PAGE.BLOGEDIT;
-}
-/*else if()
-{
-	Site.page = PAGE.GROUP;
-}*/
-else if(/view=group/.test(self.location.href) && /thread=/.test(self.location.href))
-{
-	Site.page = PAGE.GROUPTHREAD;
-}
-else if(/manage_user\/notifications/.test(self.location.href))
-{
-	Site.page = PAGE.NOTIFICATIONS;
-}
-else if(/\/user\//.test(self.location.href))
-{
-	Site.page = PAGE.USER;
-}
-else if(/story\//.test(self.location.href) || /chapter\//.test(self.location.href))
-{
-	Site.page = PAGE.STORY;
-}
-else if(/page=banner_credits/.test(self.location.href))
-{
-	Site.page = PAGE.BANNERCREDITS;
-}
-else if(/manage_user\/blog/.test(self.location.href))
-{
-	Site.page = PAGE.MANAGEBLOG;
-}
-else
-{
-	Site.page = PAGE.OTHER;
-}
-
 // End utility stuff
 
 var initialized = false;
@@ -273,17 +222,18 @@ function initializeAPI()
 	}
 	//Store the default emote table and give it an id
 	var defaultEmoteTable = emotePanel.firstChild;
-	defaultEmoteTable.style.display = 'none';
+	defaultEmoteTable.style.display = "none";
 	emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
 	emotePanel.style.paddingTop = "15px";
 
-	var br = document.createElement('br');
+	var br = document.createElement("br");
 	emotePanel.insertBefore(br, emotePanel.firstChild);
 
-	br = document.createElement('br');
+	br = document.createElement("br");
 	emotePanel.insertBefore(br, emotePanel.firstChild);
 
-	for (var i = 0; i < emoteTables.length / 7 - 1; i++) {
+	for(var i = 0; i < emoteTables.length / 7 - 1; i++)
+	{
 		br = document.createElement('br');
 		emotePanel.insertBefore(br, emotePanel.firstChild);
 	}
@@ -295,6 +245,59 @@ function initializeAPI()
 	emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
 
 	tabContainer.appendChild(createTableLink("FF"));
+
+	Site.username = "";
+	Site.userid = -1;
+
+	/*if()
+	{
+		Site.page = PAGE.MAIN;
+	}
+	else*/
+	if(/manage_user\/scriptsettings/.test(self.location.href))
+	{
+		Site.page = PAGE.SCRIPTSETTINGS;
+	}
+	else if(/blog\//.test(self.location.href))
+	{
+		Site.page = PAGE.BLOG;
+	}
+	else if(/manage_user\/edit_blog_post/.test(self.location.href))
+	{
+		Site.page = PAGE.BLOGEDIT;
+	}
+	/*else if()
+	{
+		Site.page = PAGE.GROUP;
+	}*/
+	else if(/view=group/.test(self.location.href) && /thread=/.test(self.location.href))
+	{
+		Site.page = PAGE.GROUPTHREAD;
+	}
+	else if(/manage_user\/notifications/.test(self.location.href))
+	{
+		Site.page = PAGE.NOTIFICATIONS;
+	}
+	else if(/\/user\//.test(self.location.href))
+	{
+		Site.page = PAGE.USER;
+	}
+	else if(/story\//.test(self.location.href) || /chapter\//.test(self.location.href))
+	{
+		Site.page = PAGE.STORY;
+	}
+	else if(/page=banner_credits/.test(self.location.href))
+	{
+		Site.page = PAGE.BANNERCREDITS;
+	}
+	else if(/manage_user\/blog/.test(self.location.href))
+	{
+		Site.page = PAGE.MANAGEBLOG;
+	}
+	else
+	{
+		Site.page = PAGE.OTHER;
+	}
 }
 
 function createNewEmoteTable(tableName)
