@@ -48,6 +48,7 @@ if(typeof $ === "undefined")
 	}
 	else
 	{
+		// TODO: Error handling
 		logg("jQuery not found");
 	}
 }

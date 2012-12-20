@@ -14,6 +14,8 @@
 
 "use strict";
 
+initializeAPI();
+
 // INFOCARD REPLACEMENT
 
 var infocard_timeout = null;
@@ -430,7 +432,6 @@ else if(Site.page == PAGE.MANAGEBLOG)
 }
 else if(Site.page == PAGE.STORY)
 {
-	logg("Detected page: Story");
 	if(fullwidth)
 	{
 		var container = document.getElementById("chapter_container");
@@ -448,7 +449,6 @@ else if(Site.page == PAGE.STORY)
 }
 else if(Site.page == PAGE.BLOGEDIT)
 {
-	logg("Detected page: Blog Editor");
 	var e_blog_title = document.getElementById("blog_title");
 	if(e_blog_title != null && e_blog_title.value === "")
 	{
@@ -457,7 +457,6 @@ else if(Site.page == PAGE.BLOGEDIT)
 }
 else if(Site.page == PAGE.OTHER)
 {
-	logg("Detected page: ???");
 	addEmoticons = false;
 }
 
