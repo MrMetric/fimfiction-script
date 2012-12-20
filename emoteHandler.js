@@ -128,12 +128,12 @@ function addEmote(url, tableName)
 {
 	if(emoteTables[tablePrefix + tableName] != undefined)
 	{
-		createNewEmote(url, tableName);
+		createNewEmote(url, tableName, tableName);
 	}
 	else
 	{
-		createNewEmoteTable(tableName);
-		createNewEmote(url, tableName);
+		createNewEmoteTable(tableName, tableName);
+		createNewEmote(url, tableName, tableName);
 	}
 }
 
