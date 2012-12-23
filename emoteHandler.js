@@ -85,17 +85,18 @@ function GM_setValue(aKey, aVal)
 
 var PAGE = {
 	OTHER:			{value: -1, name: "Other"},
-	MAIN:			{value: 0, name: "Main"},
-	SCRIPTSETTINGS:	{value: 1, name: "Script Settings"},
-	BLOG:			{value: 2, name: "Blog"},
-	BLOGEDIT:		{value: 3, name: "Blog Editor"},
-	GROUP:			{value: 4, name: "Group"},
-	GROUPTHREAD:	{value: 5, name: "Group Thread"},
-	NOTIFICATIONS:	{value: 6, name: "Notifications"},
-	USER:			{value: 7, name: "User"},
-	STORY:			{value: 8, name: "Story"},
-	BANNERCREDITS:	{value: 9, name: "Banner Credits"},
-	MANAGEBLOG:		{value:10, name: "Manage Blog"}
+	MAIN:			{value:  0, name: "Main"},
+	SCRIPTSETTINGS:	{value:  1, name: "Script Settings"},
+	BLOG:			{value:  2, name: "Blog"},
+	BLOGEDIT:		{value:  3, name: "Blog Editor"},
+	MANAGEBLOG:		{value:  4, name: "Manage Blog"},
+	GROUP:			{value:  5, name: "Group"},
+	GROUPTHREAD:	{value:  6, name: "Group Thread"},
+	NOTIFICATIONS:	{value:  7, name: "Notifications"},
+	USER:			{value:  8, name: "User"},
+	STORY:			{value:  9, name: "Story"},
+	CHAPTER:		{value: 10, name: "Chapter"},
+	BANNERCREDITS:	{value: 11, name: "Banner Credits"}
 };
 
 var Site = {
@@ -117,23 +118,27 @@ var Site = {
 
 // End utility stuff
 
-var initialized = false;
-var emoteTables = [];
-var commentBox;
-var tabContainer;
-var emotePanel;
-var tablePrefix = "emoteAPI_Table:";
+var initialized = false,
+	emoteTables = [],
+	commentBox,
+	tabContainer,
+	emotePanel,
+	hasEmotePanel = false,
+	tablePrefix = "emoteAPI_Table:";
 
 function addEmote(url, tableName)
 {
-	if(emoteTables[tablePrefix + tableName] != undefined)
+	if(initialized && hasEmotePanel)
 	{
-		createNewEmote(url, tableName, tableName);
-	}
-	else
-	{
-		createNewEmoteTable(tableName, tableName);
-		createNewEmote(url, tableName, tableName);
+		if(emoteTables[tablePrefix + tableName] != undefined)
+		{
+			createNewEmote(url, tableName, tableName);
+		}
+		else
+		{
+			createNewEmoteTable(tableName, tableName);
+			createNewEmote(url, tableName, tableName);
+		}
 	}
 }
 
@@ -188,25 +193,26 @@ function initializeAPI(m)
 	Site.username = "";
 	Site.userid = -1;
 
+	// TODO: Detect main page
 	/*if()
 	{
 		Site.page = PAGE.MAIN;
 	}
-	else*/ if(/\/manage_user\/scriptsettings/.test(self.location.href))
+	else*/ if(/\/manage_user\/scriptsettings/.test(location.href))
 	{
 		Site.page = PAGE.SCRIPTSETTINGS;
 	}
-	else if(/\/blog\//.test(self.location.href))
+	else if(/\/blog\//.test(location.href))
 	{
 		Site.page = PAGE.BLOG;
 	}
-	else if(/\/manage_user\/edit_blog_post/.test(self.location.href))
+	else if(/\/manage_user\/edit_blog_post/.test(location.href))
 	{
 		Site.page = PAGE.BLOGEDIT;
 	}
-	else if(/\/group\//.test(self.location.href))
+	else if(/\/group\//.test(location.href))
 	{
-		if(/\/thread\//.test(self.location.href))
+		if(/\/thread\//.test(location.href))
 		{
 			Site.page = PAGE.GROUPTHREAD;
 		}
@@ -215,27 +221,38 @@ function initializeAPI(m)
 			Site.page = PAGE.GROUP;
 		}
 	}
-	else if(/view=group/.test(self.location.href) && /thread=/.test(self.location.href))
+	else if(/view=group/.test(location.href) && /thread=/.test(location.href))
 	{
 		Site.page = PAGE.GROUPTHREAD;
 	}
-	else if(/\/manage_user\/notifications/.test(self.location.href))
+	else if(/\/manage_user\/notifications/.test(location.href))
 	{
 		Site.page = PAGE.NOTIFICATIONS;
 	}
-	else if(/\/user\//.test(self.location.href))
+	else if(/\/user\//.test(location.href))
 	{
 		Site.page = PAGE.USER;
 	}
-	else if(/\/story\//.test(self.location.href) || /\/chapter\//.test(self.location.href))
+	else if(/\/story\//.test(location.href))
 	{
-		Site.page = PAGE.STORY;
+		if(document.getElementById("chapter_format") != null)
+		{
+			Site.page = PAGE.CHAPTER;
+		}
+		else
+		{
+			Site.page = PAGE.STORY;
+		}
 	}
-	else if(/page=banner_credits/.test(self.location.href))
+	else if(/\/chapter\//.test(location.href))
+	{
+		Site.page = PAGE.CHAPTER;
+	}
+	else if(/page=banner_credits/.test(location.href))
 	{
 		Site.page = PAGE.BANNERCREDITS;
 	}
-	else if(/\/manage_user\/blog/.test(self.location.href))
+	else if(/\/manage_user\/blog/.test(location.href))
 	{
 		Site.page = PAGE.MANAGEBLOG;
 	}
@@ -248,19 +265,19 @@ function initializeAPI(m)
 	var style = "";
 
 	style += ".emoticons_panel {";
-	if(Site.mode == 0)
+	if(Site.mode === 0)
 	{
 		style += "	height: auto !important;";
 		style += "	min-height: 300px !important;";
 		style += "	display: block !important;";
 	}
-	else if(Site.mode == 1)
+	else if(Site.mode === 1)
 	{
 		style += "	overflow: auto;";
 	}
 	style += "}";
 
-	if(Site.mode == 0)
+	if(Site.mode === 0)
 	{
 		style += ".customEmote {";
 		style += "	opacity: 0.7;";
@@ -326,111 +343,131 @@ function initializeAPI(m)
 	commentBox = document.getElementById("comment_comment");
 	//Grab FiMFiction's emote panel div and store it
 	var emoticonsPanel = document.getElementsByClassName("emoticons_panel");
-	for(var i = 0; i < emoticonsPanel.length; i++)
+	if(emoticonsPanel != null && emoticonsPanel.length > 0)
 	{
-		emotePanel = emoticonsPanel[i];
+		hasEmotePanel = true;
+		for(var i = 0; i < emoticonsPanel.length; i++)
+		{
+			emotePanel = emoticonsPanel[i];
+		}
+		var tableOffset = 0;
+		if(Site.page !== PAGE.STORY && Site.page !== PAGE.CHAPTER && Site.page !== PAGE.BLOG)
+		{
+			tableOffset = 2;
+		}
+		else
+		{
+			tableOffset = 1;
+		}
+		//Store the default emote table and give it an id
+		var defaultEmoteTable = emotePanel.childNodes[emotePanel.childNodes.length - tableOffset];
+		emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
+		emotePanel.style.paddingTop = "15px";
+
+		tabContainer = document.createElement("div");
+		tabContainer.style.marginLeft = "12px";
+		tabContainer.style.marginTop = "0px";
+		tabContainer.style.float = "left";
+		tabContainer.style.clear = "both";
+		tabContainer.style.width = "279px";
+		emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
+
+		defaultEmoteTable.style.float = "left";
+		defaultEmoteTable.style.clear = "both";
+		defaultEmoteTable.style.paddingTop = "20px";
+
+		tabContainer.appendChild(createTableLink("FF"));
+
+		setTimeout(function()
+		{
+			commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
+		}, 1);
 	}
-	var tableOffset = 0;
-	if(Site.page != PAGE.STORY && Site.page != PAGE.BLOG)
-	{
-		tableOffset = 2;
-	}
-	else
-	{
-		tableOffset = 1;
-	}
-	//Store the default emote table and give it an id
-	var defaultEmoteTable = emotePanel.childNodes[emotePanel.childNodes.length - tableOffset];
-	emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
-	emotePanel.style.paddingTop = "15px";
-
-	tabContainer = document.createElement("div");
-	tabContainer.style.marginLeft = "12px";
-	tabContainer.style.marginTop = "0px";
-	tabContainer.style.float = "left";
-	tabContainer.style.clear = "both";
-	tabContainer.style.width = "279px";
-	emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
-
-	defaultEmoteTable.style.float = "left";
-	defaultEmoteTable.style.clear = "both";
-	defaultEmoteTable.style.paddingTop = "20px";
-
-	tabContainer.appendChild(createTableLink("FF"));
-
-	setTimeout(function()
-	{
-		commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
-	}, 1);
 }
 
 function createNewEmoteTable(tableName, shortTableName)
 {
-	logg("Creating emoticon table: " + tableName + "(" + shortTableName + ")");
-	var emoteTable = document.createElement("div");
-	emoteTable.style.display = "none";
-	emoteTable.style.margin = "10px";
-	emoteTable.style.paddingTop = "20px";
-	emoteTable.style.float = "left";
-	emoteTable.style.clear = "both";
-	emoteTable.style.textAlign = "center";
-	emoteTables[tablePrefix + shortTableName] = emoteTable;
-	emotePanel.appendChild(emoteTable);
+	if(initialized && hasEmotePanel)
+	{
+		logg("Creating emoticon table: " + tableName + "(" + shortTableName + ")");
+		var emoteTable = document.createElement("div");
+		emoteTable.style.display = "none";
+		emoteTable.style.margin = "10px";
+		emoteTable.style.paddingTop = "20px";
+		emoteTable.style.float = "left";
+		emoteTable.style.clear = "both";
+		emoteTable.style.textAlign = "center";
+		emoteTables[tablePrefix + shortTableName] = emoteTable;
+		emotePanel.appendChild(emoteTable);
 
-	tabContainer.appendChild(createTableLink(shortTableName));
+		tabContainer.appendChild(createTableLink(shortTableName));
+	}
 }
 
 function createNewEmote(url, emoteName, tableName)
 {
-	logg("Adding emoticon: " + url + " (" + emoteName + ") to " + tableName);
-	var image = document.createElement("img");
-	image.src = url;
-	if (Site.mode == 0) {
-		image.width = '58';
-		image.height = '58';
-		image.id = url;
-	} else {
-		image.id = emoteName.toLowerCase.replace(" ", "_");
+	if(initialized && hasEmotePanel)
+	{
+		logg("Adding emoticon: " + url + " (" + emoteName + ") to " + tableName);
+		var image = document.createElement("img");
+		image.src = url;
+		if(Site.mode === 0)
+		{
+			image.width = '58';
+			image.height = '58';
+			image.id = url;
+		}
+		else
+		{
+			image.id = emoteName.toLowerCase.replace(" ", "_");
+		}
+		image.title = emoteName;
+		image.className = "customEmote";
+		image.style.margin = "5px";
+		image.addEventListener("click", function() { addEmoteToCommentBox(this.id); }, false);
+		emoteTables[tablePrefix + tableName].appendChild(image);
 	}
-	image.title = emoteName;
-	image.className = "customEmote";
-	image.style.margin = "5px";
-	image.addEventListener("click", function() { addEmoteToCommentBox(this.id); }, false);
-	emoteTables[tablePrefix + tableName].appendChild(image);
 }
 
 function createTableLink(tableName)
 {
-	var tableLink = document.createElement("span");
-	tableLink.className = "emoteTabButton";
-	tableLink.id = tablePrefix + tableName;
-	tableLink.style.marginLeft = "5px";
-	tableLink.style.marginTop = "5px";
-	tableLink.innerHTML = tableName;
-	tableLink.addEventListener("click", function()
+	if(initialized && hasEmotePanel)
 	{
-		showTable(this.id);
-	}, false);
+		var tableLink = document.createElement("span");
+		tableLink.className = "emoteTabButton";
+		tableLink.id = tablePrefix + tableName;
+		tableLink.style.marginLeft = "5px";
+		tableLink.style.marginTop = "5px";
+		tableLink.innerHTML = tableName;
+		tableLink.addEventListener("click", function()
+		{
+			showTable(this.id);
+		}, false);
 
-	return tableLink;
+		return tableLink;
+	}
+	return null;
 }
 
 function showTable(tableID)
 {
-	emoteTables[tableID].style.display = "block";
-
-	setTimeout(function()
+	if(initialized && hasEmotePanel)
 	{
-		commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
-	}, 1);
+		emoteTables[tableID].style.display = "block";
 
-	for(var table in emoteTables)
-	{
-		if(emoteTables.hasOwnProperty(table))
+		setTimeout(function()
 		{
-			if(emoteTables[table] != emoteTables[tableID])
+			commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + "px";
+		}, 1);
+
+		for(var table in emoteTables)
+		{
+			if(emoteTables.hasOwnProperty(table))
 			{
-				emoteTables[table].style.display = "none";
+				if(emoteTables[table] != emoteTables[tableID])
+				{
+					emoteTables[table].style.display = "none";
+				}
 			}
 		}
 	}

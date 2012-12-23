@@ -14,7 +14,7 @@
 
 "use strict";
 
-initializeAPI();
+initializeAPI(1);
 
 // INFOCARD REPLACEMENT
 
@@ -112,7 +112,7 @@ if(user_toolbar != null)
 	if(innerdiv_ut != null)
 	{
 		logg("Modifying user_toolbar");
-		innerdiv_ut.innerHTML = '<a href="/" class="button"><img src="//www.fimfiction-static.net/images/icons/group.png">Home</a> '+innerdiv_ut.innerHTML;
+		innerdiv_ut.innerHTML = '<a href="/" class="button"><img src="//www.fimfiction-static.net/images/icons/group.png" title="Home">Home</a> ' + innerdiv_ut.innerHTML;
 		var dropdown_ut = innerdiv_ut.getElementsByClassName("menu_list")[0];
 		if(dropdown_ut != null)
 		{
@@ -430,7 +430,7 @@ else if(Site.page == PAGE.MANAGEBLOG)
 {
 	Site.setTitle("Manage Blog");
 }
-else if(Site.page == PAGE.STORY)
+else if(Site.page == PAGE.CHAPTER)
 {
 	if(fullwidth)
 	{
