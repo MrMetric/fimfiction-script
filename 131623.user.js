@@ -7,12 +7,15 @@
 // @icon			https://dl.dropbox.com/u/31471793/FiMFiction/Luna_lolface.png
 // @grant			none
 // @require			https://github.com/iloveportalz0r/fimfiction-script/raw/master/emoteHandler.js
+// @require			http://labs.abeautifulsite.net/jquery-miniColors/jquery.minicolors.js
 // ==/UserScript==
 
-/*jshint newcap:false, globalstrict:true, scripturl:false */
-/*global Components:true, self:true, alert:true, prompt:true, unsafeWindow:true, escape:true */
+/*jshint newcap:false, globalstrict:true, scripturl:false*/
+/*global self:true, alert:true, prompt:true, unsafeWindow:true, escape:true, logg:true, Site:true, PAGE:true, GM_getValue:true, GM_setValue:true, GM_addStyle:true, initializeAPI:true, createNewEmoteTable:true, createNewEmote:true*/
 
 "use strict";
+
+logg("Starting Le Script");
 
 initializeAPI(1);
 
@@ -155,13 +158,13 @@ if(sideMenu != null)
 	{
 		logg("Modifying side tabs");
 		sideTabs.getElementsByClassName("tab")[0].getElementsByTagName("img")[0].src = "//www.fimfiction-static.net/images/icons/settings.png";
-		sideTabs.innerHTML += '<a href="/manage_user/scriptsettings" class="tab'+((Site.page == PAGE.SCRIPTSETTINGS)?" tab_selected":"")+'"><img src="//www.fimfiction-static.net/images/icons/dashboard.png"> Script Settings</a>';
+		sideTabs.innerHTML += '<a href="/manage_user/scriptsettings" class="tab'+((Site.page === PAGE.SCRIPTSETTINGS)?" tab_selected":"")+'"><img src="//www.fimfiction-static.net/images/icons/dashboard.png"> Script Settings</a>';
 		logg("Done: side tabs");
 	}
 }
 
 // TODO: Make this work
-/*if(Site.page == PAGE.BLOG || Site.page == PAGE.STORY)
+/*if(Site.page === PAGE.BLOG || Site.page === PAGE.STORY)
 {
 	var e_username = document.getElementById("comment_username");
 	if(e_username != null && e_username.value != null && e_username.value !== "")
@@ -239,7 +242,7 @@ function loadAllPages(pages)
 	}
 }*/
 
-if(Site.page == PAGE.BLOG || Site.page == PAGE.STORY || Site.page == PAGE.GROUPTHREAD)
+if(Site.page === PAGE.BLOG || Site.page === PAGE.STORY || Site.page === PAGE.GROUPTHREAD)
 {
 	var e_authors = document.getElementsByClassName("author");
 	for(i = 0; i < e_authors.length; i++)
@@ -315,7 +318,7 @@ if(searchform != null)
 	searchform.innerHTML = '<div class="textbox"><input type="hidden" value="category" name="view"><input type="text" placeholder="Search" style="width:160px; padding-left:8px;" value="" name="search" class="search"></div><input type="submit" value="" class="search_submit">';
 }*/
 
-if(Site.page == PAGE.SCRIPTSETTINGS)
+if(Site.page === PAGE.SCRIPTSETTINGS)
 {
 	var tableHTML = '<table class="properties"><tr><td class="label" style="line-height:1em;text-align:center;" colspan="2"><h2>General</h2></td></tr><tr><td class="label" style="line-height:1em;">More Emoticons</td><td><div><input id="ss_emoticons" type="checkbox" '+(addEmoticons?' checked="true"':' ')+'></div></td></tr><tr><td class="label" style="line-height:1em;">Full-width chapters</td><td><div><input id="ss_fullwidth" type="checkbox" '+(fullwidth?' checked="true"':' ')+'></div></td></tr><tr><td class="label">Banner (leave blank for default)</td><td><div><input id="ss_banner" type="text" style="width:80%" value="'+banner+'"><input type="button" style="width:5%;margin-left:1%;" value="Add" id="ss_banner_add"><input type="button" style="width:7%;margin-left:1%;" value="Delete" id="ss_banner_del"><br><select id="ss_banner_dd" style="width:100%;"><option value="">Default</option><option value="" disabled="true">Official</option><option value="//www.fimfiction-static.net/images/custom_banners/zecora.jpg">"Hanging by the Edge" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/aeron_fluttershy.jpg">"Nature" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/aeron_philomena.jpg">"Philomena - Equestria\'s Finest Phoenix" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/aeron_celestia.jpg">"Path to Canterlot" by AeronJVL</option><option value="//www.fimfiction-static.net/images/custom_banners/derpy_dash.jpg">"Full Armour D vs D" by ponyKillerX</option><option value="//www.fimfiction-static.net/images/custom_banners/ponykiller_trixie.jpg">"No Title" by ponyKillerX</option><option value="//www.fimfiction-static.net/images/custom_banners/maplesunrise_pinkiedash.jpg">"A Warm Evening" by MapleSunrise</option><option value="//www.fimfiction-static.net/images/custom_banners/yamio_fluttershy.jpg">"Fluttershy" by Yamio</option><option value="//www.fimfiction-static.net/images/custom_banners/smitty_derpy.jpg">"Derpy for Kiyoshi" by Smitty G</option><option value="//www.fimfiction-static.net/images/custom_banners/ratofdrawn_1.jpg">"Wet Fun" by RatofDrawn</option><option value="//www.fimfiction-static.net/images/custom_banners/ratofdrawn_rarijack.jpg">"Differences" by RatofDrawn</option><option value="//www.fimfiction-static.net/images/custom_banners/jinzhan_applejack.jpg">"Applejack" by JinZhan</option><option value="//www.fimfiction-static.net/images/custom_banners/jinzhan_group.jpg">"There are alligators in the lake" by JinZhan</option><option value="//www.fimfiction-static.net/images/custom_banners/solar_luna.jpg">"Chibi Luna - Star Fishing" by Soapie-Solar</option><option value="//www.fimfiction-static.net/images/custom_banners/solar_group.jpg">"Forest Foundation" by Soapie-Solar</option><option value="//www.fimfiction-static.net/images/custom_banners/uc77_1.jpg">"Ponies Dig Giant Robots" by UC77</option><option value="//www.fimfiction-static.net/images/custom_banners/cmaggot_fluttershy.jpg">"Dangerous Mission" by cmaggot</option><option value="//www.fimfiction-static.net/images/custom_banners/rainbow_ss.jpg">Silver Spoon by Rainbow</option><option value="//www.fimfiction-static.net/images/custom_banners/rainbow_markerpone.jpg">Untitled by Rainbow</option><option value="//www.fimfiction-static.net/images/custom_banners/rainbow_roseluck.jpg">Roseluck by Rainbow</option><option value="//www.fimfiction-static.net/images/custom_banners/jj_trixie.jpg">"Trixie\'s Life is so Hard" by John Joseco</option><option value="//www.fimfiction-static.net/images/custom_banners/anima_1.jpg">"C\'mon, lift your Spirit" by Anima-dos</option><option value="//www.fimfiction-static.net/images/custom_banners/mew_pinkie.jpg">"Reflect" by Mewball</option><option value="//www.fimfiction-static.net/images/custom_banners/tsitra_dash.jpg">"Morning Flight" by Tsitra360</option><option value="//www.fimfiction-static.net/images/custom_banners/knifeh_scoots.jpg">"Scootaloo" by KnifeH</option></select></div></td></tr></table>';
 	if(error502)
@@ -397,7 +400,7 @@ else if(error502)
 	//document.body.innerHTML = document.body.innerHTML.replace("502 Bad Gateway", errmsg502);
 	addEmoticons = false;
 }
-else if(Site.page == PAGE.NOTIFICATIONS)
+else if(Site.page === PAGE.NOTIFICATIONS)
 {
 	Site.setTitle("Notifications");
 	var notifications = document.getElementsByClassName("notification");
@@ -409,7 +412,7 @@ else if(Site.page == PAGE.NOTIFICATIONS)
 		}
 	}
 }
-else if(Site.page == PAGE.BANNERCREDITS)
+else if(Site.page === PAGE.BANNERCREDITS)
 {
 	Site.setTitle("Banner Credits");
 }
@@ -426,11 +429,11 @@ else if(/view=category/.test(self.location.href))
 		Site.setTitle("Favorites");
 	}
 }
-else if(Site.page == PAGE.MANAGEBLOG)
+else if(Site.page === PAGE.MANAGEBLOG)
 {
 	Site.setTitle("Manage Blog");
 }
-else if(Site.page == PAGE.CHAPTER)
+else if(Site.page === PAGE.CHAPTER)
 {
 	if(fullwidth)
 	{
@@ -439,15 +442,184 @@ else if(Site.page == PAGE.CHAPTER)
 		{
 			logg("Setting chapter width");
 			container.setAttribute("style", "max-width:100%");
-			container.getElementsByClassName("inner_margin")[0].setAttribute("style", "max-width:100%");
+			//container.getElementsByClassName("inner_margin")[0].setAttribute("style", "max-width:100%");
 		}
 		else
 		{
 			logg("Error changing chapter width: chapter_container is null");
 		}
 	}
+	var chapter_toolbar = document.getElementById("chapter_toolbar_container");
+	if(chapter_toolbar != null)
+	{
+		var dark_toolbar = chapter_toolbar.getElementsByClassName("dark_toolbar");
+		if(dark_toolbar != null && dark_toolbar.length === 1)
+		{
+			dark_toolbar = dark_toolbar[0];
+			var labelDiv = dark_toolbar.getElementsByTagName("div");
+			if(labelDiv != null && labelDiv.length === 1)
+			{
+				labelDiv = labelDiv[0];
+				var labels = labelDiv.getElementsByTagName("label");
+				if(labels == null || labels.length === 0)
+				{
+					logg("Chapter Toolbar -> Dark Toolbar -> Label Div -> Labels not found");
+				}
+				else if(labels.length === 4)
+				{
+/*function UpdateFont()
+{
+	$("#chapter_format").css("font-family", $("#format_font option:selected").val());
+	LocalStorageSet("format_font", $("#format_font option:selected").val());
 }
-else if(Site.page == PAGE.BLOGEDIT)
+$('#format_font').val(LocalStorageGet("format_font", "Serif"));
+UpdateFont();
+$("#format_font").change(function (e)
+{
+	UpdateFont();
+});
+$("#format_font option").each(function ()
+{
+	$(this).css("font-family", $(this).val());
+});*/
+
+					// Font size
+					labels[1].innerHTML = '<img src="//www.fimfiction-static.net/images/icons/font_size.png"><select id="format_size"><option value="0.9em">Very Small (0.9em)</option><option value="1.0em">Small (1.0em)</option><option value="1.1em">Normal (1.1em)</option><option value="1.4em">Big (1.4em)</option><option value="1.6em">Large (1.6em)</option><option value="1.8em">X Large (1.8em)</option><option value="2.0em">XX Large (2.0em)</option><option value="other">Other</option></select>';
+					$("#format_size").change(function(event)
+					{
+						var fontSize = $("#format_size option:selected").val();
+						if(fontSize === "other")
+						{
+							fontSize = prompt("Font size:");
+							if(isNumber(fontSize))
+							{
+								fontSize += "em";
+							}
+							$("#format_size option:selected").html("Other: " + fontSize);
+						}
+						$("#chapter_format").css("font-size", fontSize);
+						unsafeWindow.localStorage["format_size"] = $("#format_size option:selected").val();
+					});
+					logg("Added Other option for font size");
+
+					/*var label2txt = '<img src="//www.fimfiction-static.net/images/icons/color.png"><select id="format_colours"><optgroup label="Standard"><option value="bow">Light</option><option value="medium_light">Medium Light</option><option value="medium_dark">Medium Dark</option><option value="wob">Dark</option></optgroup><optgroup label="Ponies"><option value="pinkie">Pinkie</option><option value="applejack">Applejack</option><option value="rarity">Rarity</option><option value="twilight">Twilight</option><option value="dash">Dash</option><option value="fluttershy">Fluttershy</option></optgroup><optgroup label="Other">';
+					label2txt += '<option value="helloKitty">Hello Kitty</option>'; // from Notepad++
+					label2txt += '<option value="custom">Custom</option>';
+					label2txt += '</optgroup></select>';
+					labels[2].innerHTML = label2txt;*/
+					var ffontScheme = "bow",
+						defaultFontSchemes = ["bow:Light", "medium_light:Medium Light", "medium_dark:Medium Dark", "wob:Dark", "pinkie:Pinkie", "applejack:Applejack", "rarity:Rarity", "twilight:Twilight", "dash:Dash", "fluttershy:Fluttershy"];
+					if("format_colours" in unsafeWindow.localStorage && unsafeWindow.localStorage["format_colours"] != undefined)
+					{
+						ffontScheme = unsafeWindow.localStorage["format_colours"];
+					}
+					var sfontScheme = GM_getValue("fontScheme", ffontScheme),
+						fontSchemeName = sfontScheme;
+					for(i = 0; i < defaultFontSchemes.length; ++i)
+					{
+						var schemeCode = defaultFontSchemes[i].split(":");
+						if(sfontScheme === schemeCode[0])
+						{
+							fontSchemeName = schemeCode[1];
+							break;
+						}
+					}
+					labels[2].innerHTML = '<img src="//www.fimfiction-static.net/images/icons/color.png"><span style="padding:3px;line-height:2.11em;" id="format_colours">' + fontSchemeName + '</span></select>';
+
+/*function CreateColourPicker(element, field)
+{
+	var str = "<div id='color_picker' style='padding:30px; position:absolute; margin-left:-30px; margin-top:-30px;'><div id='color_picker_inner' style='width:90px; border-radius:5px; padding:4px; background-color:#FFF; border:1px solid silver; -webkit-box-shadow:1px 1px 5px #CCC;-moz-box-shadow:1px 1px 5px #CCC;box-shadow:1px 1px 5px #CCC;'>";
+	var colors = ["silver", "red", "orange", "yellow", "brown", "green", "olive", "cornflowerblue", "cyan", "purple", "pink"];
+	for(i = 0; i < colors.length; i++)
+	{
+		str += "<div title='" + colors[i] + "' onClick=\"InsertBBCodeTags( document.getElementById( '" + field + "' ), '[color=" + colors[i] + "]', '[/color]' ); $('#color_picker').remove();\"  style=\"float:left; cursor:pointer; margin:2px; width:16px; height:16px; background-color:" + colors[i] + "; border:1px solid #333; border-radius:3px;\"></div>";
+	}
+	str += "<div style='clear:both;'></div></div></div>";
+	$(element).append(str);
+	$(element).css(
+	{
+		"position": "relative"
+	});
+	$("#color_picker").css(
+	{
+		"position": "absolute",
+		"left": "50%",
+		"margin-left": -$("#color_picker").width() / 2,
+		"z-index": "1000000000000"
+	});
+	$("#color_picker").hover(function(e)
+	{}, function(e)
+	{
+		$(this).remove();
+	});
+}*/
+
+					$("#format_colours").click(function(event)
+					{
+						var pickerWidth = 178,
+							picker = document.createElement("div");
+						picker.id = "fontColorPicker";
+						picker.setAttribute("style", "position:absolute;width:" + pickerWidth + "px;height:158px;padding:4px;left:" + Math.floor($(this).offset().left + $(this).outerWidth() - pickerWidth + 0.5) + "px;top:" + Math.floor($(this).offset().top + $(this).outerHeight() + 4.5) + "px;border-radius:5px;padding:4px;background-color:#FFF;border:1px solid silver;");
+						picker.innerHTML = '<input type="minicolors" data-control="inline">';
+						document.body.appendChild(picker);
+						$.minicolors.init();
+
+						/*$("#chapter_format").attr("class", "");
+						var fontScheme = $("#format_colours option:selected").val();
+						if(fontScheme === "helloKitty")
+						{
+							$("#chapter_format").css("background-color", "#FFB0FF");
+							$("#chapter_format").css("color", "#111111"); // FFFF80
+						}
+						else if(fontScheme === "custom")
+						{
+							<input type="minicolors" data-control="inline">
+						}
+						$("#chapter_format").addClass("content_format_" + fontScheme);
+						unsafeWindow.localStorage["format_colours"] = fontScheme;*/
+					});
+					logg("Added Other option for font color");
+
+					// Line spacing
+					labels[3].innerHTML = '<img src="//www.fimfiction-static.net/images/icons/line_spacing.png"><select id="format_line_spacing"><option value="1.0em">1.0em</option><option value="1.1em">1.1em</option><option value="1.2em">1.2em</option><option value="1.3em">1.3em</option><option value="1.4em">1.4em</option><option value="1.5em">1.5em</option><option value="1.6em">1.6em</option><option value="1.7em">1.7em</option><option value="1.8em">1.8em</option><option value="1.9em">1.9em</option><option value="2.0em">2.0em</option><option value="other">Other</option></select>';
+					$("#format_line_spacing").change(function(event)
+					{
+						var lineHeight = $("#format_line_spacing option:selected").val();
+						if(lineHeight === "other")
+						{
+							lineHeight = prompt("Line height:");
+							if(isNumber(lineHeight))
+							{
+								lineHeight += "em";
+							}
+							$("#format_line_spacing option:selected").html("Other: " + lineHeight);
+						}
+						$("#chapter_format .chapter_content").css("line-height", lineHeight);
+						unsafeWindow.localStorage["format_line_spacing"] = $("#format_line_spacing option:selected").val();
+					});
+					logg("Added Other option for line spacing");
+				}
+				else
+				{
+					logg("Wrong labels.length: " + labels.length);
+				}
+			}
+			else
+			{
+				logg("Chapter Toolbar -> Dark Toolbar -> Label Div not found");
+			}
+		}
+		else
+		{
+			logg("Chapter Toolbar -> Dark Toolbar not found");
+		}
+	}
+	else
+	{
+		logg("Chapter Toolbar not found");
+	}
+}
+else if(Site.page === PAGE.BLOGEDIT)
 {
 	var e_blog_title = document.getElementById("blog_title");
 	if(e_blog_title != null && e_blog_title.value === "")
@@ -455,7 +627,7 @@ else if(Site.page == PAGE.BLOGEDIT)
 		e_blog_title.setAttribute("value", "Untitled");
 	}
 }
-else if(Site.page == PAGE.OTHER)
+else if(Site.page === PAGE.OTHER)
 {
 	addEmoticons = false;
 }
@@ -876,7 +1048,7 @@ function addTBB(toolbar, id) // TBB = Toolbar Buttons
 
 function AddYT()
 {
-	var txtfield = document.getElementById((Site.page == PAGE.BLOGEDIT?"blog_post_content":"comment_comment"));
+	var txtfield = document.getElementById((Site.page === PAGE.BLOGEDIT?"blog_post_content":"comment_comment"));
 	if(txtfield != null)
 	{
 		var url = prompt("Enter a YouTube video URL","");
@@ -913,7 +1085,7 @@ function InsertTextAt(field, text)
 	}
 }
 
-if(addEmoticons && Site.page == PAGE.BLOGEDIT)
+if(addEmoticons && Site.page === PAGE.BLOGEDIT)
 {
 	var form = document.getElementById("edit_story_form");
 	if(form != null)
@@ -955,7 +1127,7 @@ function addEmoticonsF(emoticons_panel, num)
 		logg("Adding panel #" + num);
 		var innerdiv = emoticons_panel.getElementsByClassName("inner_padding")[0];
 		emoticons_panel.style.overflow = "auto";
-		if(Site.page != PAGE.BLOGEDIT)
+		if(Site.page !== PAGE.BLOGEDIT)
 		{
 			txtToAdd += "<b>Do not post more than 20 emoticons at once</b><br>";
 		}
@@ -1164,7 +1336,7 @@ function addEmoticonsF(emoticons_panel, num)
 		aoeu.addEventListener("click", function(){eh(6, num);}, false);*/
 
 		createNewEmoteTable("Awesome Faces", "AF");
-		createNewEmote(getURL2("Luna_lolface"), "Luna Lolface", "AF")
+		createNewEmote(getURL2("Luna_lolface"), "Luna Lolface", "AF");
 		/*addEmoticon3("lolface_Celestia", "Celestia Lolface");
 		addEmoticon2("Sweetie_Belle_lolface", "Sweetie Belle Lolface");
 		addEmoticon2("Twilight_Sparkle_lolface", "Twilight Sparkle Lolface");

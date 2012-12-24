@@ -8,7 +8,8 @@
  *			Use addEmote("image url", "table name"); to add an emote
  */
 
-/*jshint multistr: true*/
+/*jshint multistr:true*/
+/*global Components:true, escape:true*/
 
 "use strict";
 
@@ -17,6 +18,11 @@
 function logg(msg)
 {
 	console.log(msg);
+}
+
+window.onerror = function(message, url, line)
+{
+	logg(message + " @ " + line);
 }
 
 function stringToBool(s)
@@ -31,6 +37,11 @@ function stringToBool(s)
 		case "false": return false;
 		default: return null;
 	}
+}
+
+function isNumber(n)
+{
+	return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 // GM function replacements are from https://raw.github.com/gist/3123124
@@ -419,7 +430,7 @@ function createNewEmote(url, emoteName, tableName)
 		}
 		else
 		{
-			image.id = emoteName.toLowerCase.replace(" ", "_");
+			image.id = emoteName.toLowerCase().replace(" ", "_");
 		}
 		image.title = emoteName;
 		image.className = "customEmote";
