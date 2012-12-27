@@ -449,7 +449,7 @@ else if(Site.page === PAGE.CHAPTER)
 			logg("Error changing chapter width: chapter_container is null");
 		}
 	}
-	var chapter_toolbar = document.getElementById("chapter_toolbar_container");
+	/*var chapter_toolbar = document.getElementById("chapter_toolbar_container");
 	if(chapter_toolbar != null)
 	{
 		var dark_toolbar = chapter_toolbar.getElementsByClassName("dark_toolbar");
@@ -467,22 +467,6 @@ else if(Site.page === PAGE.CHAPTER)
 				}
 				else if(labels.length === 4)
 				{
-/*function UpdateFont()
-{
-	$("#chapter_format").css("font-family", $("#format_font option:selected").val());
-	LocalStorageSet("format_font", $("#format_font option:selected").val());
-}
-$('#format_font').val(LocalStorageGet("format_font", "Serif"));
-UpdateFont();
-$("#format_font").change(function (e)
-{
-	UpdateFont();
-});
-$("#format_font option").each(function ()
-{
-	$(this).css("font-family", $(this).val());
-});*/
-
 					// Font size
 					labels[1].innerHTML = '<img src="//www.fimfiction-static.net/images/icons/font_size.png"><select id="format_size"><option value="0.9em">Very Small (0.9em)</option><option value="1.0em">Small (1.0em)</option><option value="1.1em">Normal (1.1em)</option><option value="1.4em">Big (1.4em)</option><option value="1.6em">Large (1.6em)</option><option value="1.8em">X Large (1.8em)</option><option value="2.0em">XX Large (2.0em)</option><option value="other">Other</option></select>';
 					$("#format_size").change(function(event)
@@ -502,11 +486,6 @@ $("#format_font option").each(function ()
 					});
 					logg("Added Other option for font size");
 
-					/*var label2txt = '<img src="//www.fimfiction-static.net/images/icons/color.png"><select id="format_colours"><optgroup label="Standard"><option value="bow">Light</option><option value="medium_light">Medium Light</option><option value="medium_dark">Medium Dark</option><option value="wob">Dark</option></optgroup><optgroup label="Ponies"><option value="pinkie">Pinkie</option><option value="applejack">Applejack</option><option value="rarity">Rarity</option><option value="twilight">Twilight</option><option value="dash">Dash</option><option value="fluttershy">Fluttershy</option></optgroup><optgroup label="Other">';
-					label2txt += '<option value="helloKitty">Hello Kitty</option>'; // from Notepad++
-					label2txt += '<option value="custom">Custom</option>';
-					label2txt += '</optgroup></select>';
-					labels[2].innerHTML = label2txt;*/
 					var ffontScheme = "bow",
 						defaultFontSchemes = ["bow:Light", "medium_light:Medium Light", "medium_dark:Medium Dark", "wob:Dark", "pinkie:Pinkie", "applejack:Applejack", "rarity:Rarity", "twilight:Twilight", "dash:Dash", "fluttershy:Fluttershy"];
 					if("format_colours" in unsafeWindow.localStorage && unsafeWindow.localStorage["format_colours"] != undefined)
@@ -526,34 +505,6 @@ $("#format_font option").each(function ()
 					}
 					labels[2].innerHTML = '<img src="//www.fimfiction-static.net/images/icons/color.png"><span style="padding:3px;line-height:2.11em;" id="format_colours">' + fontSchemeName + '</span></select>';
 
-/*function CreateColourPicker(element, field)
-{
-	var str = "<div id='color_picker' style='padding:30px; position:absolute; margin-left:-30px; margin-top:-30px;'><div id='color_picker_inner' style='width:90px; border-radius:5px; padding:4px; background-color:#FFF; border:1px solid silver; -webkit-box-shadow:1px 1px 5px #CCC;-moz-box-shadow:1px 1px 5px #CCC;box-shadow:1px 1px 5px #CCC;'>";
-	var colors = ["silver", "red", "orange", "yellow", "brown", "green", "olive", "cornflowerblue", "cyan", "purple", "pink"];
-	for(i = 0; i < colors.length; i++)
-	{
-		str += "<div title='" + colors[i] + "' onClick=\"InsertBBCodeTags( document.getElementById( '" + field + "' ), '[color=" + colors[i] + "]', '[/color]' ); $('#color_picker').remove();\"  style=\"float:left; cursor:pointer; margin:2px; width:16px; height:16px; background-color:" + colors[i] + "; border:1px solid #333; border-radius:3px;\"></div>";
-	}
-	str += "<div style='clear:both;'></div></div></div>";
-	$(element).append(str);
-	$(element).css(
-	{
-		"position": "relative"
-	});
-	$("#color_picker").css(
-	{
-		"position": "absolute",
-		"left": "50%",
-		"margin-left": -$("#color_picker").width() / 2,
-		"z-index": "1000000000000"
-	});
-	$("#color_picker").hover(function(e)
-	{}, function(e)
-	{
-		$(this).remove();
-	});
-}*/
-
 					$("#format_colours").click(function(event)
 					{
 						var pickerWidth = 178,
@@ -563,20 +514,7 @@ $("#format_font option").each(function ()
 						picker.innerHTML = '<input type="minicolors" data-control="inline">';
 						document.body.appendChild(picker);
 						$.minicolors.init();
-
-						/*$("#chapter_format").attr("class", "");
-						var fontScheme = $("#format_colours option:selected").val();
-						if(fontScheme === "helloKitty")
-						{
-							$("#chapter_format").css("background-color", "#FFB0FF");
-							$("#chapter_format").css("color", "#111111"); // FFFF80
-						}
-						else if(fontScheme === "custom")
-						{
-							<input type="minicolors" data-control="inline">
-						}
-						$("#chapter_format").addClass("content_format_" + fontScheme);
-						unsafeWindow.localStorage["format_colours"] = fontScheme;*/
+						// TODO
 					});
 					logg("Added Other option for font color");
 
@@ -617,7 +555,7 @@ $("#format_font option").each(function ()
 	else
 	{
 		logg("Chapter Toolbar not found");
-	}
+	}*/
 }
 else if(Site.page === PAGE.BLOGEDIT)
 {
@@ -1096,7 +1034,6 @@ if(addEmoticons && Site.page === PAGE.BLOGEDIT)
 	}
 }
 
-var txtToAdd = "";
 if(addEmoticons)
 {
 	var emoticon_panels = document.getElementsByClassName("emoticons_panel");
@@ -1123,321 +1060,203 @@ function addEmoticonsF(emoticons_panel, num)
 {
 	if(emoticons_panel != null)
 	{
-		txtToAdd = "";
 		logg("Adding panel #" + num);
-		var innerdiv = emoticons_panel.getElementsByClassName("inner_padding")[0];
 		emoticons_panel.style.overflow = "auto";
-		if(Site.page !== PAGE.BLOGEDIT)
-		{
-			txtToAdd += "<b>Do not post more than 20 emoticons at once</b><br>";
-		}
 
-		startSection("Default", 0, num);
-		addEmoticon1("ajbemused", "AJ Bemused");
-		addEmoticon1("ajsleepy", "AJ Sleepy");
-		addEmoticon1("ajsmug", "AJ Smug");
-		addEmoticon1("applecry", "Crying Applebloom");
-		addEmoticon1("applejackconfused", "AJ Confused");
-		addEmoticon1("applejackunsure", "AJ Unsure");
-		addEmoticon1("coolphoto", "Cool Photo");
-		addEmoticon1("derpyderp1", "Derpy Derp #1");
-		addEmoticon1("derpyderp2", "Derpy Derp #2");
-		addEmoticon1("derpytongue2", "Derpy Tongue");
-		addEmoticon1("fluttercry", "Crying Fluttershy");
-		addEmoticon1("flutterrage", "LOVE ME OR DIE");
-		addEmoticon1("fluttershbad", "Fluttershy Bad");
-		addEmoticon1("fluttershyouch", "Fluttershy Ouch");
-		addEmoticon1("fluttershysad", "Sad Fluttershy");
-		addEmoticon1("heart", "Heart");
-		addEmoticon1("pinkiecrazy", "Pinkamena");
-		addEmoticon1("pinkiegasp", "Pinkie Gasp");
-		addEmoticon1("pinkiehappy", "Happy Pinkie");
-		addEmoticon1("pinkiesad2", "Sad Pinkie");
-		addEmoticon1("pinkiesick", "Sick Pinkie");
-		addEmoticon1("pinkiesmile", "Pinkie Smile");
-		addEmoticon1("rainbowderp", "Rainbow Derp");
-		addEmoticon1("rainbowdetermined2", "Rainbow Determined");
-		addEmoticon1("rainbowhuh", "Rainbow Huh");
-		addEmoticon1("rainbowkiss", "Rainbow Kiss");
-		addEmoticon1("rainbowlaugh", "Rainbow Laugh");
-		addEmoticon1("rainbowwild", "Rainbow Wild");
-		addEmoticon1("raritycry", "Crying Rarity");
-		addEmoticon1("raritydespair", "Rarity Despair");
-		addEmoticon1("raritystarry", "Rarity Starry");
-		addEmoticon1("raritywink", "Rarity Wink");
-		addEmoticon1("scootangel", "Scootaloo Angel");
-		addEmoticon1("trixieshiftleft", "Trixie Shift Left");
-		addEmoticon1("trixieshiftright", "Trixie Shift Right");
-		addEmoticon1("twilightangry2", "Angry Twilight");
-		addEmoticon1("twilightblush", "Blushing Twilight");
-		addEmoticon1("twilightoops", "Twilight Oops");
-		addEmoticon1("twilightsheepish", "Sheepish Twilight");
-		addEmoticon1("twilightsmile", "Twilight Smile");
-		addEmoticon1("twistnerd", "Twist Nerd");
-		addEmoticon1("unsuresweetie", "Unsure Sweetie");
-		addEmoticon1("yay", "Yay");
-		addEmoticon1("trollestia", "Trollestia");
-		addEmoticon1("moustache", "Moustache");
-		addEmoticon1("facehoof", "Facehoof");
-		addEmoticon1("eeyup", "Eeyup");
-		addEmoticon1("duck", "Duck");
-		endSection();
+		createNewEmoteTable("Default", "FF", num);
+		createNewEmote("ajbemused", "AJ Bemused", "FF");
+		createNewEmote("ajsleepy", "AJ Sleepy", "FF");
+		createNewEmote("ajsmug", "AJ Smug", "FF");
+		createNewEmote("applecry", "Crying Applebloom", "FF");
+		createNewEmote("applejackconfused", "AJ Confused", "FF");
+		createNewEmote("applejackunsure", "AJ Unsure", "FF");
+		createNewEmote("coolphoto", "Cool Photo", "FF");
+		createNewEmote("derpyderp1", "Derpy Derp #1", "FF");
+		createNewEmote("derpyderp2", "Derpy Derp #2", "FF");
+		createNewEmote("derpytongue2", "Derpy Tongue", "FF");
+		createNewEmote("fluttercry", "Crying Fluttershy", "FF");
+		createNewEmote("flutterrage", "LOVE ME OR DIE", "FF");
+		createNewEmote("fluttershbad", "Fluttershy Bad", "FF");
+		createNewEmote("fluttershyouch", "Fluttershy Ouch", "FF");
+		createNewEmote("fluttershysad", "Sad Fluttershy", "FF");
+		createNewEmote("heart", "Heart", "FF");
+		createNewEmote("pinkiecrazy", "Pinkamena", "FF");
+		createNewEmote("pinkiegasp", "Pinkie Gasp", "FF");
+		createNewEmote("pinkiehappy", "Happy Pinkie", "FF");
+		createNewEmote("pinkiesad2", "Sad Pinkie", "FF");
+		createNewEmote("pinkiesick", "Sick Pinkie", "FF");
+		createNewEmote("pinkiesmile", "Pinkie Smile", "FF");
+		createNewEmote("rainbowderp", "Rainbow Derp", "FF");
+		createNewEmote("rainbowdetermined2", "Rainbow Determined", "FF");
+		createNewEmote("rainbowhuh", "Rainbow Huh", "FF");
+		createNewEmote("rainbowkiss", "Rainbow Kiss", "FF");
+		createNewEmote("rainbowlaugh", "Rainbow Laugh", "FF");
+		createNewEmote("rainbowwild", "Rainbow Wild", "FF");
+		createNewEmote("raritycry", "Crying Rarity", "FF");
+		createNewEmote("raritydespair", "Rarity Despair", "FF");
+		createNewEmote("raritystarry", "Rarity Starry", "FF");
+		createNewEmote("raritywink", "Rarity Wink", "FF");
+		createNewEmote("scootangel", "Scootaloo Angel", "FF");
+		createNewEmote("trixieshiftleft", "Trixie Shift Left", "FF");
+		createNewEmote("trixieshiftright", "Trixie Shift Right", "FF");
+		createNewEmote("twilightangry2", "Angry Twilight", "FF");
+		createNewEmote("twilightblush", "Blushing Twilight", "FF");
+		createNewEmote("twilightoops", "Twilight Oops", "FF");
+		createNewEmote("twilightsheepish", "Sheepish Twilight", "FF");
+		createNewEmote("twilightsmile", "Twilight Smile", "FF");
+		createNewEmote("twistnerd", "Twist Nerd", "FF");
+		createNewEmote("unsuresweetie", "Unsure Sweetie", "FF");
+		createNewEmote("yay", "Yay", "FF");
+		createNewEmote("trollestia", "Trollestia", "FF");
+		createNewEmote("moustache", "Moustache", "FF");
+		createNewEmote("facehoof", "Facehoof", "FF");
+		createNewEmote("eeyup", "Eeyup", "FF");
+		createNewEmote("duck", "Duck", "FF");
 
-		/*endStartSection("Awesome Faces", 1, num);
-		addEmoticon2("Luna_lolface", "Luna Lolface");
-		addEmoticon3("lolface_Celestia", "Celestia Lolface");
-		addEmoticon2("Sweetie_Belle_lolface", "Sweetie Belle Lolface");
-		addEmoticon2("Twilight_Sparkle_lolface", "Twilight Sparkle Lolface");
-		addEmoticon2("Spike_lolface", "Spike Lolface");
-		addEmoticon2("Pinkie_Pie_lolface", "Pinkie Pie Lolface");
-		addEmoticon2("Rarity_lolface", "Rarity Lolface");
-		addEmoticon2("Rainbow_Dash_lolface", "Rainbow Dash Lolface");
-		addEmoticon2("Applejack_lolface", "Applejack Lolface");
-		addEmoticon2("Vinyl_Scratch_lolface", "Vinyl Scratch Lolface");
-		addEmoticon2("Fluttershy_lolface", "Fluttershy Lolface");
-		addEmoticon2("Scootaloo_lolface", "Scootaloo Lolface");
-		addEmoticon2("Applebloom_lolface", "Applebloom Lolface");
-		addEmoticon2("Derpy_Hooves_lolface", "Derpy Hooves Lolface");
-		addEmoticon2("Trixie_lolface_1", "Trixie Lolface 1");
-		addEmoticon2("Trixie_lolface_2", "Trixie Lolface 2");
-		addEmoticon3("lolface_Queen_Chrysalis", "Queen Chrysalis Lolface");
+		createNewEmoteTable("Awesome Faces", "AF", num);
+		createNewEmote(getURL1("Luna_lolface"), "Luna Lolface", "AF");
+		createNewEmote(getURL2("lolface_Celestia"), "Celestia Lolface", "AF");
+		createNewEmote(getURL1("Sweetie_Belle_lolface"), "Sweetie Belle Lolface", "AF");
+		createNewEmote(getURL1("Twilight_Sparkle_lolface"), "Twilight Sparkle Lolface", "AF");
+		createNewEmote(getURL1("Spike_lolface"), "Spike Lolface", "AF");
+		createNewEmote(getURL1("Pinkie_Pie_lolface"), "Pinkie Pie Lolface", "AF");
+		createNewEmote(getURL1("Rarity_lolface"), "Rarity Lolface", "AF");
+		createNewEmote(getURL1("Rainbow_Dash_lolface"), "Rainbow Dash Lolface", "AF");
+		createNewEmote(getURL1("Applejack_lolface"), "Applejack Lolface", "AF");
+		createNewEmote(getURL1("Vinyl_Scratch_lolface"), "Vinyl Scratch Lolface", "AF");
+		createNewEmote(getURL1("Fluttershy_lolface"), "Fluttershy Lolface", "AF");
+		createNewEmote(getURL1("Scootaloo_lolface"), "Scootaloo Lolface", "AF");
+		createNewEmote(getURL1("Applebloom_lolface"), "Applebloom Lolface", "AF");
+		createNewEmote(getURL1("Derpy_Hooves_lolface"), "Derpy Hooves Lolface", "AF");
+		createNewEmote(getURL1("Trixie_lolface_1"), "Trixie Lolface 1", "AF");
+		createNewEmote(getURL1("Trixie_lolface_2"), "Trixie Lolface 2", "AF");
+		createNewEmote(getURL2("lolface_Queen_Chrysalis"), "Queen Chrysalis Lolface", "AF");
 
-		endStartSection("Sillyfillies", 2, num); // Couldn't think of a better name than "sillyfilly" :|
-		addEmoticon3("sillyfilly_Sweetie_Belle", "Sweetie Belle Sillyfilly");
-		addEmoticon3("sillyfilly_Scootaloo", "Scootaloo Sillyfilly");
-		addEmoticon3("sillyfilly_Applebloom", "Applebloom Sillyfilly");
-		addEmoticon3("sillyfilly_Twilight_Sparkle", "Twilight Sparkle Sillyfilly");
-		addEmoticon3("sillyfilly_Fluttershy", "Fluttershy Sillyfilly");
-		addEmoticon3("sillyfilly_Applejack", "Applejack Sillyfilly");
-		addEmoticon3("sillyfilly_Pinkie_Pie", "Pinkie Pie Sillyfilly");
-		addEmoticon3("sillyfilly_Rarity", "Rarity Sillyfilly");
-		addEmoticon3("sillyfilly_Rainbow_Dash", "Rainbow Dash Sillyfilly");
-		addEmoticon3("sillyfilly_Derpy_Hooves", "Derpy Hooves Sillyfilly");
+		createNewEmoteTable("Sillyfillies", "SF", num); // Couldn't think of a better name than "sillyfilly" :|
+		createNewEmote(getURL2("sillyfilly_Sweetie_Belle"), "Sweetie Belle Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Scootaloo"), "Scootaloo Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Applebloom"), "Applebloom Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Twilight_Sparkle"), "Twilight Sparkle Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Fluttershy"), "Fluttershy Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Applejack"), "Applejack Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Pinkie_Pie"), "Pinkie Pie Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Rarity"), "Rarity Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Rainbow_Dash"), "Rainbow Dash Sillyfilly", "SF");
+		createNewEmote(getURL2("sillyfilly_Derpy_Hooves"), "Derpy Hooves Sillyfilly", "SF");
 
-		endStartSection("Shrugponies", 3, num);
-		addEmoticon3("shrug_Luna_apple", "Luna Shrug (Apple)");
-		addEmoticon3("shrug_Celestia", "Celestia Shrug");
-		addEmoticon3("shrug_Twilight_Sparkle", "Twilight Sparkle Shrug");
-		addEmoticon3("shrug_Twilight_future", "Future Twilight Shrug");
-		addEmoticon3("shrug_Rainbow_Dash", "Rainbow Dash Shrug");
-		addEmoticon3("shrug_Derpy_Hooves", "Derpy Hooves Shrug");
-		addEmoticon3("shrug_Queen_Chrysalis", "Queen Chrysalis Shrug");
-		addEmoticon3("shrug_bronymaster1", "bronymaster1 Shrug");
+		createNewEmoteTable("Shrugponies", "SP", num);
+		createNewEmote(getURL2("shrug_Luna_apple"), "Luna Shrug (Apple)", "SP");
+		createNewEmote(getURL2("shrug_Celestia"), "Celestia Shrug", "SP");
+		createNewEmote(getURL2("shrug_Twilight_Sparkle"), "Twilight Sparkle Shrug", "SP");
+		createNewEmote(getURL2("shrug_Twilight_future"), "Future Twilight Shrug", "SP");
+		createNewEmote(getURL2("shrug_Rainbow_Dash"), "Rainbow Dash Shrug", "SP");
+		createNewEmote(getURL2("shrug_Derpy_Hooves"), "Derpy Hooves Shrug", "SP");
+		createNewEmote(getURL2("shrug_Queen_Chrysalis"), "Queen Chrysalis Shrug", "SP");
+		createNewEmote(getURL2("shrug_bronymaster1"), "bronymaster1 Shrug", "SP");
 
-		endStartSection("Deal With It", 6, num);
-		addEmoticon3("misc_Rainbow_dealwithit", "Rainbow Dash Deal With It");
-		addEmoticon3("misc_Derpy_dealwithit", "Rainbow Dash Deal With It");
-		addEmoticon3("misc_Cloudchaser_dealwithit", "Cloudchaser Deal With It");
-		addEmoticon3("misc_Lyra_dealwithit", "Lyra Deal With It");
+		createNewEmoteTable("Deal With It", "DWI", num);
+		createNewEmote(getURL2("misc_Rainbow_dealwithit"), "Rainbow Dash Deal With It", "DWI");
+		createNewEmote(getURL2("misc_Derpy_dealwithit"), "Rainbow Dash Deal With It", "DWI");
+		createNewEmote(getURL2("misc_Cloudchaser_dealwithit"), "Cloudchaser Deal With It", "DWI");
+		createNewEmote(getURL2("misc_Lyra_dealwithit"), "Lyra Deal With It", "DWI");
 
-		endStartSection("Miscellaneous", 4, num);
-		addEmoticon3("misc_unsuresweetie_flip", "Unsure Sweetie (flipped)");
-		addEmoticon3("misc_rainbowkiss_flip", "Rainbow Kiss (flipped)");
-		addEmoticon3("misc_rainbowderp_flip", "Rainbow Derp (flipped)");
-		addEmoticon3("misc_duck_flip", "Duck (flipped)");
-		addEmoticon2("discord", "Discord");
-		addEmoticon3("misc_Discord", "Discord 2");
-		addEmoticon2("eenope", "Eenope");
-		addEmoticon2("Mr_Cake", "Mr. Cake");
-		addEmoticon2("yay_red", "Red Yay");
-		addEmoticon3("misc_TwilightWut", "Twilight Wut");
-		addEmoticon3("misc_Twilight_crazy", "Crazy Twilight");
-		addEmoticon3("misc_Twilight_crazy_invert", "Crazy Twilight (inverted)");
-		addEmoticon3("misc_Twilight_pea", "Twilight Pea");
-		addEmoticon3("misc_Fluttershy_umad", "Fluttershy Umad");
-		addEmoticon3("misc_Fluttershy", "Fluttershy being Fluttershy");
-		addEmoticon3("misc_Pinkie_loool", "Pinkie LOOOL");
-		addEmoticon3("misc_Sweetie_happy", "Happy Sweetie Belle");
-		addEmoticon3("misc_Lyra2", "Happy Lyra");
-		addEmoticon3("misc_Lyra", "Super Happy Lyra");
-		addEmoticon3("misc_Lyra_cry", "Lyra Cry");
-		addEmoticon3("misc_Lyra_smile", "Smiling Lyra");
-		addEmoticon3("misc_Lyra_ooh", '"Oooh!"');
-		addEmoticon3("misc_Bonbon_gaze", "Bonbon Gaze");
-		addEmoticon3("misc_Bonbon_grin", "Bonbon Grin");
-		addEmoticon3("misc_Bonbon_OMG_LOVE", "Bonbon OMG LOVE");
-		addEmoticon3("misc_Redheart_hmph", "Nurse Redheard Hmph");
-		addEmoticon3("misc_Redheart_shh", "Nurse Redheard Shh");
-		addEmoticon3("misc_Redheart_smile", "Nurse Redheart Smile");
-		addEmoticon3("misc_Redheart_gasp", "Nurse Redheart Gasp");
-		addEmoticon3("misc_Octavia", "Octavia");
-		addEmoticon3("misc_Octavia2", "Octavia 2");
-		addEmoticon3("misc_Octavia_O_O", "Octavia O_O");
-		addEmoticon3("misc_Octavia_cake", "Octavia likes cake");
-		addEmoticon3("misc_Octavia_chair", "Octavia Chair");
-		addEmoticon3("misc_Octavia_plot", "Octavia Plot");
-		addEmoticon3("misc_Cheerilee", "Cheerilee");
-		addEmoticon3("misc_Vinyl_Scratch", "Vinyl Scratch");
-		addEmoticon3("misc_Vinyl2", "Vinyl Scratch 2");
-		addEmoticon3("misc_Vinyl_sad", "Sad Vinyl");
-		addEmoticon3("misc_Vinyl_shock", "Shocked Vinyl");
-		addEmoticon3("misc_Soarin_dayum", "Soarin DAYUM");
-		addEmoticon3("misc_Spitfire", "Spitfire");
-		addEmoticon3("misc_Spitfire_dayum", "Spitfire DAYUM");
-		addEmoticon3("misc_Spitfire_lazy", "Lazy Spitfire");
-		addEmoticon3("misc_Spitfire_rape", "Spitfire Rapeface");
-		addEmoticon3("misc_Spitfire_sad", "Sad Spitfire");
-		addEmoticon3("misc_Colgate_beam", "Colgate Beam");
-		addEmoticon3("misc_Colgate_bedroomeyes", "Colgate Bedroom Eyes");
-		addEmoticon3("misc_Twilightclopple", "Twilightclopple");
-		addEmoticon3("misc_RageFace", "Rage Face");
-		addEmoticon3("misc_YouDontSay2", "You Don't Say?!");
+		createNewEmoteTable("Miscellaneous", "MISC", num);
+		createNewEmote(getURL2("misc_unsuresweetie_flip"), "Unsure Sweetie (flipped)", "MISC");
+		createNewEmote(getURL2("misc_rainbowkiss_flip"), "Rainbow Kiss (flipped)", "MISC");
+		createNewEmote(getURL2("misc_rainbowderp_flip"), "Rainbow Derp (flipped)", "MISC");
+		createNewEmote(getURL2("misc_duck_flip"), "Duck (flipped)", "MISC");
+		createNewEmote(getURL1("discord"), "Discord", "MISC");
+		createNewEmote(getURL2("misc_Discord"), "Discord 2", "MISC");
+		createNewEmote(getURL1("eenope"), "Eenope", "MISC");
+		createNewEmote(getURL1("Mr_Cake"), "Mr. Cake", "MISC");
+		createNewEmote(getURL1("yay_red"), "Red Yay", "MISC");
+		createNewEmote(getURL2("misc_TwilightWut"), "Twilight Wut", "MISC");
+		createNewEmote(getURL2("misc_Twilight_crazy"), "Crazy Twilight", "MISC");
+		createNewEmote(getURL2("misc_Twilight_crazy_invert"), "Crazy Twilight (inverted)", "MISC");
+		createNewEmote(getURL2("misc_Twilight_pea"), "Twilight Pea", "MISC");
+		createNewEmote(getURL2("misc_Fluttershy_umad"), "Fluttershy Umad", "MISC");
+		createNewEmote(getURL2("misc_Fluttershy"), "Fluttershy being Fluttershy", "MISC");
+		createNewEmote(getURL2("misc_Pinkie_loool"), "Pinkie LOOOL", "MISC");
+		createNewEmote(getURL2("misc_Sweetie_happy"), "Happy Sweetie Belle", "MISC");
+		createNewEmote(getURL2("misc_Lyra2"), "Happy Lyra", "MISC");
+		createNewEmote(getURL2("misc_Lyra"), "Super Happy Lyra", "MISC");
+		createNewEmote(getURL2("misc_Lyra_cry"), "Lyra Cry", "MISC");
+		createNewEmote(getURL2("misc_Lyra_smile"), "Smiling Lyra", "MISC");
+		createNewEmote(getURL2("misc_Lyra_ooh"), '"Oooh!"', "MISC");
+		createNewEmote(getURL2("misc_Bonbon_gaze"), "Bonbon Gaze", "MISC");
+		createNewEmote(getURL2("misc_Bonbon_grin"), "Bonbon Grin", "MISC");
+		createNewEmote(getURL2("misc_Bonbon_OMG_LOVE"), "Bonbon OMG LOVE", "MISC");
+		createNewEmote(getURL2("misc_Redheart_hmph"), "Nurse Redheard Hmph", "MISC");
+		createNewEmote(getURL2("misc_Redheart_shh"), "Nurse Redheard Shh", "MISC");
+		createNewEmote(getURL2("misc_Redheart_smile"), "Nurse Redheart Smile", "MISC");
+		createNewEmote(getURL2("misc_Redheart_gasp"), "Nurse Redheart Gasp", "MISC");
+		createNewEmote(getURL2("misc_Octavia"), "Octavia", "MISC");
+		createNewEmote(getURL2("misc_Octavia2"), "Octavia 2", "MISC");
+		createNewEmote(getURL2("misc_Octavia_O_O"), "Octavia O_O", "MISC");
+		createNewEmote(getURL2("misc_Octavia_cake"), "Octavia likes cake", "MISC");
+		createNewEmote(getURL2("misc_Octavia_chair"), "Octavia Chair", "MISC");
+		createNewEmote(getURL2("misc_Octavia_plot"), "Octavia Plot", "MISC");
+		createNewEmote(getURL2("misc_Cheerilee"), "Cheerilee", "MISC");
+		createNewEmote(getURL2("misc_Vinyl_Scratch"), "Vinyl Scratch", "MISC");
+		createNewEmote(getURL2("misc_Vinyl2"), "Vinyl Scratch 2", "MISC");
+		createNewEmote(getURL2("misc_Vinyl_sad"), "Sad Vinyl", "MISC");
+		createNewEmote(getURL2("misc_Vinyl_shock"), "Shocked Vinyl", "MISC");
+		createNewEmote(getURL2("misc_Soarin_dayum"), "Soarin DAYUM", "MISC");
+		createNewEmote(getURL2("misc_Spitfire"), "Spitfire", "MISC");
+		createNewEmote(getURL2("misc_Spitfire_dayum"), "Spitfire DAYUM", "MISC");
+		createNewEmote(getURL2("misc_Spitfire_lazy"), "Lazy Spitfire", "MISC");
+		createNewEmote(getURL2("misc_Spitfire_rape"), "Spitfire Rapeface", "MISC");
+		createNewEmote(getURL2("misc_Spitfire_sad"), "Sad Spitfire", "MISC");
+		createNewEmote(getURL2("misc_Colgate_beam"), "Colgate Beam", "MISC");
+		createNewEmote(getURL2("misc_Colgate_bedroomeyes"), "Colgate Bedroom Eyes", "MISC");
+		createNewEmote(getURL2("misc_Twilightclopple"), "Twilightclopple", "MISC");
+		createNewEmote(getURL2("misc_RageFace"), "Rage Face", "MISC");
+		createNewEmote(getURL2("misc_YouDontSay2"), "You Don't Say?!", "MISC");
 
-		endStartSection("deviantART", 5, num);
-		addEmoticon("//e.deviantart.net/emoticons/t/trollface.png", "Trollface");
-		addEmoticon("//e.deviantart.net/emoticons/b/biggrin.gif", "Big Grin");
-		addEmoticon("//e.deviantart.net/emoticons/h/horny2.gif", "Horny 2");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love.gif", "Love");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection.gif", "Affection");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/adoration.gif", "Adoration");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/attraction.gif", "Attraction");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/caring.gif", "Caring");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/compassion.gif", "Compassion");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/da_love.gif", "dA Love");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/flirty.gif", "Flirty");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/obsessed.gif", "Obsessed");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/sentimental.gif", "Sentimental");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/sweet.gif", "Sweet");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/affection/tender.gif", "Tender");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/longing.gif", "Longing");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/longing/drooling.gif", "Drooling");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/longing/love_dazed.gif", "Love Dazed");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/longing/yearning.gif", "Yearning");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/lust.gif", "Lust");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/lust/aroused.gif", "Aroused");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/lust/horny.gif", "Horny");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/lust/hump.gif", "Hump");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/lust/passionate.gif", "Passionate");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/lust/suggestive.gif", "Suggestive");
-		addEmoticon("//e.deviantart.com/emoticons/moods/love/lust/unf.gif", "Unf!");
-		addEmoticon("//e.deviantart.net/emoticons/moods/joy.gif", "Joy");
-		addEmoticon("//e.deviantart.com/emoticons/moods/surprise.gif", "Wow!");
-		addEmoticon("//e.deviantart.com/emoticons/moods/anger.gif", "Anger");
-		addEmoticon("//e.deviantart.com/emoticons/moods/sadness.gif", "Sadness");
-		addEmoticon("//e.deviantart.com/emoticons/moods/fear.gif", "Fear");
-		addEmoticon("//e.deviantart.com/emoticons/moods/neutral.gif", "Neutral");
-		endSection();*/
+		createNewEmoteTable("deviantART", "dA", num);
+		createNewEmote("//e.deviantart.net/emoticons/t/trollface.png", "Trollface", "dA");
+		createNewEmote("//e.deviantart.net/emoticons/b/biggrin.gif", "Big Grin", "dA");
+		createNewEmote("//e.deviantart.net/emoticons/h/horny2.gif", "Horny 2", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love.gif", "Love", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection.gif", "Affection", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/adoration.gif", "Adoration", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/attraction.gif", "Attraction", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/caring.gif", "Caring", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/compassion.gif", "Compassion", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/da_love.gif", "dA Love", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/flirty.gif", "Flirty", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/obsessed.gif", "Obsessed", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/sentimental.gif", "Sentimental", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/sweet.gif", "Sweet", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/affection/tender.gif", "Tender", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/longing.gif", "Longing", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/longing/drooling.gif", "Drooling", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/longing/love_dazed.gif", "Love Dazed", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/longing/yearning.gif", "Yearning", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/lust.gif", "Lust", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/lust/aroused.gif", "Aroused", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/lust/horny.gif", "Horny", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/lust/hump.gif", "Hump", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/lust/passionate.gif", "Passionate", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/lust/suggestive.gif", "Suggestive", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/love/lust/unf.gif", "Unf!", "dA");
+		createNewEmote("//e.deviantart.net/emoticons/moods/joy.gif", "Joy", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/surprise.gif", "Wow!", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/anger.gif", "Anger", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/sadness.gif", "Sadness", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/fear.gif", "Fear", "dA");
+		createNewEmote("//e.deviantart.com/emoticons/moods/neutral.gif", "Neutral", "dA");
 
-		innerdiv.innerHTML = txtToAdd;
-
-		/*var aoeu = document.getElementById("ehl_0_" + num);
-		aoeu.addEventListener("click", function(){eh(0, num);}, false);
-		aoeu = document.getElementById("ehl_1_" + num);
-		aoeu.addEventListener("click", function(){eh(1, num);}, false);
-		aoeu = document.getElementById("ehl_2_" + num);
-		aoeu.addEventListener("click", function(){eh(2, num);}, false);
-		aoeu = document.getElementById("ehl_3_" + num);
-		aoeu.addEventListener("click", function(){eh(3, num);}, false);
-		aoeu = document.getElementById("ehl_4_" + num);
-		aoeu.addEventListener("click", function(){eh(4, num);}, false);
-		aoeu = document.getElementById("ehl_5_" + num);
-		aoeu.addEventListener("click", function(){eh(5, num);}, false);
-		aoeu = document.getElementById("ehl_6_" + num);
-		aoeu.addEventListener("click", function(){eh(6, num);}, false);*/
-
-		createNewEmoteTable("Awesome Faces", "AF");
-		createNewEmote(getURL2("Luna_lolface"), "Luna Lolface", "AF");
-		/*addEmoticon3("lolface_Celestia", "Celestia Lolface");
-		addEmoticon2("Sweetie_Belle_lolface", "Sweetie Belle Lolface");
-		addEmoticon2("Twilight_Sparkle_lolface", "Twilight Sparkle Lolface");
-		addEmoticon2("Spike_lolface", "Spike Lolface");
-		addEmoticon2("Pinkie_Pie_lolface", "Pinkie Pie Lolface");
-		addEmoticon2("Rarity_lolface", "Rarity Lolface");
-		addEmoticon2("Rainbow_Dash_lolface", "Rainbow Dash Lolface");
-		addEmoticon2("Applejack_lolface", "Applejack Lolface");
-		addEmoticon2("Vinyl_Scratch_lolface", "Vinyl Scratch Lolface");
-		addEmoticon2("Fluttershy_lolface", "Fluttershy Lolface");
-		addEmoticon2("Scootaloo_lolface", "Scootaloo Lolface");
-		addEmoticon2("Applebloom_lolface", "Applebloom Lolface");
-		addEmoticon2("Derpy_Hooves_lolface", "Derpy Hooves Lolface");
-		addEmoticon2("Trixie_lolface_1", "Trixie Lolface 1");
-		addEmoticon2("Trixie_lolface_2", "Trixie Lolface 2");
-		addEmoticon3("lolface_Queen_Chrysalis", "Queen Chrysalis Lolface");*/
+		addEmotes(num);
 	}
 }
 
-/**
-name = section name
-sID = section ID
-eID = element ID
-*/
-function startSection(name, sID, eID)
-{
-	var open = (eha[sID] === "1");
-	txtToAdd += '<a id="ehl_' + sID + '_' + eID + '"><span id="ehs_' + sID + '_' + eID + '">' + (open?"▼":"▶") + '<i>' + name + '</i>' + (open?":":"&nbsp;") +
-				'</a></span><br><div id="ehd_' + sID + '_' + eID + '" style="display:' + (open?"inherit":"none") + ';">';
-}
-
-function endSection()
-{
-	txtToAdd += "</div>";
-}
-
-function endStartSection(name, sID, eID)
-{
-	endSection();
-	startSection(name, sID, eID);
-}
-
-function addEmoticon1(name, title) // default
-{
-	txtToAdd += '<a href="javascript:smilie(\':' + name + ':\');" title="' + title + '"><img style="margin:1px;" src="//www.fimfiction-static.net/images/emoticons/' + name + '.png"></a>&nbsp;';
-}
-
-function addEmoticon2(url, title) // old format
-{
-	addEmoticon("//dl.dropbox.com/u/31471793/FiMFiction/" + url + ".png", title);
-}
-
-function getURL2(url)
+function getURL1(url) // old format
 {
 	return("//dl.dropbox.com/u/31471793/FiMFiction/" + url + ".png");
 }
 
-function addEmoticon3(url, title) // new format
+function getURL2(url) // new format
 {
-	addEmoticon("//dl.dropbox.com/u/31471793/FiMFiction/emoticons/" + url + ".png", title);
-}
-
-function addEmoticon(url, title)
-{
-	txtToAdd += '<a href="javascript:smilie(\'[img]' + url + '[/img]\');" title="' + title + '"><img style="margin:1px;" src="' + url + '" alt="' + title + '"></a>';
-}
-
-function eh(sID, eID)
-{
-	//logg("eh("+sID+", "+eID+");");
-	var span = null;
-	if(sID === -1)
-	{
-		span = document.getElementById("emot_s");
-		if(span.innerHTML.indexOf("▶") !== -1)
-		{
-			span.innerHTML = span.innerHTML.replace("▶", "▼").replace("&nbsp;", ":");
-			document.getElementById("emot_d").style.display="inherit";
-		}
-		else if(span.innerHTML.indexOf("▼") !== -1)
-		{
-			span.innerHTML = span.innerHTML.replace("▼", "▶").replace(":", "&nbsp;");
-			document.getElementById("emot_d").style.display="none";
-		}
-	}
-	else
-	{
-		var spanid = "ehs_" + sID + "_" + eID;
-		span = document.getElementById(spanid);
-		if(span.innerHTML.indexOf("▶") !== -1)
-		{
-			span.innerHTML = span.innerHTML.replace("▶", "▼").replace("&nbsp;", ":");
-			document.getElementById("ehd_" + sID + "_" + eID).style.display="inherit";
-			eha[sID] = "1";
-		}
-		else if(span.innerHTML.indexOf("▼") !== -1)
-		{
-			span.innerHTML = span.innerHTML.replace("▼", "▶").replace(":", "&nbsp;");
-			document.getElementById("ehd_" + sID + "_" + eID).style.display="none";
-			eha[sID] = "0";
-		}
-		GM_setValue("eha", eha.join(":"));
-	}
+	return("//dl.dropbox.com/u/31471793/FiMFiction/emoticons/" + url + ".png");
 }
