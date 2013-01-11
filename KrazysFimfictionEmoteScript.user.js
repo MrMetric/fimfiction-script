@@ -6,7 +6,6 @@
 // @include     http*://fimfiction.net/*
 // @grant       none
 // @require		https://github.com/iloveportalz0r/fimfiction-script/raw/master/emoteHandler.js
-// @require		http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js
 // @version     1.0
 // ==/UserScript==
 
@@ -19,14 +18,39 @@ function run() {
 	
 	initializeAPI();
 	
-	$.getScript("https://github.com/iloveportalz0r/fimfiction-script/raw/master/RemoteEmotes.js", function(){
-	   
-		var emotes = fetchAndAddEmotes();
-	   
-		for (var i = 0; i < emotes.length; i++) {
-			addEmote(emotes[i][0], emotes[i][1]);
-		}
-		
-	});
+	if (Site.page ==  PAGE.GROUPTHREAD || Site.page == PAGE.GROUP) {
+	
+		$.ajax({
+			url: "http://www.krazyweb.net/fimfictionemotes/RemoteEmotes.js",
+			success: loadEmotesFromRemoteScript,
+			error: loadSecondaryScript,
+			timeout: 1000, // 2 seconds timeout before error function will be called
+			dataType: 'script',
+			crossDomain: true
+		});
+	
+	}
+	
+}
 
+function loadEmotesFromRemoteScript() {
+	
+	var emotes = fetchAndAddEmotes();
+			
+	for (var i = 0; i < emotes.length; i++) {
+		addEmote(emotes[i][0], emotes[i][1]);
+	}
+	
+}
+
+function loadSecondaryScript() {
+	
+	$.ajax({
+		url: "http://www.krazyweb.net/fimfictionemotes/RemoteEmotes.js",
+		success: loadEmotesFromRemoteScript,
+		timeout: 1000, // 2 seconds timeout before error function will be called
+		dataType: 'script',
+		crossDomain: true
+	});
+	
 }
