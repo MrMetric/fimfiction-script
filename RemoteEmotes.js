@@ -1,5 +1,4 @@
 
-
 // Remote Emote Script
 
 function fetchAndAddEmotes() {
@@ -113,6 +112,11 @@ function fetchAndAddEmotes() {
 		["http://i.imgur.com/GmNPM.png", "C"],
 		["http://i.imgur.com/GIV4g.png", "C"],
 		["http://i.imgur.com/rTIx4.png", "C"],
+		["http://i.imgur.com/5faXAtj.png", "C"],
+		["http://i.imgur.com/5wxoPUa.png", "C"],
+		["http://i.imgur.com/3Sr1ACU.png", "C"],
+		["http://i.imgur.com/pV4j88A.png", "C"],
+		["http://i.imgur.com/CqXDDh6.png", "C"],
 		
 		["http://i.imgur.com/LbXFj.png", "E"],
 		["http://i.imgur.com/QoZIz.png", "E"],
