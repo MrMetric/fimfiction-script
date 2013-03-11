@@ -1,4 +1,3 @@
-
 // Remote Emote Script
 
 function fetchAndAddEmotes() {
@@ -219,7 +218,11 @@ function fetchAndAddEmotes() {
 		["http://i.imgur.com/OJHNg.png", "TS"],
 		["http://i.imgur.com/IZJSZ.png", "TS"],
 		["http://i.imgur.com/z2R9A.png", "TS"],
-		["http://i.imgur.com/AKn7J.png", "TS"]
+		["http://i.imgur.com/AKn7J.png", "TS"],
+		
+		["http://i.imgur.com/zbei6cO.png", "PP"],
+		["http://i.imgur.com/zplekGi.png", "PP"],
+		["http://i.imgur.com/jvzynek.png", "PP"]
 	];
 	
 	return emoteArray;
