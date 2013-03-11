@@ -21,7 +21,7 @@ function run() {
 	if (Site.page ==  PAGE.GROUPTHREAD || Site.page == PAGE.GROUP) {
 	
 		$.ajax({
-			url: "http://www.krazyweb.net/fimfictionemotes/RemoteEmotes.js",
+			url: "https://raw.github.com/iloveportalz0r/fimfiction-script/master/RemoteEmotes.js",
 			success: loadEmotesFromRemoteScript,
 			error: loadSecondaryScript,
 			timeout: 1000, // 2 seconds timeout before error function will be called
