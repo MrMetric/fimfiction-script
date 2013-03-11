@@ -5,6 +5,7 @@
 // @include     http*://www.fimfiction.net/*
 // @include     http*://fimfiction.net/*
 // @grant       none
+// @require		http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
 // @require		https://github.com/iloveportalz0r/fimfiction-script/raw/master/emoteHandler.js
 // @version     1.0
 // ==/UserScript==
