@@ -10,11 +10,6 @@
 // @version     1.0
 // ==/UserScript==
 
-/*window.addEventListener("load", function load(event){
-    window.removeEventListener("load", load, false);
-    run();
-},false);*/
-
 $(document).ready(run);
 
 function run() {
@@ -60,6 +55,10 @@ function run() {
 			["http://i.imgur.com/xJ9hG.png", "A"],
 			["http://i.imgur.com/TVh3T.png", "A"],
 			["http://i.imgur.com/Av7mi.png", "A"],
+			["http://i.imgur.com/zbSFhpV.png", "A"],
+			["http://i.imgur.com/oaEI1BM.png", "A"],
+			["http://i.imgur.com/dObdk0h.png", "A"],
+			["http://i.imgur.com/bEP8EQ2.png", "A"],
 			
 			["http://i.imgur.com/PKx4m.png", "B"],
 			["http://i.imgur.com/30Blc.png", "B"],
@@ -192,6 +191,34 @@ function run() {
 			["http://i.imgur.com/LOrxf.png", "AJ"],
 			["http://i.imgur.com/Evd0x.png", "AJ"],
 			["http://i.imgur.com/tjCXQ.png", "AJ"],
+			["http://i.imgur.com/NlvYtnA.png", "AJ"],
+			["http://i.imgur.com/Qe7TiLt.png", "AJ"],
+			["http://i.imgur.com/yAmRYea.png", "AJ"],
+			["http://i.imgur.com/pww1wjm.png", "AJ"],
+			["http://i.imgur.com/KZHFE8U.png", "AJ"],
+			["http://i.imgur.com/MZsrxQK.png", "AJ"],
+			
+			["http://i.imgur.com/sb2Qbof.png", "FS"],
+			["http://i.imgur.com/24nRCr5.png", "FS"],
+			["http://i.imgur.com/AFuKMoD.png", "FS"],
+			["http://i.imgur.com/mkCLMHb.png", "FS"],
+			["http://i.imgur.com/IOcuWkK.png", "FS"],
+			["http://i.imgur.com/YUeUKME.png", "FS"],
+			["http://i.imgur.com/z4PAdhi.png", "FS"],
+			["http://i.imgur.com/wwVpoHt.png", "FS"],
+			["http://i.imgur.com/cSViT7t.png", "FS"],
+			["http://i.imgur.com/3UFhl3F.png", "FS"],
+			["http://i.imgur.com/968NYEH.png", "FS"],
+			["http://i.imgur.com/i98QYFY.png", "FS"],
+			["http://i.imgur.com/HUbolAq.png", "FS"],
+			["http://i.imgur.com/Ade2YQ4.png", "FS"],
+			["http://i.imgur.com/nirPCDd.png", "FS"],
+			["http://i.imgur.com/MHYaQsA.png", "FS"],
+			["http://i.imgur.com/r4SxEH3.png", "FS"],
+			["http://i.imgur.com/xZjtFqi.png", "FS"],
+			["http://i.imgur.com/5c1j3xv.png", "FS"],
+			["http://i.imgur.com/uSOX8aw.png", "FS"],
+			["http://i.imgur.com/EcWBGKl.png", "FS"],
 		
 			["http://i.imgur.com/fiITL.png", "RD"],
 			["http://i.imgur.com/1mJFi.png", "RD"],
@@ -217,6 +244,21 @@ function run() {
 			["http://i.imgur.com/DupLe.png", "RD"],
 			["http://i.imgur.com/Am3AY.png", "RD"],
 			["http://i.imgur.com/7TZmw.png", "RD"],
+			
+			["http://i.imgur.com/KluyWmn.png", "R"],
+			["http://i.imgur.com/cUszKbb.png", "R"],
+			["http://i.imgur.com/9yFw70j.png", "R"],
+			["http://i.imgur.com/hyH6usq.png", "R"],
+			["http://i.imgur.com/CpZgXTk.png", "R"],
+			["http://i.imgur.com/hT1CSak.png", "R"],
+			["http://i.imgur.com/HDAG3B9.png", "R"],
+			["http://i.imgur.com/tHHlMgs.png", "R"],
+			["http://i.imgur.com/GLRdqlz.png", "R"],
+			["http://i.imgur.com/dwryYQj.png", "R"],
+			["http://i.imgur.com/pqytDZN.png", "R"],
+			["http://i.imgur.com/JqAPTWq.png", "R"],
+			["http://i.imgur.com/mmVWxDL.png", "R"],
+			["http://i.imgur.com/YHqF6Oe.png", "R"],
 			
 			["http://i.imgur.com/5OGeQ.png", "TS"],
 			["http://i.imgur.com/hs7Hh.png", "TS"],
