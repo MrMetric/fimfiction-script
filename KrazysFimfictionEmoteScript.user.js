@@ -10,10 +10,12 @@
 // @version     1.0
 // ==/UserScript==
 
-window.addEventListener("load", function load(event){
+/*window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false);
     run();
-},false);
+},false);*/
+
+$(document).ready(run);
 
 function run() {
 	
