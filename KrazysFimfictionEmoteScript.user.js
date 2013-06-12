@@ -208,7 +208,6 @@ function run() {
 			["http://i.imgur.com/cSViT7t.png", "FS"],
 			["http://i.imgur.com/3UFhl3F.png", "FS"],
 			["http://i.imgur.com/968NYEH.png", "FS"],
-			["http://i.imgur.com/i98QYFY.png", "FS"],
 			["http://i.imgur.com/HUbolAq.png", "FS"],
 			["http://i.imgur.com/Ade2YQ4.png", "FS"],
 			["http://i.imgur.com/nirPCDd.png", "FS"],
