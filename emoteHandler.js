@@ -129,22 +129,22 @@ var Site = {
 
 // End utility stuff
 
-var initialized = false,
-	emoteTables = [],
-	txtToAdd = [], // HTML to append (mode 1)
-	commentBox,
-	tabContainer,
-	emotePanel,
-	hasEmotePanel = false,
-	tablePrefix = "emoteAPI_Table:";
+top.initialized = false;
+top.emoteTables = [];
+top.txtToAdd = []; // HTML to append (mode 1)
+top.commentBox;
+top.tabContainer;
+top.emotePanel;
+top.hasEmotePanel = false;
+top.tablePrefix = "emoteAPI_Table:";
 
 function addEmote(url, tableName)
 {
-	if(initialized && hasEmotePanel)
+	if(top.initialized && top.hasEmotePanel)
 	{
 		if(Site.mode == 0)
 		{
-			if(emoteTables[tablePrefix + tableName] != undefined)
+			if(top.emoteTables[top.tablePrefix + tableName] != undefined)
 			{
 				createNewEmote(url, tableName, tableName);
 			}
@@ -160,11 +160,6 @@ function addEmote(url, tableName)
 
 function initializeAPI(m)
 {
-	if(initialized)
-	{
-		return;
-	}
-	initialized = true;
 
 	if(typeof m === "undefined" || m == null || m < 0 || m > 1)
 	{
@@ -277,6 +272,13 @@ function initializeAPI(m)
 		Site.page = PAGE.OTHER;
 	}
 	logg("Detected page: " + Site.page.name);
+	
+	if(top.initialized)
+	{
+		return;
+	}
+	
+	top.initialized = true;
 
 	var style = "";
 
@@ -356,15 +358,15 @@ function initializeAPI(m)
 
 	GM_addStyle(style);
 
-	commentBox = document.getElementById("comment_comment");
+	top.commentBox = document.getElementById("comment_comment");
 	//Grab FiMFiction's emote panel div and store it
 	var emoticonsPanel = document.getElementsByClassName("emoticons_panel");
 	if(emoticonsPanel != null && emoticonsPanel.length > 0)
 	{
-		hasEmotePanel = true;
+		top.hasEmotePanel = true;
 		for(var i = 0; i < emoticonsPanel.length; i++)
 		{
-			emotePanel = emoticonsPanel[i];
+			top.emotePanel = emoticonsPanel[i];
 		}
 		if(Site.mode == 0)
 		{
@@ -378,27 +380,27 @@ function initializeAPI(m)
 				tableOffset = 1;
 			}
 			//Store the default emote table and give it an id
-			var defaultEmoteTable = emotePanel.childNodes[emotePanel.childNodes.length - tableOffset];
-			emoteTables[tablePrefix + "FF"] = defaultEmoteTable;
-			emotePanel.style.paddingTop = "15px";
+			var defaultEmoteTable = top.emotePanel.childNodes[top.emotePanel.childNodes.length - tableOffset];
+			top.emoteTables[top.tablePrefix + "FF"] = defaultEmoteTable;
+			top.emotePanel.style.paddingTop = "15px";
 
-			tabContainer = document.createElement("div");
-			tabContainer.style.marginLeft = "12px";
-			tabContainer.style.marginTop = "0px";
-			tabContainer.style.float = "left";
-			tabContainer.style.clear = "both";
-			tabContainer.style.width = "279px";
-			emotePanel.insertBefore(tabContainer, emotePanel.firstChild);
+			top.tabContainer = document.createElement("div");
+			top.tabContainer.style.marginLeft = "12px";
+			top.tabContainer.style.marginTop = "0px";
+			top.tabContainer.style.float = "left";
+			top.tabContainer.style.clear = "both";
+			top.tabContainer.style.width = "279px";
+			top.emotePanel.insertBefore(top.tabContainer, top.emotePanel.firstChild);
 
 			defaultEmoteTable.style.float = "left";
 			defaultEmoteTable.style.clear = "both";
 			defaultEmoteTable.style.paddingTop = "20px";
 
-			tabContainer.appendChild(createTableLink("FF"));
+			top.tabContainer.appendChild(createTableLink("FF"));
 
 			setTimeout(function()
 			{
-				commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + 'px';
+				top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1) + 'px';
 			}, 1);
 		}
 	}
@@ -406,7 +408,7 @@ function initializeAPI(m)
 
 function createNewEmoteTable(tableName, shortTableName, panelID)
 {
-	if(initialized && hasEmotePanel)
+	if(top.initialized && top.hasEmotePanel)
 	{
 		logg("Creating emoticon table: " + tableName + "(" + shortTableName + ")" + " for panel #" + panelID);
 		if(Site.mode == 0)
@@ -418,15 +420,15 @@ function createNewEmoteTable(tableName, shortTableName, panelID)
 			emoteTable.style.float = "left";
 			emoteTable.style.clear = "both";
 			emoteTable.style.textAlign = "center";
-			emoteTables[tablePrefix + shortTableName] = emoteTable;
-			emotePanel.appendChild(emoteTable);
-			tabContainer.appendChild(createTableLink(shortTableName));
+			top.emoteTables[top.tablePrefix + shortTableName] = emoteTable;
+			top.emotePanel.appendChild(emoteTable);
+			top.tabContainer.appendChild(createTableLink(shortTableName));
 		}
 		else if(Site.mode == 1)
 		{
-			emoteTables.push(shortTableName);
+			top.emoteTables.push(shortTableName);
 			var open = (tableName === "Default"); // TODO
-			txtToAdd[emoteTables.indexOf(shortTableName)] = '<a id="ehl_' + shortTableName  + '_' + panelID + '"><span id="ehs_' + shortTableName + '_' + panelID + '">' +
+			top.txtToAdd[top.emoteTables.indexOf(shortTableName)] = '<a id="ehl_' + shortTableName  + '_' + panelID + '"><span id="ehs_' + shortTableName + '_' + panelID + '">' +
 				(open?"▼":"▶") + '<i>' + tableName + '</i>' + (open?":":"&nbsp;") +
 				'</a></span><br><div id="ehd_' + shortTableName + '_' + panelID + '" style="display:' + (open?"inherit":"none") + ';">';
 		}
@@ -435,7 +437,7 @@ function createNewEmoteTable(tableName, shortTableName, panelID)
 
 function createNewEmote(url, emoteName, shortTableName)
 {
-	if(initialized && hasEmotePanel)
+	if(top.initialized && top.hasEmotePanel)
 	{
 		logg("Adding emoticon: " + url + " (" + emoteName + ") to " + shortTableName);
 		if(Site.mode == 0)
@@ -455,19 +457,19 @@ function createNewEmote(url, emoteName, shortTableName)
 			image.title = emoteName;
 			image.className = "customEmote";
 			image.style.margin = "5px";
-			image.addEventListener("click", function() { addEmoteToCommentBox(this.id); }, false);
-			emoteTables[tablePrefix + shortTableName].appendChild(image);
+			image.addEventListener("click", function() { addEmoteTotop.commentBox(this.id); }, false);
+			top.emoteTables[top.tablePrefix + shortTableName].appendChild(image);
 		}
 		else if(Site.mode == 1)
 		{
 			if(shortTableName == "FF")
 			{
-				txtToAdd[emoteTables.indexOf(shortTableName)] += '<a href="javascript:smilie(\':' + url + ':\');" title="' + emoteName +
+				top.txtToAdd[top.emoteTables.indexOf(shortTableName)] += '<a href="javascript:smilie(\':' + url + ':\');" title="' + emoteName +
 					'"><img style="margin:1px;" src="//www.fimfiction-static.net/images/emoticons/' + url + '.png" alt="' + emoteName + '" title="' + emoteName + '"></a>&nbsp;';
 			}
 			else
 			{
-				txtToAdd[emoteTables.indexOf(shortTableName)] += '<a href="javascript:smilie(\'[img]' + url + '[/img]\');" title="' + emoteName +
+				top.txtToAdd[top.emoteTables.indexOf(shortTableName)] += '<a href="javascript:smilie(\'[img]' + url + '[/img]\');" title="' + emoteName +
 					'"><img style="margin:1px;" src="' + url + '" alt="' + emoteName + '" title="' + emoteName + '"></a>';
 			}
 		}
@@ -476,11 +478,11 @@ function createNewEmote(url, emoteName, shortTableName)
 
 function createTableLink(tableName)
 {
-	if(initialized && hasEmotePanel)
+	if(top.initialized && top.hasEmotePanel)
 	{
 		var tableLink = document.createElement("span");
 		tableLink.className = "emoteTabButton";
-		tableLink.id = tablePrefix + tableName;
+		tableLink.id = top.tablePrefix + tableName;
 		tableLink.style.marginLeft = "5px";
 		tableLink.style.marginTop = "5px";
 		tableLink.innerHTML = tableName;
@@ -496,22 +498,22 @@ function createTableLink(tableName)
 
 function showTable(tableID)
 {
-	if(initialized && hasEmotePanel)
+	if(top.initialized && top.hasEmotePanel)
 	{
-		emoteTables[tableID].style.display = "block";
+		top.emoteTables[tableID].style.display = "block";
 
 		setTimeout(function()
 		{
-			commentBox.style.minHeight = commentBox.style.height = (emotePanel.offsetHeight + 1) + "px";
+			top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1) + "px";
 		}, 1);
 
-		for(var table in emoteTables)
+		for(var table in top.emoteTables)
 		{
-			if(emoteTables.hasOwnProperty(table))
+			if(top.emoteTables.hasOwnProperty(table))
 			{
-				if(emoteTables[table] != emoteTables[tableID])
+				if(top.emoteTables[table] != top.emoteTables[tableID])
 				{
-					emoteTables[table].style.display = "none";
+					top.emoteTables[table].style.display = "none";
 				}
 			}
 		}
@@ -521,27 +523,27 @@ function showTable(tableID)
 function addEmotes(panelID)
 {
 	var text = (Site.page !== PAGE.BLOGEDIT?"<b>Do not post more than 20 emoticons at once</b><br>":"");
-	for(var t = 0; t < emoteTables.length; ++t)
+	for(var t = 0; t < top.emoteTables.length; ++t)
 	{
-		text += txtToAdd[t] + "</div>";
+		text += top.txtToAdd[t] + "</div>";
 	}
-	txtToAdd.splice(0, txtToAdd.length); // clear array
+	top.txtToAdd.splice(0, top.txtToAdd.length); // clear array
 
-	emotePanel.getElementsByClassName("inner_padding")[0].innerHTML = text;
+	top.emotePanel.getElementsByClassName("inner_padding")[0].innerHTML = text;
 
-	for(var t = 0; t < emoteTables.length; ++t)
+	for(var t = 0; t < top.emoteTables.length; ++t)
 	{
-		var table = document.getElementById("ehl_" + emoteTables[t] + "_" + panelID);
+		var table = document.getElementById("ehl_" + top.emoteTables[t] + "_" + panelID);
 		(function(shortTableName, pID)
 		{
 			table.addEventListener("click", function()
 			{
 				toggleTable(shortTableName, pID);
 			}, false);
-		})(emoteTables[t], panelID);
+		})(top.emoteTables[t], panelID);
 	}
 
-	emoteTables.splice(0, emoteTables.length); // clear array
+	top.emoteTables.splice(0, top.emoteTables.length); // clear array
 
 	logg("Added emoticons for panel #" + panelID);
 }
@@ -568,7 +570,7 @@ function toggleTable(shortTableName, panelID)
 
 function addEmoteToCommentBox(url)
 {
-	replaceSelectedText(commentBox, "[img]" + url + "[/img]");
+	replaceSelectedText(top.commentBox, "[img]" + url + "[/img]");
 }
 
 function getInputSelection(el)
