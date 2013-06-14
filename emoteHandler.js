@@ -2,7 +2,7 @@
  *	Fimfiction.net emote API Script
  *	Written by: iloveportalz0r and KrazyTheFox
  *
- *	Version: 1.0a
+ *	Version: 1.1
  *
  *	Usage:	@require this script in your Greasemonkey scripts
  *			Use addEmote("image url", "table name"); to add an emote
