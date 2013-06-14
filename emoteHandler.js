@@ -457,7 +457,7 @@ function createNewEmote(url, emoteName, shortTableName)
 			image.title = emoteName;
 			image.className = "customEmote";
 			image.style.margin = "5px";
-			image.addEventListener("click", function() { addEmoteTotop.commentBox(this.id); }, false);
+			image.addEventListener("click", function() { addEmoteToCommentBox(this.id); }, false);
 			top.emoteTables[top.tablePrefix + shortTableName].appendChild(image);
 		}
 		else if(Site.mode == 1)
