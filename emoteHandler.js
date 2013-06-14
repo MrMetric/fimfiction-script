@@ -162,6 +162,7 @@ function initializeAPI(m)
 {
 	if(initialized)
 	{
+		alert("Returned");
 		return;
 	}
 	initialized = true;
