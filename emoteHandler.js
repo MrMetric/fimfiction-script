@@ -162,11 +162,8 @@ function initializeAPI(m)
 {
 	if(initialized)
 	{
-		alert("Returned");
 		return;
 	}
-	
-	alert("Init");
 	initialized = true;
 
 	if(typeof m === "undefined" || m == null || m < 0 || m > 1)
