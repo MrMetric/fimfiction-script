@@ -403,7 +403,7 @@ function initializeAPI(m)
 
 			setTimeout(function()
 			{
-				top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1) + 'px';
+				top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1 - 21) + 'px';
 			}, 1);
 		}
 	}
