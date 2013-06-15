@@ -6,7 +6,7 @@
 // @include     http*://fimfiction.net/*
 // @grant       none
 // @require		https://github.com/iloveportalz0r/fimfiction-script/raw/master/emoteHandler.js
-// @version     1.1
+// @version     1.2
 // ==/UserScript==
 
 $(document).ready(run);
@@ -196,6 +196,12 @@ function run() {
 			["http://i.imgur.com/pww1wjm.png", "AJ"],
 			["http://i.imgur.com/KZHFE8U.png", "AJ"],
 			["http://i.imgur.com/MZsrxQK.png", "AJ"],
+			["http://i.imgur.com/aHVIEJf.png", "AJ"],
+			["http://i.imgur.com/DPk2NZn.png", "AJ"],
+			["http://i.imgur.com/ogtnDnC.png", "AJ"],
+			["http://i.imgur.com/oBAx788.png", "AJ"],
+			["http://i.imgur.com/myOBKB4.png", "AJ"],
+			["http://i.imgur.com/LRD2W70.png", "AJ"],
 			
 			["http://i.imgur.com/sb2Qbof.png", "FS"],
 			["http://i.imgur.com/24nRCr5.png", "FS"],
@@ -217,8 +223,14 @@ function run() {
 			["http://i.imgur.com/5c1j3xv.png", "FS"],
 			["http://i.imgur.com/uSOX8aw.png", "FS"],
 			["http://i.imgur.com/EcWBGKl.png", "FS"],
+			["http://i.imgur.com/hkeh1qO.png", "FS"],
+			["http://i.imgur.com/zFPxSbB.png", "FS"],
+			["http://i.imgur.com/UgQIIgZ.png", "FS"],
+			["http://i.imgur.com/7LN4PGP.png", "FS"],
+			["http://i.imgur.com/Ar4a6oI.png", "FS"],
+			["http://i.imgur.com/Tsg6sSk.png", "FS"],
+			["http://i.imgur.com/3Bw1vJc.png", "FS"],
 		
-			["http://i.imgur.com/fiITL.png", "RD"],
 			["http://i.imgur.com/1mJFi.png", "RD"],
 			["http://i.imgur.com/fQFdk.png", "RD"],
 			["http://i.imgur.com/5JXsL.png", "RD"],
@@ -242,6 +254,14 @@ function run() {
 			["http://i.imgur.com/DupLe.png", "RD"],
 			["http://i.imgur.com/Am3AY.png", "RD"],
 			["http://i.imgur.com/7TZmw.png", "RD"],
+			["http://i.imgur.com/72IFYgG.png", "RD"],
+			["http://i.imgur.com/xq9lagn.png", "RD"],
+			["http://i.imgur.com/Cqzgjte.png", "RD"],
+			["http://i.imgur.com/fmPKYjE.png", "RD"],
+			["http://i.imgur.com/ZaEN90U.png", "RD"],
+			["http://i.imgur.com/1bcgbrm.png", "RD"],
+			["http://i.imgur.com/aJbPeur.png", "RD"],
+			["http://i.imgur.com/DuTtzKD.png", "RD"],
 			
 			["http://i.imgur.com/KluyWmn.png", "R"],
 			["http://i.imgur.com/cUszKbb.png", "R"],
@@ -257,6 +277,19 @@ function run() {
 			["http://i.imgur.com/JqAPTWq.png", "R"],
 			["http://i.imgur.com/mmVWxDL.png", "R"],
 			["http://i.imgur.com/YHqF6Oe.png", "R"],
+			["http://i.imgur.com/BTkTZtQ.png", "R"],
+			["http://i.imgur.com/ijHyYGN.png", "R"],
+			["http://i.imgur.com/H93RXx3.png", "R"],
+			["http://i.imgur.com/rqasPvb.png", "R"],
+			["http://i.imgur.com/qrNLnm7.png", "R"],
+			["http://i.imgur.com/gSUBQJo.png", "R"],
+			["http://i.imgur.com/L82FBf7.png", "R"],
+			["http://i.imgur.com/uUFRVSw.png", "R"],
+			["http://i.imgur.com/9cktQCa.png", "R"],
+			["http://i.imgur.com/FIMTF9F.png", "R"],
+			["http://i.imgur.com/6Xjr4qx.png", "R"],
+			["http://i.imgur.com/8FLpgzg.png", "R"],
+			["http://i.imgur.com/zDp89aN.png", "R"],
 			
 			["http://i.imgur.com/5OGeQ.png", "TS"],
 			["http://i.imgur.com/hs7Hh.png", "TS"],
@@ -280,10 +313,40 @@ function run() {
 			["http://i.imgur.com/IZJSZ.png", "TS"],
 			["http://i.imgur.com/z2R9A.png", "TS"],
 			["http://i.imgur.com/AKn7J.png", "TS"],
+			["http://i.imgur.com/djjrzly.png", "TS"],
+			["http://i.imgur.com/u91K3lE.png", "TS"],
+			["http://i.imgur.com/6amBMsZ.png", "TS"],
+			["http://i.imgur.com/8MaDTLV.png", "TS"],
+			["http://i.imgur.com/SspLS12.png", "TS"],
+			["http://i.imgur.com/SGKxDhn.png", "TS"],
+			["http://i.imgur.com/OL1DowU.png", "TS"],
+			["http://i.imgur.com/lSIizWD.png", "TS"],
 			
 			["http://i.imgur.com/zbei6cO.png", "PP"],
 			["http://i.imgur.com/zplekGi.png", "PP"],
-			["http://i.imgur.com/jvzynek.png", "PP"]
+			["http://i.imgur.com/jvzynek.png", "PP"],
+			["http://i.imgur.com/LMtxcao.png", "PP"],
+			["http://i.imgur.com/7ppPcYn.png", "PP"],
+			["http://i.imgur.com/4doC5ED.png", "PP"],
+			["http://i.imgur.com/MQBZ41g.png", "PP"],
+			["http://i.imgur.com/pdLkfXA.png", "PP"],
+			["http://i.imgur.com/NwyjTTE.png", "PP"],
+			["http://i.imgur.com/Q7KFdL7.png", "PP"],
+			["http://i.imgur.com/q4uECGh.png", "PP"],
+			["http://i.imgur.com/4M5fMay.png", "PP"],
+			["http://i.imgur.com/8BDWuaI.png", "PP"],
+			["http://i.imgur.com/sBq1PM1.png", "PP"],
+			["http://i.imgur.com/Ok4LXo8.png", "PP"],
+			
+			["http://i.imgur.com/fiITL.png", "CMC"],
+			["http://i.imgur.com/inSsXQt.png", "CMC"],
+			["http://i.imgur.com/tDOuj3P.png", "CMC"],
+			["http://i.imgur.com/Gh1mXeB.png", "CMC"],
+			["http://i.imgur.com/O7YJl8D.png", "CMC"],
+			["http://i.imgur.com/JZ7Qjcd.png", "CMC"],
+			["http://i.imgur.com/njZ7Ocd.png", "CMC"],
+			["http://i.imgur.com/5HOAGsD.png", "CMC"]
+			
 		];
 		
 		for (var i = 0; i < emotes.length; i++) {
