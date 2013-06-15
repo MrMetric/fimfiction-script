@@ -403,7 +403,7 @@ function initializeAPI(m)
 
 			setTimeout(function()
 			{
-				top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1 - 21) + 'px';
+				top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1) + 'px';
 			}, 1);
 		}
 	}
@@ -507,7 +507,7 @@ function showTable(tableID)
 
 		setTimeout(function()
 		{
-			top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1 - 21) + "px";
+			top.commentBox.style.minHeight = top.commentBox.style.height = (top.emotePanel.offsetHeight + 1) + "px";
 		}, 1);
 
 		for(var table in top.emoteTables)
