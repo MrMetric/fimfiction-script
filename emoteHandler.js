@@ -321,12 +321,11 @@ function initializeAPI(m)
 		style += "}";
 
 		style += ".emoteTabButton {";
-		style += "	width: 32px;";
+		style += "	width: auto;";//32px;";
 		style += "	height: 23px;";
-		style += "	background-image: url(\"//dl.dropbox.com/u/31471793/FiMFiction/script/buttonBG.png\");";
 		style += "	float: left;";
 		style += "	text-align: center;";
-		style += "	padding-top: 5px;";
+		style += "	padding: 5px 8px 0px 8px;";
 		style += "	font: 13px normal \"Segoe UI\" !important;";
 		style += "	-webkit-touch-callout: none;";
 		style += "	-webkit-user-select: none;";
@@ -339,6 +338,10 @@ function initializeAPI(m)
 		style += "	-moz-transition: opacity .2s ease-in;";
 		style += "	-webkit-transition: opacity .2s ease-in;";
 		style += "	-o-transition: opacity .2s ease-in;";
+		style += "	-webkit-border-radius: 3px;";
+		style += "	-moz-border-radius: 3px;";
+		style += "	border-radius: 3px;";
+		style += "	background-color: #abc156;";
 		style += "	color: #ffffff";
 		style += "}";
 
